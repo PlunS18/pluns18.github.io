@@ -24,13 +24,16 @@ export const HeroSection: React.FC = () => {
           <div className="lg:col-span-6 flex flex-col gap-6">
             
             {/* Status Pills */}
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="neon-badge live">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-xs font-semibold backdrop-blur-md shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
                 <span>{t.hero.statusLive}</span>
               </div>
-              <div className="neon-badge ai">
-                <Sparkles className="w-3 h-3 text-purple-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-300 text-xs font-semibold backdrop-blur-md shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-purple-400" />
                 <span>{t.hero.statusAi}</span>
               </div>
             </div>
@@ -51,11 +54,14 @@ export const HeroSection: React.FC = () => {
             </p>
 
             {/* Key Value Badges */}
-            <div className="grid grid-cols-2 gap-3 py-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 py-1">
               {t.hero.features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                <div
+                  key={idx}
+                  className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/30 transition-colors text-xs text-slate-200"
+                >
                   <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                  <span>{feature}</span>
+                  <span className="font-medium">{feature}</span>
                 </div>
               ))}
             </div>

@@ -153,32 +153,9 @@ code, pre, .font-mono {
   -webkit-text-fill-color: transparent;
 }
 
-/* Pulse Beacon */
-.beacon-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #10b981;
-  position: relative;
-}
-.beacon-dot::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: rgba(16, 185, 129, 0.4);
-  animation: beacon-pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
-}
-
-@keyframes beacon-pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(2);
-    opacity: 0;
-  }
+/* Pulse Beacon Effect */
+.pulse-glow {
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
 }
 
 /* Grid Layout Utilities */

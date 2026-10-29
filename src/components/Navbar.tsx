@@ -21,24 +21,30 @@ export const Navbar: React.FC = () => {
         <div className="glass-panel px-4 py-3 flex items-center justify-between border-cyan-500/20 bg-slate-950/75 shadow-xl">
           {/* Brand Logo & Avatar */}
           <a href="#" className="flex items-center gap-3 group text-decoration-none">
-            <div className="relative">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-cyan-400/60 shadow-lg shadow-cyan-500/20">
-                <img
-                  src="./assets/candidate_clean.png"
-                  alt="Lưu Trương Hoàng Phúc"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
+            <div className="relative flex-shrink-0">
+              <div className="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-indigo-500 shadow-md shadow-cyan-500/25">
+                <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
+                  <img
+                    src="./assets/candidate_clean.png"
+                    alt="Lưu Trương Hoàng Phúc"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
               </div>
-              <div className="absolute -bottom-0.5 -right-0.5 beacon-dot" title={t.nav.statusAvailable}></div>
+              {/* Perfectly docked status dot with clean ping effect at bottom-right */}
+              <span className="absolute bottom-0 right-0 flex h-3 w-3" title={t.nav.statusAvailable}>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-slate-950"></span>
+              </span>
             </div>
-            <div>
-              <div className="font-heading font-extrabold text-sm text-slate-100 flex items-center gap-1.5">
+            <div className="flex flex-col">
+              <div className="font-heading font-extrabold text-sm text-slate-100 flex items-center gap-1.5 leading-none">
                 <span>{t.nav.brandTitle}</span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-mono">
+                <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
                   {t.nav.devBadge}
                 </span>
               </div>
-              <div className="text-[11px] text-slate-400 font-medium">
+              <div className="text-[11px] text-slate-400 font-medium mt-1.5 leading-none">
                 {t.nav.jobTitle}
               </div>
             </div>

@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col items-center md:items-start gap-1">
           <div className="font-heading font-extrabold text-sm text-white flex items-center gap-2">
             <span>{t.hero.name}</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-mono">
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-mono">
               2026
             </span>
           </div>

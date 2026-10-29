@@ -43,7 +43,10 @@ export const ContactSection: React.FC = () => {
             <div className="lg:col-span-7 flex flex-col gap-6">
               <div>
                 <div className="neon-badge live mb-3">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
                   <span>{t.contact.badge}</span>
                 </div>
                 <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-white">

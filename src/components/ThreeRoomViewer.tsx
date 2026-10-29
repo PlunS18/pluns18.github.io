@@ -573,7 +573,10 @@ export const ThreeRoomViewer: React.FC = () => {
       {/* Bottom Status Bar */}
       <div className="relative z-10 px-4 py-2.5 bg-slate-950/80 backdrop-blur-md border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
           <span className="text-slate-200 font-mono">{t.viewer3d.statusBar.title}</span>
         </div>
         <div className="flex items-center gap-3 text-[11px] text-slate-400">

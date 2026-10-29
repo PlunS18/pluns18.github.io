@@ -175,7 +175,7 @@ export const TechMatrixBento: React.FC = () => {
                       }`}
                     >
                       <span>{skill.name}</span>
-                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-slate-950/80 text-slate-400 font-mono">
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-950/80 text-slate-400 font-mono">
                         {skill.level}
                       </span>
                     </div>

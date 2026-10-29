@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Smartphone, RotateCw, Eye } from 'lucide-react';
+import { Smartphone, RotateCw, Eye, Sparkles, Compass, Layers, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 
 interface ScreenOption {
@@ -10,40 +10,45 @@ interface ScreenOption {
   url: string;
   tagVi: string;
   tagEn: string;
+  icon: React.ElementType;
 }
 
 const SCREEN_OPTIONS: ScreenOption[] = [
   {
     id: 'ai-design',
-    nameVi: 'Kiến trúc sư trưởng Agentic AI',
-    nameEn: 'Agentic AI Chief Architect',
+    nameVi: 'Kiến trúc sư AI',
+    nameEn: 'Agentic AI Architect',
     url: './assets/hc_web_hero_design.webp',
-    tagVi: 'One Sentence One Home',
-    tagEn: 'One Sentence One Home'
+    tagVi: 'One Sentence',
+    tagEn: 'One Sentence',
+    icon: Sparkles
   },
   {
     id: 'satellite',
-    nameVi: 'Đo đạc Vệ tinh & Sơn hướng',
-    nameEn: 'Satellite & Orientation Measurement',
+    nameVi: 'Đo đạc Vệ tinh',
+    nameEn: 'Satellite Compass',
     url: './assets/hc_web_satellite_measure.webp',
-    tagVi: 'GPS • 24 Sơn Hướng',
-    tagEn: 'GPS • 24-Mountain Compass'
+    tagVi: '24 Sơn hướng',
+    tagEn: '24-Mountain',
+    icon: Compass
   },
   {
     id: 'cad-digitize',
-    nameVi: 'Số hoá & Dựng bản vẽ CAD 2D/3D',
-    nameEn: '2D/3D CAD Floorplan Digitizer',
+    nameVi: 'Bản vẽ CAD 2D/3D',
+    nameEn: 'CAD Floorplan 3D',
     url: './assets/hc_web_cad_digitize.webp',
-    tagVi: 'Canvas 2D • Laser BLE',
-    tagEn: 'Canvas 2D • Laser BLE'
+    tagVi: 'Canvas 2D • BLE',
+    tagEn: 'Canvas 2D • BLE',
+    icon: Layers
   },
   {
     id: 'fengshui',
-    nameVi: 'Thẩm định Phong thuỷ Khoa học',
-    nameEn: 'Scientific Feng Shui Evaluation',
+    nameVi: 'Phong thuỷ Khoa học',
+    nameEn: 'Feng Shui Analysis',
     url: './assets/hc_web_fengshui_analysis.webp',
-    tagVi: '9 Chuyên đề Phong thuỷ',
-    tagEn: '9 Feng Shui Domains'
+    tagVi: '9 Chuyên đề',
+    tagEn: '9 Domains',
+    icon: ShieldCheck
   }
 ];
 
@@ -531,57 +536,78 @@ export const ThreeHeroCanvas: React.FC = () => {
 
         {/* Floating live indicator at bottom of 3D canvas */}
         <div className="absolute bottom-4 left-4 right-4 z-10 flex justify-between items-center pointer-events-none">
-          <div className="bg-slate-950/90 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-800 text-[11px] text-slate-300 flex items-center gap-2 pointer-events-auto">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+          <div className="bg-slate-950/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-800 text-[11px] text-slate-300 flex items-center gap-2.5 pointer-events-auto shadow-lg">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
             <span className="font-semibold text-white">
               {language === 'vi' ? activeOption.nameVi : activeOption.nameEn}
             </span>
-            <span className="text-cyan-400 text-[10px] px-1.5 py-0.2 rounded bg-cyan-950/60 border border-cyan-800/60 font-mono">
+            <span className="text-cyan-400 text-[10px] px-2 py-0.5 rounded-md bg-cyan-950/80 border border-cyan-800/80 font-mono font-medium">
               {language === 'vi' ? activeOption.tagVi : activeOption.tagEn}
             </span>
           </div>
-          <div className="text-[10px] text-slate-400 font-mono hidden sm:block bg-slate-950/80 px-2.5 py-1 rounded border border-slate-800">
-            PBR Titanium • 60 FPS
+          <div className="text-[10px] text-slate-400 font-mono hidden sm:flex items-center gap-2 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-800 shadow-lg">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>PBR Titanium • 60 FPS</span>
           </div>
         </div>
       </div>
 
       {/* Screen Switcher Bar Below 3D Device */}
-      <div className="w-full mt-4 bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-3 shadow-xl">
-        <div className="text-[11px] text-slate-400 font-mono uppercase tracking-wider mb-2.5 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-cyan-400">
-            <Eye className="w-3.5 h-3.5" />
-            <span className="font-semibold">
-              {language === 'vi' ? 'Chọn màn hình thực tế từ web myhomecheck.ai:' : 'Select official screen from myhomecheck.ai:'}
+      <div className="w-full mt-4 bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-3.5 shadow-xl">
+        <div className="text-[11px] text-slate-400 font-mono uppercase tracking-wider mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-cyan-400">
+            <Eye className="w-4 h-4" />
+            <span className="font-bold tracking-wide">
+              {language === 'vi' ? 'CHỌN GIAO DIỆN HOMECHECK TRÊN ĐIỆN THOẠI 3D:' : 'SELECT HOMECHECK UI ON 3D PHONE:'}
             </span>
           </div>
-          <span className="text-slate-500 hidden sm:inline">
-            {language === 'vi' ? 'Texture WebP • Tự động ánh xạ vào 3D' : 'WebP Texture • Realtime 3D Mapping'}
+          <span className="text-slate-400 text-[10px] hidden sm:inline bg-slate-900/90 px-2.5 py-0.5 rounded-md border border-slate-800">
+            {language === 'vi' ? 'HD Texture • Ánh xạ 3D tức thì' : 'HD Texture • Realtime 3D Mapping'}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
           {SCREEN_OPTIONS.map((screen) => {
             const isSelected = activeScreen === screen.id;
+            const Icon = screen.icon;
             return (
               <button
                 key={screen.id}
                 onClick={() => handleSwitchScreen(screen)}
-                className={`p-2.5 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
+                className={`group relative p-3 rounded-2xl border text-left transition-all duration-300 cursor-pointer overflow-hidden ${
                   isSelected
-                    ? 'bg-cyan-950/50 border-cyan-400/80 text-white shadow-lg shadow-cyan-500/20 scale-[1.02]'
-                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 text-slate-400 hover:text-slate-200'
+                    ? 'bg-gradient-to-b from-cyan-950/70 via-slate-900/90 to-slate-950 border-cyan-400/80 shadow-lg shadow-cyan-500/25 ring-1 ring-cyan-400/40'
+                    : 'bg-slate-900/60 border-slate-800/80 hover:border-slate-700/80 hover:bg-slate-900/90 text-slate-400'
                 }`}
               >
-                <div className="flex items-center justify-between mb-1">
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono ${
-                    isSelected ? 'bg-cyan-500/20 text-cyan-300' : 'bg-slate-800 text-slate-400'
+                {/* Glowing Active Top Hairline */}
+                {isSelected && (
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+                )}
+
+                <div className="flex items-center justify-between gap-1.5 mb-2">
+                  <div className={`p-1.5 rounded-lg border transition-colors flex-shrink-0 ${
+                    isSelected
+                      ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'
+                      : 'bg-slate-800/80 border-slate-700/60 text-slate-400 group-hover:text-slate-200'
+                  }`}>
+                    <Icon className="w-3.5 h-3.5" />
+                  </div>
+                  <span className={`text-[10px] font-mono tracking-tight font-semibold px-2 py-0.5 rounded-full border whitespace-nowrap ${
+                    isSelected
+                      ? 'bg-cyan-500/15 border-cyan-500/30 text-cyan-300'
+                      : 'bg-slate-800/70 border-slate-700/60 text-slate-400'
                   }`}>
                     {language === 'vi' ? screen.tagVi : screen.tagEn}
                   </span>
-                  {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />}
                 </div>
-                <div className="text-xs font-bold truncate text-slate-100">
+
+                <div className={`text-xs font-bold leading-snug transition-colors ${
+                  isSelected ? 'text-white' : 'text-slate-200 group-hover:text-white'
+                }`}>
                   {language === 'vi' ? screen.nameVi : screen.nameEn}
                 </div>
               </button>
