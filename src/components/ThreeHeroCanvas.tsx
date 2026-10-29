@@ -7,9 +7,13 @@ interface ScreenOption {
   id: string;
   nameVi: string;
   nameEn: string;
-  url: string;
+  descVi: string;
+  descEn: string;
   tagVi: string;
   tagEn: string;
+  badgeVi: string;
+  badgeEn: string;
+  url: string;
   icon: React.ElementType;
 }
 
@@ -18,36 +22,52 @@ const SCREEN_OPTIONS: ScreenOption[] = [
     id: 'ai-design',
     nameVi: 'Kiến trúc sư AI',
     nameEn: 'Agentic AI Architect',
+    descVi: 'Thiết kế mặt bằng bằng 1 câu lệnh',
+    descEn: 'One-sentence prompt to floorplan',
+    tagVi: 'AI Thiết kế',
+    tagEn: 'AI Design',
+    badgeVi: 'AI Engine',
+    badgeEn: 'AI Engine',
     url: './assets/hc_web_hero_design.webp',
-    tagVi: 'One Sentence',
-    tagEn: 'One Sentence',
     icon: Sparkles
   },
   {
     id: 'satellite',
     nameVi: 'Đo đạc Vệ tinh',
     nameEn: 'Satellite Compass',
-    url: './assets/hc_web_satellite_measure.webp',
+    descVi: 'Định vị GPS & 24 Sơn hướng thực địa',
+    descEn: 'Realtime GPS & 24-Mountain grid',
     tagVi: '24 Sơn hướng',
     tagEn: '24-Mountain',
+    badgeVi: 'GPS Vệ tinh',
+    badgeEn: 'GPS Align',
+    url: './assets/hc_web_satellite_measure.webp',
     icon: Compass
   },
   {
     id: 'cad-digitize',
     nameVi: 'Bản vẽ CAD 2D/3D',
     nameEn: 'CAD Floorplan 3D',
+    descVi: 'Số hoá tự động từ thước đo laser BLE',
+    descEn: 'Auto-digitized via BLE laser meter',
+    tagVi: 'CAD 2D',
+    tagEn: 'CAD 2D',
+    badgeVi: 'Laser BLE',
+    badgeEn: 'Laser BLE',
     url: './assets/hc_web_cad_digitize.webp',
-    tagVi: 'Canvas 2D',
-    tagEn: 'Canvas 2D',
     icon: Layers
   },
   {
     id: 'fengshui',
     nameVi: 'Phong thuỷ Khoa học',
     nameEn: 'Feng Shui Analysis',
+    descVi: 'Bát Trạch chuyên sâu & 9 chuyên đề',
+    descEn: 'Scientific spatial energy & 9 domains',
+    tagVi: 'Phong thuỷ',
+    tagEn: 'Feng Shui',
+    badgeVi: 'Bát Trạch',
+    badgeEn: 'Spatial AI',
     url: './assets/hc_web_fengshui_analysis.webp',
-    tagVi: '9 Chuyên đề',
-    tagEn: '9 Domains',
     icon: ShieldCheck
   }
 ];
@@ -557,19 +577,19 @@ export const ThreeHeroCanvas: React.FC = () => {
 
       {/* Screen Switcher Bar Below 3D Device */}
       <div className="w-full mt-4 bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-3.5 shadow-xl">
-        <div className="text-[11px] text-slate-400 font-mono uppercase tracking-wider mb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-cyan-400">
-            <Eye className="w-4 h-4" />
-            <span className="font-bold tracking-wide">
-              {language === 'vi' ? 'CHỌN GIAO DIỆN HOMECHECK TRÊN ĐIỆN THOẠI 3D:' : 'SELECT HOMECHECK UI ON 3D PHONE:'}
+        <div className="flex items-center justify-between mb-3 text-xs">
+          <div className="flex items-center gap-2 text-slate-300 font-semibold">
+            <Smartphone className="w-4 h-4 text-cyan-400" />
+            <span>
+              {language === 'vi' ? 'Khám phá tính năng trên điện thoại 3D:' : 'Explore features on 3D phone:'}
             </span>
           </div>
-          <span className="text-slate-400 text-[10px] hidden sm:inline bg-slate-900/90 px-2.5 py-0.5 rounded-md border border-slate-800">
-            {language === 'vi' ? 'HD Texture • Ánh xạ 3D tức thì' : 'HD Texture • Realtime 3D Mapping'}
+          <span className="text-[11px] text-slate-500 font-mono hidden sm:inline">
+            {language === 'vi' ? 'Chạm để đổi màn hình' : 'Click to preview screen'}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {SCREEN_OPTIONS.map((screen) => {
             const isSelected = activeScreen === screen.id;
             const Icon = screen.icon;
@@ -577,10 +597,10 @@ export const ThreeHeroCanvas: React.FC = () => {
               <button
                 key={screen.id}
                 onClick={() => handleSwitchScreen(screen)}
-                className={`group relative p-3 rounded-2xl border text-left transition-all duration-300 cursor-pointer overflow-hidden ${
+                className={`group relative p-3 rounded-xl border text-left transition-all duration-300 cursor-pointer flex items-center gap-3 overflow-hidden ${
                   isSelected
-                    ? 'bg-gradient-to-b from-cyan-950/70 via-slate-900/90 to-slate-950 border-cyan-400/80 shadow-lg shadow-cyan-500/25 ring-1 ring-cyan-400/40'
-                    : 'bg-slate-900/60 border-slate-800/80 hover:border-slate-700/80 hover:bg-slate-900/90 text-slate-400'
+                    ? 'bg-gradient-to-r from-cyan-950/70 via-slate-900/90 to-slate-950 border-cyan-400/80 shadow-lg shadow-cyan-500/20 ring-1 ring-cyan-400/40'
+                    : 'bg-slate-900/50 border-slate-800/80 hover:border-slate-700/80 hover:bg-slate-900/80 text-slate-400'
                 }`}
               >
                 {/* Glowing Active Top Hairline */}
@@ -588,27 +608,36 @@ export const ThreeHeroCanvas: React.FC = () => {
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
                 )}
 
-                <div className="flex items-center justify-between gap-1.5 mb-2">
-                  <div className={`p-1.5 rounded-lg border transition-colors flex-shrink-0 ${
-                    isSelected
-                      ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'
-                      : 'bg-slate-800/80 border-slate-700/60 text-slate-400 group-hover:text-slate-200'
-                  }`}>
-                    <Icon className="w-3.5 h-3.5" />
-                  </div>
-                  <span className={`text-[10px] font-mono tracking-tight font-semibold px-2 py-0.5 rounded-full border whitespace-nowrap ${
-                    isSelected
-                      ? 'bg-cyan-500/15 border-cyan-500/30 text-cyan-300'
-                      : 'bg-slate-800/70 border-slate-700/60 text-slate-400'
-                  }`}>
-                    {language === 'vi' ? screen.tagVi : screen.tagEn}
-                  </span>
+                {/* Icon in rounded frosted container */}
+                <div className={`p-2.5 rounded-xl border flex-shrink-0 transition-colors ${
+                  isSelected
+                    ? 'bg-cyan-500/20 border-cyan-400/40 text-cyan-300 shadow-sm'
+                    : 'bg-slate-950 border-slate-800 text-slate-400 group-hover:text-slate-200 group-hover:border-slate-700'
+                }`}>
+                  <Icon className="w-5 h-5" />
                 </div>
 
-                <div className={`text-xs font-bold leading-snug transition-colors ${
-                  isSelected ? 'text-white' : 'text-slate-200 group-hover:text-white'
-                }`}>
-                  {language === 'vi' ? screen.nameVi : screen.nameEn}
+                {/* Text details: Title + Micro Badge & Clean 1-line description */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-1 mb-0.5">
+                    <span className={`text-xs font-bold transition-colors truncate ${
+                      isSelected ? 'text-white' : 'text-slate-200 group-hover:text-white'
+                    }`}>
+                      {language === 'vi' ? screen.nameVi : screen.nameEn}
+                    </span>
+                    <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded-full border whitespace-nowrap ${
+                      isSelected
+                        ? 'bg-cyan-500/20 border-cyan-400/40 text-cyan-300 font-semibold'
+                        : 'bg-slate-950 border-slate-800/80 text-slate-500'
+                    }`}>
+                      {language === 'vi' ? screen.badgeVi : screen.badgeEn}
+                    </span>
+                  </div>
+                  <div className={`text-[11px] truncate transition-colors ${
+                    isSelected ? 'text-cyan-200/90 font-medium' : 'text-slate-400 group-hover:text-slate-300'
+                  }`}>
+                    {language === 'vi' ? screen.descVi : screen.descEn}
+                  </div>
                 </div>
               </button>
             );
