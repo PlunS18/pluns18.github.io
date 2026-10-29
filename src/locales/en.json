@@ -1,0 +1,263 @@
+{
+  "nav": {
+    "brandTitle": "Hoang Phuc",
+    "devBadge": "DEV",
+    "jobTitle": "Mobile & Web Developer",
+    "overview": "Overview",
+    "projects": "Projects",
+    "engine3d": "3D Engine",
+    "skills": "Skills",
+    "aiWorkflow": "AI Workflow",
+    "contact": "Contact",
+    "downloadPdf": "Download Portfolio PDF",
+    "statusAvailable": "Available for Middle Mobile & Web Roles"
+  },
+  "hero": {
+    "statusLive": "Available for Middle Level Roles",
+    "statusAi": "AI-Native Engineering (Cursor, Claude)",
+    "name": "Luu Truong Hoang Phuc",
+    "title": "Middle Mobile & Web Developer",
+    "description": "Over 3+ years of production experience mastering cross-platform ecosystems: React Native (iOS & Android), Next.js 14 / React, and Three.js WebGL. Successfully deployed and maintained 2 production apps on App Store & Google Play. Proactively leveraging AI workflows (Claude Code, Cursor) to multiply velocity while strictly upholding Type-Safety, clean architecture, and security.",
+    "features": [
+      "React Native • Expo • Hermes 60FPS",
+      "Next.js 14 App Router • Tailwind CSS",
+      "Offline-First (SQLite/MMKV) • Sync Engine",
+      "Three.js 3D WebGL • Canvas 2D CAD"
+    ],
+    "ctaProjects": "View Live Projects",
+    "ctaDownload": "Download Portfolio PDF (1.66MB)",
+    "phoneHint": "Drag mouse to rotate 360°",
+    "phoneDragTitle": "Drag mouse to rotate 3D device naturally",
+    "screenPickerTitle": "Select official screen from myhomecheck.ai:",
+    "screenPickerSub": "WebP Texture • Realtime 3D Mapping",
+    "screens": {
+      "aiDesign": {
+        "name": "Agentic AI Chief Architect",
+        "tag": "One Sentence One Home"
+      },
+      "satellite": {
+        "name": "Satellite & Orientation Measurement",
+        "tag": "GPS • 24-Mountain Compass"
+      },
+      "cadDigitize": {
+        "name": "2D/3D CAD Floorplan Digitizer",
+        "tag": "Canvas 2D • Laser BLE"
+      },
+      "fengshui": {
+        "name": "Scientific Feng Shui Evaluation",
+        "tag": "9 Feng Shui Domains"
+      }
+    }
+  },
+  "metrics": {
+    "m1": {
+      "number": "3+ Years",
+      "title": "Production Experience",
+      "subtitle": "Specialized in React Native & Next.js"
+    },
+    "m2": {
+      "number": "02 Apps",
+      "title": "Shipped to App Store & Google Play",
+      "subtitle": "HomeCheck & Thay AI (Active in production)"
+    },
+    "m3": {
+      "number": "60 FPS",
+      "title": "Graphics Performance Locked",
+      "subtitle": "Hermes Engine, Worklets & Three.js WebGL"
+    },
+    "m4": {
+      "number": "AI-Native",
+      "title": "Cursor, Claude Code, Codex",
+      "subtitle": "2-3x velocity multiplier, strict Type-Safety"
+    }
+  },
+  "marquee": {
+    "badge": "PRODUCTION-READY TECH STACK",
+    "sub": "React Bits • Infinite Motion Stream",
+    "apiIntegration": "API Integration",
+    "apiIntegrationNote": "REST, GraphQL & WebSocket"
+  },
+  "viewer3d": {
+    "engineTitle": "Interactive Architectural 3D Engine",
+    "engineSub": "Real-world spatial architecture • Cross-device responsive • Instant switching",
+    "fpsBadge": "Three.js 60FPS",
+    "tabs": {
+      "model3d": "3D WebGL Model",
+      "cad2d": "2D CAD Floorplan",
+      "fengshui": "24-Mountain Compass"
+    },
+    "roomOverlay": {
+      "title": "Modern Living Room (Villa 120m²)",
+      "desc": "Floor Area: 28.5 m² • Ceiling: 3.2 m • Luxury Sectional L-Sofa",
+      "disposeBadge": "Memory Leak Prevention Enabled (Dispose)"
+    },
+    "cad": {
+      "badge": "Multi-Dimensional Spatial Decomposition Algorithm",
+      "title": "Floorplan Digitization & Automated Room Layout",
+      "desc": "Directly transforms property deeds, blueprints, or Bluetooth laser measurements. HTML5 Canvas engine dynamically renders walls, doors, windows, and calculates room dimensions.",
+      "feature1": "BLE Laser Wall Measurement",
+      "feature2": "60 FPS Pan & Zoom"
+    },
+    "fengshui": {
+      "badge": "Geomagnetic Spatial Analytics",
+      "title": "24-Mountain Orientation & Clash Mitigation",
+      "desc": "Automated compass disc projection onto the architectural centerpoint (135.0° Southeast). Algorithmic scoring of architectural proposals and hazard alerts.",
+      "feature1": "Grade A: 94 pts Xun Palace",
+      "feature2": "Kitchen / Restroom Clash Alert"
+    },
+    "statusBar": {
+      "title": "Three.js WebGL • 60 FPS Canvas UI",
+      "dragHint": "Drag mouse to orbit 360° naturally",
+      "memoryHint": "Automatic garbage collection (No Memory Leak)"
+    }
+  },
+  "projects": {
+    "badge": "Featured Projects",
+    "title": "Shipped Real-World Products",
+    "subtitle": "Complex production apps demonstrating Cross-Platform Mobile, Web 3D and API integration mastery",
+    "solutionsHeading": "Key Engineering Solutions",
+    "techStackHeading": "Tech Stack",
+    "btnLiveDemo": "Live Demo",
+    "btnGooglePlay": "Google Play",
+    "btnAppStore": "App Store",
+    "p1": {
+      "title": "HomeCheck Ecosystem — Mobile App & Web 3D",
+      "role": "Middle Mobile & Web Developer",
+      "desc": "Pioneering PropTech platform in Vietnam: Digitize architectural floorplans with BLE Laser Rangefinder, render interactive 3D WebGL models, and compute 24-mountain Feng Shui orientations.",
+      "sol1Title": "Bluetooth Laser (BLE) Hardware Sync",
+      "sol1Desc": "Connect laser rangefinders via BLE GATT profile, stream real-time measurements into 2D Canvas for auto-wall snapping with packet deduplication.",
+      "sol2Title": "60FPS Performance & OOM Prevention",
+      "sol2Desc": "Offload heavy LiDAR mesh processing to Web Workers, strict memory garbage collection (dispose materials/geometries) upon unmount. React Native Reanimated Worklets for 60fps touch interactions.",
+      "sol3Title": "Asynchronous API Queue Integration & Push Notifications",
+      "sol3Desc": "Collaborated with Backend team to integrate BullMQ + Redis task queues for Generative AI room redesigns, delivering instant mobile UX and reliable FCM push notifications.",
+      "card1Title": "Agentic AI Chief Architect",
+      "card1Subtitle": "One Sentence One Home",
+      "card2Title": "24-Mountain Compass",
+      "card2Subtitle": "GPS & Satellite Overlay",
+      "card3Title": "Proprietary 2D CAD Digitizer",
+      "card3Subtitle": "BLE Laser Rangefinder Sync",
+      "card4Title": "Multi-layer Feng Shui Analysis",
+      "card4Subtitle": "Eight Mansions & Flying Stars"
+    },
+    "p2": {
+      "title": "Thay AI — Smart Cross-Platform Educational Assistant",
+      "role": "Mobile & Web Front-end Developer",
+      "desc": "AI educational tutor app on iOS & Android: Instant math/physics problem recognition via camera, step-by-step AI voice explanations, and dynamic LaTeX formula rendering.",
+      "sol1Title": "Low-Latency Audio Streaming (TTS)",
+      "sol1Desc": "Stream voice chunks directly (TTS streaming) playing audio on the first received byte, slashing perceived response latency from 4s to sub-800ms.",
+      "sol2Title": "Dynamic LaTeX Math & Graph Rendering",
+      "sol2Desc": "Render complex mathematical expressions and dynamic coordinate graphs in real-time on React Native without frame drops.",
+      "sol3Title": "Real-time State & Local History Sync",
+      "sol3Desc": "Zustand combined with local SQLite/MMKV storage delivers instant offline history lookup with zero network lag."
+    },
+    "p3": {
+      "title": "2D Floorplan CAD Editor & 3D Spatial Viewer (Web)",
+      "role": "Frontend & 3D Web Developer",
+      "desc": "In-browser architectural drafting and visualization suite, transforming 2D architectural vectors into accurate interactive 3D WebGL rooms with millimeter precision.",
+      "sol1Title": "HTML5 Canvas 2D Vector Drafting Engine",
+      "sol1Desc": "Built wall drawing and door/window placement tools with magnetic grid snapping algorithms and complex polygon area calculation.",
+      "sol2Title": "Automated 2D to 3D Extrusion Pipeline",
+      "sol2Desc": "Custom algorithmic extrusion generating 3D Three.js room geometry from 2D wall paths with realistic PBR materials and interior lighting."
+    }
+  },
+  "skills": {
+    "badge": "Skills & Technology Stack",
+    "title": "Production Engineering Matrix",
+    "subtitle": "Deep specialization in Frontend Mobile & Web, backed by solid API integration skills and modern AI workflows",
+    "cardMobile": {
+      "title": "Mobile Cross-Platform",
+      "subtitle": "iOS & Android Native Performance",
+      "highlight": "Optimized Hermes Engine 60FPS, offline-first architecture with SQLite/MMKV, and instant OTA deployments with CodePush."
+    },
+    "cardWeb": {
+      "title": "Web & 3D Spatial",
+      "subtitle": "Modern Web Platform & 3D Spatial",
+      "highlight": "SEO-optimized SSR/SSG with Next.js 14 and high-performance Three.js WebGL spatial rendering in Web Workers."
+    },
+    "cardBackend": {
+      "title": "Backend Integration & APIs",
+      "subtitle": "API Integration & Basic Backend Foundation",
+      "highlight": "Solid backend fundamentals, thorough understanding of API lifecycles, databases, and smooth collaboration with backend engineers."
+    },
+    "cardAi": {
+      "title": "AI-Native & Tooling",
+      "subtitle": "AI-Accelerated Engineering Workflow",
+      "highlight": "Leveraging Claude Code & Cursor to multiply velocity 2-3x while maintaining strict Type-safety and security standards."
+    },
+    "levels": {
+      "expert": "Deep Expertise",
+      "proficient": "Proficient",
+      "practical": "Production Experience",
+      "basic": "Working Knowledge",
+      "integration": "Good Integration",
+      "daily": "Daily Driver"
+    }
+  },
+  "aiTerminal": {
+    "badge": "Engineered for TIZO Vietnam Criteria",
+    "title": "AI-Native Engineering Workflow",
+    "subtitle": "How I leverage modern AI tools (Claude Code, Cursor, Codex) to 2-3x development velocity while keeping strict Type-safety and security standards.",
+    "copied": "Copied",
+    "copyCommand": "Copy Command",
+    "tabsPrompt": "Real-world AI Scenario:",
+    "scenarios": [
+      {
+        "id": "perf",
+        "name": "Resolve Memory Leak (OOM) & Lock 60FPS",
+        "command": "claude-code analyze --target hc-app/src/screens/view3d --profile memory",
+        "output": [
+          "🔍 [Claude Code] Analyzing Three.js render loop in React Native WebView...",
+          "⚠️  Detected: Textures & Geometries not disposed upon component unmount (OOM risk).",
+          "💡 Solution generated: Web Worker offloading for LIDAR mesh + Auto-disposal hook.",
+          "⚡ Result: Heap allocation reduced by 68%. Frame rate locked at steady 60FPS."
+        ]
+      },
+      {
+        "id": "offline",
+        "name": "Architect Offline-First Sync Engine",
+        "command": "cursor --generate-sync-engine --db sqlite --conflict updated_at",
+        "output": [
+          "📦 [Cursor AI] Scaffolding Offline-First Local Store (SQLite + MMKV)...",
+          "🔄 Implementing two-way delta synchronization engine with retry backoff...",
+          "🛡️ Edge case resolved: Clock skew conflict handled via vector timestamps.",
+          "✅ Field test passed: 500+ site photos saved offline and synced seamlessly."
+        ]
+      },
+      {
+        "id": "api-contract",
+        "name": "Generate Type-Safe API Client & Integration",
+        "command": "cursor --generate-api-client --spec swagger.json --output src/services/api",
+        "output": [
+          "🚀 [Cursor AI] Parsing OpenAPI 3.0 specification from Backend team...",
+          "📐 Auto-generating TypeScript interfaces, request validators, and react-query hooks...",
+          "🔒 Strict runtime type validation (Zod) attached to incoming response payloads.",
+          "✨ Result: 100% Type-safe API calls with zero manual boilerplate code."
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "badge": "Available for Interviews & Opportunities",
+    "title": "Let's Build Exceptional Products Together",
+    "desc": "Always open to discussing opportunities for Middle Mobile & Web Developer roles, React Native / Next.js projects, or cutting-edge 3D WebGL and AI workflows.",
+    "phoneLabel": "Phone / Zalo",
+    "emailLabel": "Email Address",
+    "locationLabel": "Location",
+    "locationValue": "Ho Chi Minh City (Ready for on-site at Cat Lai / Thu Duc / District 2 / Center)",
+    "timeLabel": "Response Time",
+    "timeValue": "Within 24 hours • Ready for interview immediately",
+    "formTitle": "Send Direct Message",
+    "nameLabel": "Your Name",
+    "namePlaceholder": "e.g. HR / Tech Lead from TIZO",
+    "emailInputLabel": "Email Address",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Enter your message or interview proposal...",
+    "sendBtn": "Send Message",
+    "sentSuccess": "Thank you! Your message has been sent successfully.",
+    "copied": "Copied"
+  },
+  "footer": {
+    "rights": "© 2026 Luu Truong Hoang Phuc. Built with React, Three.js & Tailwind CSS.",
+    "available": "Available for Middle Mobile & Web Developer roles"
+  }
+}

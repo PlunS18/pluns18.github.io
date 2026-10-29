@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Box, Rotate3d, Layers, Compass, Eye, Maximize2, ShieldCheck, Sparkles } from 'lucide-react';
+import { Box, Rotate3d, Layers, Compass, Sparkles } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 export const ThreeRoomViewer: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
   const [viewMode, setViewMode] = useState<'3d' | 'cad' | 'fengshui'>('3d');
   const [isRotating, setIsRotating] = useState(false);
 
@@ -422,14 +424,14 @@ export const ThreeRoomViewer: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h4 className="font-heading font-black text-sm sm:text-base text-slate-100">
-                Interactive Architectural 3D Engine
+                {t.viewer3d.engineTitle}
               </h4>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-mono">
-                Three.js 60FPS
+                {t.viewer3d.fpsBadge}
               </span>
             </div>
             <p className="text-xs text-slate-400">
-              Kiến trúc không gian thực tế • Tương thích đa thiết bị • Chuyển đổi tức thì
+              {t.viewer3d.engineSub}
             </p>
           </div>
         </div>
@@ -446,7 +448,7 @@ export const ThreeRoomViewer: React.FC = () => {
             }`}
           >
             <Rotate3d className="w-3.5 h-3.5" />
-            <span>Mô hình 3D WebGL</span>
+            <span>{t.viewer3d.tabs.model3d}</span>
           </button>
 
           <button
@@ -459,7 +461,7 @@ export const ThreeRoomViewer: React.FC = () => {
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
-            <span>Bản vẽ CAD 2D</span>
+            <span>{t.viewer3d.tabs.cad2d}</span>
           </button>
 
           <button
@@ -472,7 +474,7 @@ export const ThreeRoomViewer: React.FC = () => {
             }`}
           >
             <Compass className="w-3.5 h-3.5" />
-            <span>24 Sơn Hướng La Kinh</span>
+            <span>{t.viewer3d.tabs.fengshui}</span>
           </button>
         </div>
       </div>
@@ -484,21 +486,21 @@ export const ThreeRoomViewer: React.FC = () => {
             <div
               ref={mountRef}
               className="w-full h-full cursor-grab active:cursor-grabbing"
-              title="Kéo &amp; Rê chuột để xoay phòng 3D tự nhiên 360 độ"
+              title={t.viewer3d.statusBar.dragHint}
             />
             {/* Floating Room Info Overlay */}
             <div className="absolute top-4 left-4 bg-slate-950/85 backdrop-blur-md px-3.5 py-2 rounded-xl border border-cyan-500/30 text-xs text-slate-200 pointer-events-none shadow-xl">
               <div className="font-bold text-white flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Phòng Khách Hiện Đại (Villa 120m²)</span>
+                <span>{t.viewer3d.roomOverlay.title}</span>
               </div>
               <div className="text-[11px] text-slate-400 mt-0.5">
-                Diện tích: 28.5 m² • Trần cao: 3.2 m • Sofa chữ L cao cấp
+                {t.viewer3d.roomOverlay.desc}
               </div>
             </div>
 
             <div className="absolute top-4 right-4 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/60 text-[11px] text-slate-300 font-mono pointer-events-none">
-              <span>Đã bật khử rò rỉ RAM (Dispose)</span>
+              <span>{t.viewer3d.roomOverlay.disposeBadge}</span>
             </div>
           </>
         )}
@@ -515,21 +517,20 @@ export const ThreeRoomViewer: React.FC = () => {
             <div className="max-w-md text-left bg-slate-900/80 backdrop-blur-md p-5 rounded-2xl border border-slate-800 shadow-xl">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-xs font-semibold mb-3 border border-cyan-500/20">
                 <Layers className="w-3.5 h-3.5" />
-                <span>Thuật toán Phân Tách Không Gian Đa Chiều</span>
+                <span>{t.viewer3d.cad.badge}</span>
               </div>
               <h5 className="font-heading font-black text-lg text-white mb-2">
-                Số Hoá Bản Vẽ &amp; Định Vị Phòng Tự Động
+                {t.viewer3d.cad.title}
               </h5>
               <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                Trực tiếp chuyển tải từ ảnh chụp sổ đỏ / bản vẽ tay hoặc máy đo khoảng cách laser Bluetooth.
-                Mô đun Canvas 2D vẽ tường, cửa đi, cửa sổ, tự động đo đạc diện tích (Phòng ngủ 19.1m², Bếp 12.9m², Phòng khách 8.4m²).
+                {t.viewer3d.cad.desc}
               </p>
               <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
                 <div className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
-                  <span className="text-cyan-400 font-bold">✓ BLE Laser</span> đo tường
+                  <span className="text-cyan-400 font-bold">✓ {t.viewer3d.cad.feature1}</span>
                 </div>
                 <div className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
-                  <span className="text-emerald-400 font-bold">✓ 60 FPS</span> Pan &amp; Zoom
+                  <span className="text-emerald-400 font-bold">✓ {t.viewer3d.cad.feature2}</span>
                 </div>
               </div>
             </div>
@@ -548,21 +549,20 @@ export const ThreeRoomViewer: React.FC = () => {
             <div className="max-w-md text-left bg-slate-900/80 backdrop-blur-md p-5 rounded-2xl border border-slate-800 shadow-xl">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/20">
                 <Compass className="w-3.5 h-3.5" />
-                <span>Khoa Học Phong Thuỷ &amp; Địa Từ Trường</span>
+                <span>{t.viewer3d.fengshui.badge}</span>
               </div>
               <h5 className="font-heading font-black text-lg text-white mb-2">
-                Phân Tích 24 Sơn Hướng &amp; Khắc Phục Xung Sát
+                {t.viewer3d.fengshui.title}
               </h5>
               <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                Tự động chồng đĩa La kinh Bát Trạch &amp; Huyền Không Phi Tinh lên tim nhà (135.0° Đông Nam).
-                Chấm điểm tự động các phương án kiến trúc (Phương án A: 94 điểm, B: 82 điểm, C: 76 điểm), cảnh báo vị trí bếp đối diện cửa WC.
+                {t.viewer3d.fengshui.desc}
               </p>
               <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
                 <div className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
-                  <span className="text-amber-400 font-bold">Hạng A: 94đ</span> Hướng Tốn
+                  <span className="text-amber-400 font-bold">✓ {t.viewer3d.fengshui.feature1}</span>
                 </div>
                 <div className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
-                  <span className="text-purple-400 font-bold">Cảnh báo</span> Bếp / Cửa WC
+                  <span className="text-purple-400 font-bold">✓ {t.viewer3d.fengshui.feature2}</span>
                 </div>
               </div>
             </div>
@@ -574,12 +574,12 @@ export const ThreeRoomViewer: React.FC = () => {
       <div className="relative z-10 px-4 py-2.5 bg-slate-950/80 backdrop-blur-md border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-          <span className="text-slate-200 font-mono">Three.js WebGL • 60 FPS Canvas UI</span>
+          <span className="text-slate-200 font-mono">{t.viewer3d.statusBar.title}</span>
         </div>
         <div className="flex items-center gap-3 text-[11px] text-slate-400">
-          <span>Kéo chuột xoay phòng 360° tự nhiên</span>
+          <span>{t.viewer3d.statusBar.dragHint}</span>
           <span>•</span>
-          <span>Tự động thu hồi bộ nhớ (No Memory Leak)</span>
+          <span>{t.viewer3d.statusBar.memoryHint}</span>
         </div>
       </div>
     </div>

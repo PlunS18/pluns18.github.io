@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { Smartphone, Globe, Server, Sparkles, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
+import { Smartphone, Globe, Server, Sparkles, Zap, ShieldCheck } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface TechItem {
   name: string;
@@ -19,6 +20,7 @@ interface CategoryCard {
 
 export const TechMatrixBento: React.FC = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const { t, language } = useLanguage();
 
   // React Bits Spotlight Card effect (tracks mouse coords within the card)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
@@ -33,76 +35,76 @@ export const TechMatrixBento: React.FC = () => {
 
   const categories: CategoryCard[] = [
     {
-      title: 'Mobile Engineering',
-      subtitle: 'Kiến trúc Ứng dụng Di động Đa nền tảng',
+      title: t.skills.cardMobile.title,
+      subtitle: t.skills.cardMobile.subtitle,
       icon: <Smartphone className="w-5 h-5 text-cyan-400" />,
       borderGlow: 'rgba(56, 189, 248, 0.4)',
       badgeColor: 'border-cyan-500/30 text-cyan-300 bg-cyan-500/10',
-      highlightNote: 'Hermes Engine Bytecode compilation & Reanimated worklets đạt 60FPS mượt mà.',
+      highlightNote: t.skills.cardMobile.highlight,
       skills: [
-        { name: 'React Native', level: 'Chuyên sâu', isKey: true },
-        { name: 'Expo', level: 'Thành thạo', isKey: true },
-        { name: 'TypeScript', level: 'Nền tảng', isKey: true },
-        { name: 'Hermes Engine', level: 'Tối ưu' },
-        { name: 'Reanimated 3', level: '60FPS' },
-        { name: 'Zustand / Redux', level: 'State' },
-        { name: 'Xcode / Gradle', level: 'Native build' },
+        { name: 'React Native', level: t.skills.levels.expert, isKey: true },
+        { name: 'Expo & EAS', level: t.skills.levels.proficient, isKey: true },
+        { name: 'TypeScript', level: t.skills.levels.proficient, isKey: true },
+        { name: 'Hermes Engine', level: '60FPS' },
+        { name: 'Reanimated 3', level: 'Worklets' },
+        { name: 'Zustand / Redux', level: 'State Management' },
+        { name: 'Xcode / Gradle', level: 'Native Config' },
         { name: 'Offline-First', level: 'SQLite/MMKV', isKey: true },
         { name: 'CodePush (OTA)', level: 'RevoPush' }
       ]
     },
     {
-      title: 'Web & 3D Spatial',
-      subtitle: 'Nền tảng Web Hiện đại & Không gian 3D',
+      title: t.skills.cardWeb.title,
+      subtitle: t.skills.cardWeb.subtitle,
       icon: <Globe className="w-5 h-5 text-indigo-400" />,
       borderGlow: 'rgba(99, 102, 241, 0.4)',
       badgeColor: 'border-indigo-500/30 text-indigo-300 bg-indigo-500/10',
-      highlightNote: 'SSR / SSG tối ưu hóa SEO với Next.js 14 và render Three.js WebGL trong Worker ngầm.',
+      highlightNote: t.skills.cardWeb.highlight,
       skills: [
-        { name: 'Next.js 14 (App Router)', level: 'Chuyên sâu', isKey: true },
-        { name: 'React.js', level: 'Thành thạo', isKey: true },
-        { name: 'Three.js (WebGL)', level: 'Thực chiến', isKey: true },
-        { name: 'HTML5 Canvas 2D', level: 'Dựng CAD' },
-        { name: 'Tailwind CSS', level: 'Tối ưu UI' },
-        { name: 'Server Components', level: 'Tốc độ' },
-        { name: 'Responsive 100%', level: 'Đa thiết bị' },
+        { name: 'Next.js 14 (App Router)', level: t.skills.levels.proficient, isKey: true },
+        { name: 'React.js', level: t.skills.levels.proficient, isKey: true },
+        { name: 'Three.js (WebGL)', level: t.skills.levels.practical, isKey: true },
+        { name: 'HTML5 Canvas 2D', level: 'CAD Drafting' },
+        { name: 'Tailwind CSS', level: 'Modern UI/UX' },
+        { name: 'Server Components', level: 'High Velocity' },
+        { name: 'Responsive 100%', level: 'Cross-Device' },
         { name: 'Performance Tuning', level: 'Lighthouse 95+' }
       ]
     },
     {
-      title: 'Backend & Distributed',
-      subtitle: 'Hệ thống Bất đồng bộ & Real-time',
+      title: t.skills.cardBackend.title,
+      subtitle: t.skills.cardBackend.subtitle,
       icon: <Server className="w-5 h-5 text-emerald-400" />,
       borderGlow: 'rgba(16, 185, 129, 0.4)',
       badgeColor: 'border-emerald-500/30 text-emerald-300 bg-emerald-500/10',
-      highlightNote: 'Xếp hàng BullMQ + Redis cho các tác vụ nặng tránh nghẽn luồng và WsGateway cộng tác.',
+      highlightNote: t.skills.cardBackend.highlight,
       skills: [
-        { name: 'Node.js', level: 'Chuyên sâu', isKey: true },
-        { name: 'NestJS', level: 'Thành thạo', isKey: true },
-        { name: 'BullMQ & Redis', level: 'Task Queue', isKey: true },
-        { name: 'WebSockets (WsGateway)', level: 'Real-time' },
-        { name: 'PostgreSQL', level: 'Schema / Index' },
-        { name: 'RESTful APIs', level: 'Chuẩn REST' },
-        { name: 'FCM Push Notifications', level: 'Tự động' },
-        { name: 'Database Normalization', level: '3NF' }
+        { name: 'RESTful & GraphQL APIs', level: t.skills.levels.integration, isKey: true },
+        { name: 'Node.js & Express', level: t.skills.levels.basic, isKey: true },
+        { name: 'NestJS', level: t.skills.levels.basic, isKey: false },
+        { name: 'WebSockets (WsClient)', level: t.skills.levels.practical, isKey: true },
+        { name: 'PostgreSQL / SQL', level: t.skills.levels.basic },
+        { name: 'Redis & BullMQ Flow', level: t.skills.levels.basic },
+        { name: 'Postman & Swagger', level: t.skills.levels.practical },
+        { name: 'FCM Push Notifications', level: t.skills.levels.practical }
       ]
     },
     {
-      title: 'AI-Native & Tooling',
-      subtitle: 'Quy trình Kỹ nghệ Tăng tốc bằng AI',
+      title: t.skills.cardAi.title,
+      subtitle: t.skills.cardAi.subtitle,
       icon: <Sparkles className="w-5 h-5 text-purple-400" />,
       borderGlow: 'rgba(168, 85, 247, 0.4)',
       badgeColor: 'border-purple-500/30 text-purple-300 bg-purple-500/10',
-      highlightNote: 'Ứng dụng Claude Code & Cursor tăng tốc 2-3x nhưng giữ kỷ luật Type-safety tuyệt đối.',
+      highlightNote: t.skills.cardAi.highlight,
       skills: [
-        { name: 'Cursor AI', level: 'Hằng ngày', isKey: true },
-        { name: 'Claude Code', level: 'Architecture', isKey: true },
-        { name: 'Codex / Copilot', level: 'Tăng tốc' },
-        { name: 'Git / GitHub Actions', level: 'CI/CD' },
-        { name: 'Docker', level: 'Container' },
-        { name: 'App Store Connect', level: 'Release' },
-        { name: 'Google Play Console', level: 'Release' },
-        { name: 'Type-Safe Architecture', level: 'An toàn' }
+        { name: 'Cursor AI', level: t.skills.levels.daily, isKey: true },
+        { name: 'Claude Code', level: t.skills.levels.daily, isKey: true },
+        { name: 'Codex / Copilot', level: 'Accelerate' },
+        { name: 'Git / GitHub Actions', level: 'CI/CD Flow' },
+        { name: 'Docker', level: 'Container Basic' },
+        { name: 'App Store Connect', level: 'Production Release' },
+        { name: 'Google Play Console', level: 'Production Release' },
+        { name: 'Type-Safe Architecture', level: 'Zod & Strict TS' }
       ]
     }
   ];
@@ -115,13 +117,13 @@ export const TechMatrixBento: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="neon-badge ai mb-3">
             <Zap className="w-3.5 h-3.5" />
-            <span>Kỹ năng &amp; Nền tảng Công nghệ</span>
+            <span>{t.skills.badge}</span>
           </div>
           <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-white">
-            Technical Matrix &amp; Kiến trúc
+            {t.skills.title}
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Tổng hợp các công nghệ cốt lõi được ứng dụng để phát triển sản phẩm chịu tải thực tế, tối ưu trải nghiệm và duy trì mã nguồn sạch.
+            {t.skills.subtitle}
           </p>
         </div>
 

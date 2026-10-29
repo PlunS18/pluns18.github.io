@@ -1,31 +1,34 @@
 import React from 'react';
 import { Award, Smartphone, Gauge, Cpu } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 export const MetricsBar: React.FC = () => {
+  const { t } = useLanguage();
+
   const metrics = [
     {
       icon: <Award className="w-5 h-5 text-blue-400" />,
-      number: '3+ Năm',
-      title: 'Kinh nghiệm Thực chiến',
-      subtitle: 'Phát triển chuyên sâu React Native & Next.js'
+      number: t.metrics.m1.number,
+      title: t.metrics.m1.title,
+      subtitle: t.metrics.m1.subtitle
     },
     {
       icon: <Smartphone className="w-5 h-5 text-cyan-400" />,
-      number: '02 Apps',
-      title: 'Đã lên App Store & Google Play',
-      subtitle: 'HomeCheck & Thầy AI (vận hành production)'
+      number: t.metrics.m2.number,
+      title: t.metrics.m2.title,
+      subtitle: t.metrics.m2.subtitle
     },
     {
       icon: <Gauge className="w-5 h-5 text-emerald-400" />,
-      number: '60 FPS',
-      title: 'Tối ưu Hiệu năng Đồ họa',
-      subtitle: 'Hermes Engine, Worklets & Three.js WebGL'
+      number: t.metrics.m3.number,
+      title: t.metrics.m3.title,
+      subtitle: t.metrics.m3.subtitle
     },
     {
       icon: <Cpu className="w-5 h-5 text-purple-400" />,
-      number: 'AI-Native',
-      title: 'Cursor, Claude Code, Codex',
-      subtitle: 'Tăng tốc 2-3x năng suất, Type-safe tuyệt đối'
+      number: t.metrics.m4.number,
+      title: t.metrics.m4.title,
+      subtitle: t.metrics.m4.subtitle
     }
   ];
 

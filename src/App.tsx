@@ -1,4 +1,5 @@
 import React from 'react';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { MetricsBar } from './components/MetricsBar';
@@ -11,37 +12,39 @@ import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#070a12] text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
-      {/* Floating Glassmorphic Navbar */}
-      <Navbar />
+    <LanguageProvider>
+      <div className="min-h-screen bg-[#070a12] text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+        {/* Floating Glassmorphic Navbar */}
+        <Navbar />
 
-      {/* Main Content Sections */}
-      <main className="flex-1">
-        {/* Hero Section with Interactive 3D Smartphone Device */}
-        <HeroSection />
+        {/* Main Content Sections */}
+        <main className="flex-1">
+          {/* Hero Section with Interactive 3D Smartphone Device */}
+          <HeroSection />
 
-        {/* 4-Card Bento Metrics */}
-        <MetricsBar />
+          {/* 4-Card Bento Metrics */}
+          <MetricsBar />
 
-        {/* React Bits Infinite Tech Stack Marquee */}
-        <TechMarquee />
+          {/* React Bits Infinite Tech Stack Marquee */}
+          <TechMarquee />
 
-        {/* Flagship Projects & 3D Interactive Engine */}
-        <ProjectsSection />
+          {/* Flagship Projects & 3D Interactive Engine */}
+          <ProjectsSection />
 
-        {/* Technical Matrix Spotlight Bento Grid */}
-        <TechMatrixBento />
+          {/* Technical Matrix Spotlight Bento Grid */}
+          <TechMatrixBento />
 
-        {/* AI-Native Engineering Terminal Simulation */}
-        <AiTerminalExperience />
+          {/* AI-Native Engineering Terminal Simulation */}
+          <AiTerminalExperience />
 
-        {/* Direct Contact & PDF Download Hub */}
-        <ContactSection />
-      </main>
+          {/* Direct Contact & PDF Download Hub */}
+          <ContactSection />
+        </main>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 };
 

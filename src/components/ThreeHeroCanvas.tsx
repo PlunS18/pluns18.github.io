@@ -1,48 +1,55 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Smartphone, RotateCw, Sparkles, Layers, Eye, Cpu, Compass, ShieldCheck } from 'lucide-react';
+import { Smartphone, RotateCw, Eye } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface ScreenOption {
   id: string;
-  name: string;
+  nameVi: string;
+  nameEn: string;
   url: string;
-  tag: string;
-  description: string;
+  tagVi: string;
+  tagEn: string;
 }
 
 const SCREEN_OPTIONS: ScreenOption[] = [
   {
     id: 'ai-design',
-    name: 'Kiến trúc sư trưởng Agentic AI',
+    nameVi: 'Kiến trúc sư trưởng Agentic AI',
+    nameEn: 'Agentic AI Chief Architect',
     url: './assets/hc_web_hero_design.webp',
-    tag: 'One Sentence One Home',
-    description: 'Ra lệnh bằng giọng nói, tự động sinh mặt bằng & phương án 3D theo quy chuẩn xây dựng'
+    tagVi: 'One Sentence One Home',
+    tagEn: 'One Sentence One Home'
   },
   {
     id: 'satellite',
-    name: 'Đo đạc Vệ tinh & Sơn hướng',
+    nameVi: 'Đo đạc Vệ tinh & Sơn hướng',
+    nameEn: 'Satellite & Orientation Measurement',
     url: './assets/hc_web_satellite_measure.webp',
-    tag: 'GPS • 24 Sơn Hướng',
-    description: 'Định vị la kinh độ chính xác cao trên không ảnh vệ tinh độ phân giải cao'
+    tagVi: 'GPS • 24 Sơn Hướng',
+    tagEn: 'GPS • 24-Mountain Compass'
   },
   {
     id: 'cad-digitize',
-    name: 'Số hoá & Dựng bản vẽ CAD 2D/3D',
+    nameVi: 'Số hoá & Dựng bản vẽ CAD 2D/3D',
+    nameEn: '2D/3D CAD Floorplan Digitizer',
     url: './assets/hc_web_cad_digitize.webp',
-    tag: 'Canvas 2D • Laser BLE',
-    description: 'Dựng tường, đo đạc kích thước phòng và định vị đồ đạc tự động mượt 60 FPS'
+    tagVi: 'Canvas 2D • Laser BLE',
+    tagEn: 'Canvas 2D • Laser BLE'
   },
   {
     id: 'fengshui',
-    name: 'Thẩm định Phong thuỷ Khoa học',
+    nameVi: 'Thẩm định Phong thuỷ Khoa học',
+    nameEn: 'Scientific Feng Shui Evaluation',
     url: './assets/hc_web_fengshui_analysis.webp',
-    tag: '9 Chuyên đề Phong thuỷ',
-    description: 'Chấm điểm Bát Trạch, Huyền Không & phát hiện xung sát kiến trúc tự động'
+    tagVi: '9 Chuyên đề Phong thuỷ',
+    tagEn: '9 Feng Shui Domains'
   }
 ];
 
 export const ThreeHeroCanvas: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
+  const { language } = useLanguage();
   const [activeScreen, setActiveScreen] = useState<string>('ai-design');
   const [isInteracting, setIsInteracting] = useState(false);
   const phoneGroupRef = useRef<THREE.Group | null>(null);
@@ -476,7 +483,7 @@ export const ThreeHeroCanvas: React.FC = () => {
 
           <div className="flex items-center gap-2 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 text-[11px] text-slate-300 font-mono pointer-events-auto">
             <RotateCw className={`w-3.5 h-3.5 text-cyan-400 ${isInteracting ? 'animate-spin' : ''}`} />
-            <span>Kéo chuột xoay 360°</span>
+            <span>{language === 'vi' ? 'Kéo chuột xoay 360°' : 'Drag mouse to rotate 360°'}</span>
           </div>
         </div>
 
@@ -484,16 +491,18 @@ export const ThreeHeroCanvas: React.FC = () => {
         <div
           ref={mountRef}
           className="w-full h-full cursor-grab active:cursor-grabbing"
-          title="Kéo &amp; Rê chuột để xoay thiết bị 3D tự nhiên"
+          title={language === 'vi' ? 'Kéo & Rê chuột để xoay thiết bị 3D tự nhiên' : 'Drag mouse to rotate 3D device naturally'}
         />
 
         {/* Floating live indicator at bottom of 3D canvas */}
         <div className="absolute bottom-4 left-4 right-4 z-10 flex justify-between items-center pointer-events-none">
           <div className="bg-slate-950/90 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-800 text-[11px] text-slate-300 flex items-center gap-2 pointer-events-auto">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="font-semibold text-white">{activeOption.name}</span>
+            <span className="font-semibold text-white">
+              {language === 'vi' ? activeOption.nameVi : activeOption.nameEn}
+            </span>
             <span className="text-cyan-400 text-[10px] px-1.5 py-0.2 rounded bg-cyan-950/60 border border-cyan-800/60 font-mono">
-              {activeOption.tag}
+              {language === 'vi' ? activeOption.tagVi : activeOption.tagEn}
             </span>
           </div>
           <div className="text-[10px] text-slate-400 font-mono hidden sm:block bg-slate-950/80 px-2.5 py-1 rounded border border-slate-800">
@@ -507,9 +516,13 @@ export const ThreeHeroCanvas: React.FC = () => {
         <div className="text-[11px] text-slate-400 font-mono uppercase tracking-wider mb-2.5 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-cyan-400">
             <Eye className="w-3.5 h-3.5" />
-            <span className="font-semibold">Chọn màn hình thực tế từ web myhomecheck.ai:</span>
+            <span className="font-semibold">
+              {language === 'vi' ? 'Chọn màn hình thực tế từ web myhomecheck.ai:' : 'Select official screen from myhomecheck.ai:'}
+            </span>
           </div>
-          <span className="text-slate-500 hidden sm:inline">Texture 4K WebP • Tự động ánh xạ vào 3D</span>
+          <span className="text-slate-500 hidden sm:inline">
+            {language === 'vi' ? 'Texture WebP • Tự động ánh xạ vào 3D' : 'WebP Texture • Realtime 3D Mapping'}
+          </span>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -529,11 +542,13 @@ export const ThreeHeroCanvas: React.FC = () => {
                   <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono ${
                     isSelected ? 'bg-cyan-500/20 text-cyan-300' : 'bg-slate-800 text-slate-400'
                   }`}>
-                    {screen.tag}
+                    {language === 'vi' ? screen.tagVi : screen.tagEn}
                   </span>
                   {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />}
                 </div>
-                <div className="text-xs font-bold truncate text-slate-100">{screen.name}</div>
+                <div className="text-xs font-bold truncate text-slate-100">
+                  {language === 'vi' ? screen.nameVi : screen.nameEn}
+                </div>
               </button>
             );
           })}

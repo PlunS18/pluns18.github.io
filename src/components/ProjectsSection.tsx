@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { ThreeRoomViewer } from './ThreeRoomViewer';
-import { ExternalLink, Smartphone, Globe, Cpu, CheckCircle2, Layers, Sparkles, Box, Code2, ArrowUpRight } from 'lucide-react';
+import { Smartphone, Cpu, CheckCircle2, Sparkles, Box, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 export const ProjectsSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'mobile' | 'web' | '3d'>('all');
+  const { t, language } = useLanguage();
 
   // React Bits 3D Tilt Card Effect Handler
   const handleTiltMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -31,13 +33,13 @@ export const ProjectsSection: React.FC = () => {
           <div>
             <div className="neon-badge mb-2">
               <Box className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Sản phẩm Thực tế đã Triển khai</span>
+              <span>{t.projects.badge}</span>
             </div>
             <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-white">
-              Dự án Tiêu biểu &amp; Kiến trúc Lõi
+              {t.projects.title}
             </h2>
             <p className="text-slate-400 text-sm max-w-xl mt-1">
-              Các hệ thống thực chiến giải quyết bài toán tải lớn, tối ưu hóa bộ nhớ di động và trải nghiệm không gian 3D mượt mà 60FPS.
+              {t.projects.subtitle}
             </p>
           </div>
 
@@ -51,7 +53,7 @@ export const ProjectsSection: React.FC = () => {
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              Tất cả
+              {language === 'vi' ? 'Tất cả' : 'All'}
             </button>
             <button
               onClick={() => setActiveTab('mobile')}
@@ -108,7 +110,7 @@ export const ProjectsSection: React.FC = () => {
                 <div>
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <h3 className="font-heading font-black text-xl md:text-2xl text-white">
-                      HomeCheck Ecosystem
+                      {t.projects.p1.title}
                     </h3>
                     <span className="neon-badge live">Production Live</span>
                     <span className="text-[11px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">
@@ -116,7 +118,7 @@ export const ProjectsSection: React.FC = () => {
                     </span>
                   </div>
                   <p className="text-xs text-cyan-400 font-medium">
-                    Core Mobile &amp; Web Developer • Web Media (04/2024 – Hiện tại)
+                    {t.projects.p1.role} • (04/2024 – {language === 'vi' ? 'Hiện tại' : 'Present'})
                   </p>
                 </div>
               </div>
@@ -126,9 +128,9 @@ export const ProjectsSection: React.FC = () => {
                   href="https://myhomecheck.ai/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-slate-950/80 hover:bg-cyan-950/50 border border-cyan-500/40 hover:border-cyan-400 text-cyan-300 text-xs font-bold flex items-center gap-2 transition-all shadow-md group"
+                  className="px-4 py-2 rounded-xl bg-slate-950/80 hover:bg-cyan-950/50 border border-cyan-500/40 hover:border-cyan-400 text-cyan-300 text-xs font-bold flex items-center gap-2 transition-all shadow-md group cursor-pointer"
                 >
-                  <span>Truy cập myhomecheck.ai</span>
+                  <span>myhomecheck.ai</span>
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
@@ -140,7 +142,7 @@ export const ProjectsSection: React.FC = () => {
               {/* Left Column: Architectural Bullets */}
               <div className="lg:col-span-7 space-y-4">
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  HomeCheck là giải pháp công nghệ toàn diện cho kỹ sư và chủ nhà nhằm khảo sát, thẩm định hiện trạng công trình, dựng mặt bằng 2D/3D tương tác và ứng dụng Generative AI thiết kế lại không gian sống.
+                  {t.projects.p1.desc}
                 </p>
 
                 <div className="space-y-3">
@@ -150,9 +152,9 @@ export const ProjectsSection: React.FC = () => {
                         <Smartphone className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="font-bold text-xs text-white">Kiến trúc Mobile App Offline-First (React Native, TypeScript)</div>
+                        <div className="font-bold text-xs text-white">{t.projects.p1.sol1Title}</div>
                         <p className="text-xs text-slate-400 mt-1">
-                          Lưu trữ toàn bộ dữ liệu khảo sát và bản vẽ ngay cả khi mất sóng hoàn toàn (SQLite/MMKV). Tự động kích hoạt Sync Engine 2 chiều xử lý conflict thông minh khi có mạng trở lại.
+                          {t.projects.p1.sol1Desc}
                         </p>
                       </div>
                     </div>
@@ -164,9 +166,9 @@ export const ProjectsSection: React.FC = () => {
                         <Cpu className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="font-bold text-xs text-white">Tối ưu 60FPS &amp; Khắc phục tràn RAM (OOM)</div>
+                        <div className="font-bold text-xs text-white">{t.projects.p1.sol2Title}</div>
                         <p className="text-xs text-slate-400 mt-1">
-                          Xử lý các mô hình LiDAR nặng sang Web Worker luồng nền, thu hồi bộ nhớ (dispose materials) khi chuyển phòng. Sử dụng React Native Reanimated (Worklets) để phản hồi cảm ứng mượt mà.
+                          {t.projects.p1.sol2Desc}
                         </p>
                       </div>
                     </div>
@@ -178,28 +180,27 @@ export const ProjectsSection: React.FC = () => {
                         <Sparkles className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="font-bold text-xs text-white">Hệ thống Bất đồng bộ Generative AI Redesign</div>
+                        <div className="font-bold text-xs text-white">{t.projects.p1.sol3Title}</div>
                         <p className="text-xs text-slate-400 mt-1">
-                          Backend NestJS tích hợp BullMQ + Redis xếp hàng xử lý các tác vụ AI sinh ảnh không gian nội thất, trả phản hồi tức thì cho Mobile và bắn Push Notification (FCM) khi xong.
+                          {t.projects.p1.sol3Desc}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Tech Stack Pills */}
+                {/* Tech Stack Pills - Honest and Accurate Front-end/Mobile stack */}
                 <div className="flex flex-wrap gap-1.5 pt-2">
                   {[
                     'React Native',
                     'Expo',
                     'TypeScript',
                     'Next.js 14',
-                    'Three.js',
+                    'Three.js WebGL',
+                    'HTML5 Canvas 2D',
                     'Zustand',
-                    'NestJS',
-                    'BullMQ',
-                    'Redis',
-                    'PostgreSQL',
+                    'RESTful API',
+                    'WebSocket Client',
                     'CodePush (OTA)'
                   ].map((tech) => (
                     <span
@@ -219,13 +220,13 @@ export const ProjectsSection: React.FC = () => {
                     <div className="h-52 overflow-hidden rounded-xl bg-slate-900 flex items-center justify-center">
                       <img
                         src="./assets/hc_web_hero_design.webp"
-                        alt="Kiến trúc sư trưởng Agentic AI"
+                        alt={t.projects.p1.card1Title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-2 text-center">
-                      <div className="text-[11px] font-bold text-slate-200">Kiến trúc sư trưởng AI</div>
-                      <div className="text-[10px] text-cyan-400 font-mono">One Sentence One Home</div>
+                      <div className="text-[11px] font-bold text-slate-200">{t.projects.p1.card1Title}</div>
+                      <div className="text-[10px] text-cyan-400 font-mono">{t.projects.p1.card1Subtitle}</div>
                     </div>
                   </div>
 
@@ -233,13 +234,13 @@ export const ProjectsSection: React.FC = () => {
                     <div className="h-52 overflow-hidden rounded-xl bg-slate-900 flex items-center justify-center">
                       <img
                         src="./assets/hc_web_satellite_measure.webp"
-                        alt="Đo đạc Vệ tinh Hiện trường"
+                        alt={t.projects.p1.card2Title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-2 text-center">
-                      <div className="text-[11px] font-bold text-slate-200">Đo đạc Vệ tinh Hiện trường</div>
-                      <div className="text-[10px] text-cyan-400 font-mono">La Kinh • Sơn Hướng</div>
+                      <div className="text-[11px] font-bold text-slate-200">{t.projects.p1.card2Title}</div>
+                      <div className="text-[10px] text-cyan-400 font-mono">{t.projects.p1.card2Subtitle}</div>
                     </div>
                   </div>
                 </div>
@@ -249,13 +250,13 @@ export const ProjectsSection: React.FC = () => {
                     <div className="h-32 overflow-hidden rounded-xl bg-slate-900 flex items-center justify-center">
                       <img
                         src="./assets/hc_web_cad_digitize.webp"
-                        alt="Số hoá bản vẽ & Dựng CAD"
+                        alt={t.projects.p1.card3Title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-1.5 text-center">
-                      <div className="text-[10px] font-bold text-slate-200">Số hoá CAD 2D/3D</div>
-                      <div className="text-[9px] text-cyan-400 font-mono">Laser Bluetooth</div>
+                      <div className="text-[10px] font-bold text-slate-200">{t.projects.p1.card3Title}</div>
+                      <div className="text-[9px] text-cyan-400 font-mono">{t.projects.p1.card3Subtitle}</div>
                     </div>
                   </div>
 
@@ -263,13 +264,13 @@ export const ProjectsSection: React.FC = () => {
                     <div className="h-32 overflow-hidden rounded-xl bg-slate-900 flex items-center justify-center">
                       <img
                         src="./assets/hc_web_fengshui_analysis.webp"
-                        alt="Thẩm định Phong thuỷ 24 Sơn Hướng"
+                        alt={t.projects.p1.card4Title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-1.5 text-center">
-                      <div className="text-[10px] font-bold text-slate-200">Phong thuỷ 24 Sơn</div>
-                      <div className="text-[9px] text-amber-400 font-mono">Bát Trạch • Phi Tinh</div>
+                      <div className="text-[10px] font-bold text-slate-200">{t.projects.p1.card4Title}</div>
+                      <div className="text-[9px] text-amber-400 font-mono">{t.projects.p1.card4Subtitle}</div>
                     </div>
                   </div>
                 </div>
@@ -289,7 +290,7 @@ export const ProjectsSection: React.FC = () => {
         )}
 
         {/* =========================================================================
-            PROJECT 2 & 3: THẦY AI & WEB MEDIA STUDIO SAAS
+            PROJECT 2 & 3: THẦY AI & WEB 3D CAD ENGINE
             ========================================================================= */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {(activeTab === 'all' || activeTab === 'mobile') && (
@@ -314,30 +315,30 @@ export const ProjectsSection: React.FC = () => {
                 </div>
 
                 <h4 className="font-heading font-black text-lg text-white mb-1">
-                  Ứng dụng Giáo dục &amp; Quản trị Gia Phả "Thầy AI"
+                  {t.projects.p2.title}
                 </h4>
                 <p className="text-xs text-slate-400 mb-4">
-                  Mobile Developer (React Native) • TGMSS (09/2023 – 04/2024)
+                  {t.projects.p2.role} • (09/2023 – 04/2024)
                 </p>
 
                 <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                  Ứng dụng di động cung cấp công cụ tra cứu giáo dục và quản lý phả hệ dòng họ nhiều thế hệ. Đảm nhiệm toàn bộ vòng đời phát triển từ đặc tả yêu cầu, thiết kế kiến trúc đến phát hành lên hai kho ứng dụng.
+                  {t.projects.p2.desc}
                 </p>
 
                 <div className="space-y-2 text-xs text-slate-300">
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
-                    <span><strong>Giải thuật Cây Gia Phả đệ quy:</strong> Tự tay thiết kế thuật toán phân nhánh cây nhiều tầng trên infinite canvas, tính toán tọa độ nút và đường nối mượt mà.</span>
+                    <span><strong>{t.projects.p2.sol1Title}:</strong> {t.projects.p2.sol1Desc}</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
-                    <span><strong>Xử lý Gesture đa điểm 60FPS:</strong> Tối ưu thao tác Pan, Pinch to Zoom bằng react-native-gesture-handler và reanimated không giật lag.</span>
+                    <span><strong>{t.projects.p2.sol2Title}:</strong> {t.projects.p2.sol2Desc}</span>
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-1.5 pt-4 mt-4 border-t border-slate-800/80">
-                {['React Native', 'TypeScript', 'Gesture Handler', 'Reanimated', 'Redux', 'SDLC'].map((t) => (
+                {['React Native', 'TypeScript', 'Audio Streaming', 'LaTeX Math', 'Redux', 'SDLC'].map((t) => (
                   <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-slate-950 text-slate-400 border border-slate-800 font-mono">
                     {t}
                   </span>
@@ -355,43 +356,43 @@ export const ProjectsSection: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm border border-blue-500/30">
-                    WM
+                    CAD
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">
-                      SaaS Enterprise
+                      WebGL &amp; Canvas
                     </span>
                     <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
-                      Next.js 14 • Tailwind CSS
+                      Three.js • Next.js 14
                     </span>
                   </div>
                 </div>
 
                 <h4 className="font-heading font-black text-lg text-white mb-1">
-                  Web Media Studio — Nền tảng Quản trị SaaS
+                  {t.projects.p3.title}
                 </h4>
                 <p className="text-xs text-slate-400 mb-4">
-                  Frontend / Fullstack Developer • Web Media
+                  {t.projects.p3.role} • Web Platform
                 </p>
 
                 <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                  Hệ thống Web App phục vụ quản trị chiến dịch tiếp thị số, tạo video tự động bằng AI và giám sát số liệu SEO thời gian thực với trải nghiệm người dùng cao cấp.
+                  {t.projects.p3.desc}
                 </p>
 
                 <div className="space-y-2 text-xs text-slate-300">
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <span><strong>Dynamic Schema-Driven Forms:</strong> Tự động sinh form theo JSON Schema, validate ngữ nghĩa dữ liệu tại Client và Edge.</span>
+                    <span><strong>{t.projects.p3.sol1Title}:</strong> {t.projects.p3.sol1Desc}</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                    <span><strong>High-Performance UI Dashboard:</strong> Ứng dụng Server Components và caching của Next.js 14 để tối ưu thời gian tải trang dưới 1.2s.</span>
+                    <span><strong>{t.projects.p3.sol2Title}:</strong> {t.projects.p3.sol2Desc}</span>
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-1.5 pt-4 mt-4 border-t border-slate-800/80">
-                {['Next.js 14', 'React', 'TypeScript', 'Tailwind CSS', 'Dynamic Forms', 'RESTful API'].map((t) => (
+                {['HTML5 Canvas 2D', 'Three.js (WebGL)', 'Next.js 14', 'TypeScript', 'Tailwind CSS', 'Vector Snapping'].map((t) => (
                   <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-slate-950 text-slate-400 border border-slate-800 font-mono">
                     {t}
                   </span>

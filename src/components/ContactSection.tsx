@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Phone, Mail, MapPin, Download, Check, Sparkles } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 export const ContactSection: React.FC = () => {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const { t, language } = useLanguage();
 
   const handleCopyPhone = () => {
     navigator.clipboard.writeText('0888244212');
@@ -42,13 +44,13 @@ export const ContactSection: React.FC = () => {
               <div>
                 <div className="neon-badge live mb-3">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                  <span>Sẵn sàng kết nối &amp; Phỏng vấn</span>
+                  <span>{t.contact.badge}</span>
                 </div>
                 <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-white">
-                  Cùng Xây dựng Sản phẩm Đỉnh cao
+                  {t.contact.title}
                 </h2>
                 <p className="text-slate-300 text-sm mt-3 leading-relaxed max-w-lg">
-                  Tôi luôn cởi mở trao đổi về các cơ hội hợp tác vị trí <strong>Middle Mobile &amp; Web Developer</strong>, các dự án React Native / Next.js hoặc tích hợp 3D WebGL và AI thế hệ mới.
+                  {t.contact.desc}
                 </p>
               </div>
 
@@ -62,7 +64,7 @@ export const ContactSection: React.FC = () => {
                       <Phone className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-[11px] text-slate-400">Điện thoại / Zalo</div>
+                      <div className="text-[11px] text-slate-400">{t.contact.phoneLabel}</div>
                       <a href="tel:0888244212" className="font-bold text-xs text-white hover:text-cyan-400">
                         0888 244 212
                       </a>
@@ -71,9 +73,9 @@ export const ContactSection: React.FC = () => {
                   <button
                     onClick={handleCopyPhone}
                     className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer"
-                    title="Sao chép số"
+                    title={t.contact.copied}
                   >
-                    {copiedPhone ? <Check className="w-4 h-4 text-emerald-400" /> : <span className="text-[10px] font-mono">Copy</span>}
+                    {copiedPhone ? <Check className="w-4 h-4 text-emerald-400" /> : <span className="text-[10px] font-mono">{language === 'vi' ? 'Chép' : 'Copy'}</span>}
                   </button>
                 </div>
 
@@ -84,7 +86,7 @@ export const ContactSection: React.FC = () => {
                       <Mail className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-[11px] text-slate-400">Hòm thư điện tử</div>
+                      <div className="text-[11px] text-slate-400">{t.contact.emailLabel}</div>
                       <a href="mailto:hoangphucplun@gmail.com" className="font-bold text-xs text-white hover:text-blue-400">
                         hoangphucplun@gmail.com
                       </a>
@@ -93,9 +95,9 @@ export const ContactSection: React.FC = () => {
                   <button
                     onClick={handleCopyEmail}
                     className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer"
-                    title="Sao chép email"
+                    title={t.contact.copied}
                   >
-                    {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <span className="text-[10px] font-mono">Copy</span>}
+                    {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <span className="text-[10px] font-mono">{language === 'vi' ? 'Chép' : 'Copy'}</span>}
                   </button>
                 </div>
 
@@ -128,8 +130,8 @@ export const ContactSection: React.FC = () => {
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[11px] text-slate-400">Địa điểm làm việc</div>
-                    <div className="font-bold text-xs text-white">TP. Hồ Chí Minh, Việt Nam</div>
+                    <div className="text-[11px] text-slate-400">{t.contact.locationLabel}</div>
+                    <div className="font-bold text-xs text-white">{t.contact.locationValue}</div>
                   </div>
                 </div>
 
@@ -142,11 +144,13 @@ export const ContactSection: React.FC = () => {
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="w-4 h-4 text-cyan-400" />
                 <h3 className="font-heading font-bold text-base text-white">
-                  Tải Hồ sơ Năng lực (PDFs)
+                  {language === 'vi' ? 'Tải Hồ sơ Năng lực (PDFs)' : 'Download Resumes & Portfolio (PDFs)'}
                 </h3>
               </div>
               <p className="text-xs text-slate-400 leading-normal mb-2">
-                Hồ sơ đã được tối ưu hóa lossless dưới 2MB, định dạng chuẩn quốc tế sẵn sàng nộp hoặc in ấn.
+                {language === 'vi'
+                  ? 'Hồ sơ đã được tối ưu hóa lossless dưới 2MB, định dạng chuẩn quốc tế sẵn sàng nộp hoặc in ấn.'
+                  : 'Lossless compressed under 2MB, internationally formatted and ready for submission or print.'}
               </p>
 
               {/* Button 1: Developer Portfolio PDF */}
@@ -159,33 +163,45 @@ export const ContactSection: React.FC = () => {
                 <div className="flex items-center gap-2.5">
                   <Download className="w-4 h-4" />
                   <div className="text-left">
-                    <div className="font-bold">Portfolio Sản phẩm Thực tế (PDF)</div>
-                    <div className="text-[10px] text-cyan-100 font-normal">Đầy đủ hình ảnh 3D, CAD &amp; Mobile App • 1.66 MB</div>
+                    <div className="font-bold">
+                      {language === 'vi' ? 'Portfolio Sản phẩm Thực tế (PDF)' : 'Interactive Products Portfolio (PDF)'}
+                    </div>
+                    <div className="text-[10px] text-cyan-100 font-normal">
+                      {language === 'vi' ? 'Đầy đủ hình ảnh 3D, CAD & Mobile App • 1.66 MB' : 'Full 3D, CAD & Mobile app visuals • 1.66 MB'}
+                    </div>
                   </div>
                 </div>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-black/30 font-mono">TẢI VỀ</span>
+                <span className="text-[10px] px-2 py-0.5 rounded bg-black/30 font-mono">
+                  {language === 'vi' ? 'TẢI VỀ' : 'DOWNLOAD'}
+                </span>
               </a>
 
-              {/* Button 2: FullStack CV */}
+              {/* Button 2: Mobile & Web Engineer CV */}
               <a
                 href="./Luu_Truong_Hoang_Phuc_FullStack_Engineer.pdf"
-                download="Luu_Truong_Hoang_Phuc_FullStack_Engineer.pdf"
+                download="Luu_Truong_Hoang_Phuc_Mobile_Web_Engineer.pdf"
                 onClick={handleDownload}
                 className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-850 text-slate-200 border border-slate-700/80 font-semibold text-xs flex items-center justify-between transition-all hover:border-cyan-400/50 hover:scale-[1.02] cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   <Download className="w-4 h-4 text-cyan-400" />
                   <div className="text-left">
-                    <div className="font-bold">Bản CV Full-Stack / Mobile Engineer</div>
-                    <div className="text-[10px] text-slate-400">Tiêu chuẩn nộp tuyển dụng ITviec &amp; TopCV • 1.44 MB</div>
+                    <div className="font-bold">
+                      {language === 'vi' ? 'Bản CV Mobile & Web Developer' : 'Mobile & Web Developer Resume'}
+                    </div>
+                    <div className="text-[10px] text-slate-400">
+                      {language === 'vi' ? 'Tiêu chuẩn nộp tuyển dụng ITviec & TopCV • 1.44 MB' : 'Standard ATS recruitment format • 1.44 MB'}
+                    </div>
                   </div>
                 </div>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">TẢI VỀ</span>
+                <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
+                  {language === 'vi' ? 'TẢI VỀ' : 'DOWNLOAD'}
+                </span>
               </a>
 
               {/* Direct Zalo / Phone CTA */}
               <div className="pt-2 text-center text-[11px] text-slate-400">
-                <span>Hoặc liên hệ nhanh qua Zalo: </span>
+                <span>{language === 'vi' ? 'Hoặc liên hệ nhanh qua Zalo: ' : 'Or quick chat via Zalo / Phone: '}</span>
                 <a href="https://zalo.me/0888244212" target="_blank" rel="noreferrer" className="text-cyan-400 font-bold hover:underline">
                   0888 244 212
                 </a>

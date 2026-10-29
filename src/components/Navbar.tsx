@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Download, FileText, Sparkles, Send, Menu, X, Smartphone, Globe } from 'lucide-react';
+import { Download, Sparkles, Menu, X, Globe } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
-  const handleDownloadPortfolio = (e: React.MouseEvent) => {
+  const handleDownloadPortfolio = () => {
     confetti({
       particleCount: 75,
       spread: 60,
@@ -27,17 +29,17 @@ export const Navbar: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <div className="absolute -bottom-0.5 -right-0.5 beacon-dot" title="Sẵn sàng nhận việc Middle Mobile & Web"></div>
+              <div className="absolute -bottom-0.5 -right-0.5 beacon-dot" title={t.nav.statusAvailable}></div>
             </div>
             <div>
               <div className="font-heading font-extrabold text-sm text-slate-100 flex items-center gap-1.5">
-                <span>Hoàng Phúc</span>
+                <span>{t.nav.brandTitle}</span>
                 <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-mono">
-                  DEV
+                  {t.nav.devBadge}
                 </span>
               </div>
               <div className="text-[11px] text-slate-400 font-medium">
-                Mobile &amp; Web Developer
+                {t.nav.jobTitle}
               </div>
             </div>
           </a>
@@ -45,29 +47,58 @@ export const Navbar: React.FC = () => {
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-300">
             <a href="#about" className="hover:text-cyan-400 transition-colors">
-              Tổng quan
+              {t.nav.overview}
             </a>
             <a href="#projects" className="hover:text-cyan-400 transition-colors">
-              Dự án Thực chiến
+              {t.nav.projects}
             </a>
             <a href="#three-engine" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
-              <span>3D Engine</span>
+              <span>{t.nav.engine3d}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
             </a>
             <a href="#tech-matrix" className="hover:text-cyan-400 transition-colors">
-              Kỹ năng
+              {t.nav.skills}
             </a>
             <a href="#ai-native" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-purple-400" />
-              <span>AI Workflow</span>
+              <span>{t.nav.aiWorkflow}</span>
             </a>
             <a href="#contact" className="hover:text-cyan-400 transition-colors">
-              Liên hệ
+              {t.nav.contact}
             </a>
           </nav>
 
-          {/* CTA Buttons */}
+          {/* Action Hub & Language Switcher */}
           <div className="hidden sm:flex items-center gap-2.5">
+            {/* Language Segmented Toggle */}
+            <div className="flex items-center bg-slate-900/90 rounded-xl p-0.5 border border-slate-800 text-[11px] font-bold shadow-inner">
+              <button
+                id="btn-lang-vi"
+                onClick={() => setLanguage('vi')}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                  language === 'vi'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-slate-950 font-black shadow-md'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="Tiếng Việt"
+              >
+                🇻🇳 VI
+              </button>
+              <button
+                id="btn-lang-en"
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                  language === 'en'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-slate-950 font-black shadow-md'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="English"
+              >
+                🇬🇧 EN
+              </button>
+            </div>
+
+            {/* Download PDF Button */}
             <a
               href="./Luu_Truong_Hoang_Phuc_Portfolio.pdf"
               download="Luu_Truong_Hoang_Phuc_Portfolio.pdf"
@@ -75,18 +106,39 @@ export const Navbar: React.FC = () => {
               className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Tải Portfolio PDF</span>
+              <span>{t.nav.downloadPdf}</span>
             </a>
           </div>
 
-          {/* Mobile Hamburger Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300"
-            aria-label="Toggle Menu"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile Right Controls: Language + Hamburger */}
+          <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center bg-slate-900/90 rounded-lg p-0.5 border border-slate-800 text-[10px] font-bold">
+              <button
+                onClick={() => setLanguage('vi')}
+                className={`px-2 py-0.5 rounded transition-all ${
+                  language === 'vi' ? 'bg-cyan-500 text-slate-950 font-black' : 'text-slate-400'
+                }`}
+              >
+                VI
+              </button>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`px-2 py-0.5 rounded transition-all ${
+                  language === 'en' ? 'bg-cyan-500 text-slate-950 font-black' : 'text-slate-400'
+                }`}
+              >
+                EN
+              </button>
+            </div>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300"
+              aria-label="Toggle Menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Dropdown Menu */}
@@ -97,52 +149,52 @@ export const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2 rounded-lg hover:bg-slate-900 text-sm font-semibold text-slate-200"
             >
-              Tổng quan
+              {t.nav.overview}
             </a>
             <a
               href="#projects"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2 rounded-lg hover:bg-slate-900 text-sm font-semibold text-slate-200"
             >
-              Dự án Thực chiến
+              {t.nav.projects}
             </a>
             <a
               href="#three-engine"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2 rounded-lg hover:bg-slate-900 text-sm font-semibold text-slate-200"
             >
-              3D Interactive Engine
+              {t.nav.engine3d}
             </a>
             <a
               href="#tech-matrix"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2 rounded-lg hover:bg-slate-900 text-sm font-semibold text-slate-200"
             >
-              Kỹ năng &amp; Công nghệ
+              {t.nav.skills}
             </a>
             <a
               href="#ai-native"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2 rounded-lg hover:bg-slate-900 text-sm font-semibold text-slate-200"
             >
-              AI-Native Workflow
+              {t.nav.aiWorkflow}
             </a>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2 rounded-lg hover:bg-slate-900 text-sm font-semibold text-slate-200"
             >
-              Liên hệ
+              {t.nav.contact}
             </a>
             <div className="pt-2 border-t border-slate-800 flex flex-col gap-2">
               <a
                 href="./Luu_Truong_Hoang_Phuc_Portfolio.pdf"
                 download="Luu_Truong_Hoang_Phuc_Portfolio.pdf"
                 onClick={handleDownloadPortfolio}
-                className="w-full py-2.5 rounded-lg bg-blue-600 text-white text-xs font-bold flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-bold flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4" />
-                <span>Tải Portfolio PDF (1.66MB)</span>
+                <span>{t.nav.downloadPdf} (1.66MB)</span>
               </a>
             </div>
           </div>

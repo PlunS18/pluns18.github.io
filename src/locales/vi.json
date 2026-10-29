@@ -1,0 +1,263 @@
+{
+  "nav": {
+    "brandTitle": "Hoàng Phúc",
+    "devBadge": "DEV",
+    "jobTitle": "Mobile & Web Developer",
+    "overview": "Tổng quan",
+    "projects": "Dự án Thực chiến",
+    "engine3d": "3D Engine",
+    "skills": "Kỹ năng",
+    "aiWorkflow": "AI Workflow",
+    "contact": "Liên hệ",
+    "downloadPdf": "Tải Portfolio PDF",
+    "statusAvailable": "Sẵn sàng nhận việc Middle Mobile & Web"
+  },
+  "hero": {
+    "statusLive": "Sẵn sàng nhận việc Middle Level",
+    "statusAi": "AI-Native Engineering (Cursor, Claude)",
+    "name": "Lưu Trương Hoàng Phúc",
+    "title": "Middle Mobile & Web Developer",
+    "description": "Hơn 3 năm kinh nghiệm thực chiến làm chủ hệ sinh thái đa nền tảng: React Native (iOS & Android), Next.js 14 / React, và Three.js WebGL. Đã trực tiếp kiến trúc và phát hành 2 ứng dụng production lên App Store & Google Play. Chủ động ứng dụng sâu các công cụ AI (Claude Code, Cursor) để tối ưu năng suất nhưng vẫn đảm bảo chất lượng và bảo mật mã nguồn.",
+    "features": [
+      "React Native • Expo • Hermes 60FPS",
+      "Next.js 14 App Router • Tailwind CSS",
+      "Offline-First (SQLite/MMKV) • Sync Engine",
+      "Three.js 3D WebGL • Canvas 2D CAD"
+    ],
+    "ctaProjects": "Xem Dự án Thực chiến",
+    "ctaDownload": "Tải Portfolio PDF (1.66MB)",
+    "phoneHint": "Kéo chuột xoay 360°",
+    "phoneDragTitle": "Kéo & Rê chuột để xoay thiết bị 3D tự nhiên",
+    "screenPickerTitle": "Chọn màn hình thực tế từ web myhomecheck.ai:",
+    "screenPickerSub": "Texture WebP • Tự động ánh xạ vào 3D",
+    "screens": {
+      "aiDesign": {
+        "name": "Kiến trúc sư trưởng Agentic AI",
+        "tag": "One Sentence One Home"
+      },
+      "satellite": {
+        "name": "Đo đạc Vệ tinh & Sơn hướng",
+        "tag": "GPS • 24 Sơn Hướng"
+      },
+      "cadDigitize": {
+        "name": "Số hoá & Dựng bản vẽ CAD 2D/3D",
+        "tag": "Canvas 2D • Laser BLE"
+      },
+      "fengshui": {
+        "name": "Thẩm định Phong thuỷ Khoa học",
+        "tag": "9 Chuyên đề Phong thuỷ"
+      }
+    }
+  },
+  "metrics": {
+    "m1": {
+      "number": "3+ Năm",
+      "title": "Kinh nghiệm Thực chiến",
+      "subtitle": "Phát triển chuyên sâu React Native & Next.js"
+    },
+    "m2": {
+      "number": "02 Apps",
+      "title": "Đã lên App Store & Google Play",
+      "subtitle": "HomeCheck & Thầy AI (vận hành production)"
+    },
+    "m3": {
+      "number": "60 FPS",
+      "title": "Tối ưu Hiệu năng Đồ họa",
+      "subtitle": "Hermes Engine, Worklets & Three.js WebGL"
+    },
+    "m4": {
+      "number": "AI-Native",
+      "title": "Cursor, Claude Code, Codex",
+      "subtitle": "Tăng tốc 2-3x năng suất, Type-safe tuyệt đối"
+    }
+  },
+  "marquee": {
+    "badge": "PRODUCTION-READY TECH STACK",
+    "sub": "React Bits • Infinite Motion Stream",
+    "apiIntegration": "Tích hợp API",
+    "apiIntegrationNote": "REST, GraphQL & WebSocket"
+  },
+  "viewer3d": {
+    "engineTitle": "Interactive Architectural 3D Engine",
+    "engineSub": "Kiến trúc không gian thực tế • Tương thích đa thiết bị • Chuyển đổi tức thì",
+    "fpsBadge": "Three.js 60FPS",
+    "tabs": {
+      "model3d": "Mô hình 3D WebGL",
+      "cad2d": "Bản vẽ CAD 2D",
+      "fengshui": "24 Sơn Hướng La Kinh"
+    },
+    "roomOverlay": {
+      "title": "Phòng Khách Hiện Đại (Villa 120m²)",
+      "desc": "Diện tích: 28.5 m² • Trần cao: 3.2 m • Sofa chữ L bọc nỉ cao cấp",
+      "disposeBadge": "Đã bật khử rò rỉ RAM (Dispose)"
+    },
+    "cad": {
+      "badge": "Thuật toán Phân Tách Không Gian Đa Chiều",
+      "title": "Số Hoá Bản Vẽ & Định Vị Phòng Tự Động",
+      "desc": "Trực tiếp chuyển tải từ ảnh chụp sổ đỏ / bản vẽ tay hoặc máy đo khoảng cách laser Bluetooth. Mô đun Canvas 2D vẽ tường, cửa đi, cửa sổ, tự động đo đạc diện tích chuẩn xác.",
+      "feature1": "BLE Laser đo tường",
+      "feature2": "60 FPS Pan & Zoom"
+    },
+    "fengshui": {
+      "badge": "Khoa Học Phong Thuỷ & Địa Từ Trường",
+      "title": "Phân Tích 24 Sơn Hướng & Khắc Phục Xung Sát",
+      "desc": "Tự động chồng đĩa La kinh Bát Trạch & Huyền Không Phi Tinh lên tim nhà (135.0° Đông Nam). Chấm điểm tự động các phương án kiến trúc, cảnh báo hướng bếp và cửa WC.",
+      "feature1": "Hạng A: 94đ Hướng Tốn",
+      "feature2": "Cảnh báo Bếp / Cửa WC"
+    },
+    "statusBar": {
+      "title": "Three.js WebGL • 60 FPS Canvas UI",
+      "dragHint": "Kéo chuột xoay phòng 360° tự nhiên",
+      "memoryHint": "Tự động thu hồi bộ nhớ (No Memory Leak)"
+    }
+  },
+  "projects": {
+    "badge": "Dự án Tiêu biểu",
+    "title": "Sản phẩm Thực chiến Đã Phát hành",
+    "subtitle": "Các hệ thống ứng dụng phức tạp khẳng định năng lực Mobile Cross-Platform, Web 3D và Tích hợp API",
+    "solutionsHeading": "Giải pháp Kỹ thuật Đột phá",
+    "techStackHeading": "Công nghệ sử dụng",
+    "btnLiveDemo": "Website Trải nghiệm",
+    "btnGooglePlay": "Google Play",
+    "btnAppStore": "App Store",
+    "p1": {
+      "title": "HomeCheck Ecosystem — Mobile App & Web 3D",
+      "role": "Middle Mobile & Web Developer",
+      "desc": "Nền tảng proptech thông minh đột phá tại Việt Nam: Số hóa mặt bằng bằng thước đo Laser Bluetooth, dựng mô hình 3D WebGL tương tác và tra cứu phong thủy Bát Trạch 24 Sơn Hướng.",
+      "sol1Title": "Đồng bộ Thước đo Laser Bluetooth (BLE)",
+      "sol1Desc": "Kết nối thiết bị đo khoảng cách qua BLE GATT Profile, stream dữ liệu đo thời gian thực vào Canvas 2D vẽ tường tự động, khử nhiễu gói tin.",
+      "sol2Title": "Tối ưu 60FPS & Khắc phục tràn RAM (OOM)",
+      "sol2Desc": "Xử lý các mô hình LiDAR nặng sang Web Worker luồng nền, thu hồi bộ nhớ (dispose materials) khi chuyển phòng. Sử dụng React Native Reanimated (Worklets) để phản hồi cảm ứng mượt mà.",
+      "sol3Title": "Tích hợp API Bất đồng bộ & Push Notification",
+      "sol3Desc": "Phối hợp với Backend tích hợp API hàng đợi BullMQ + Redis cho tác vụ AI sinh ảnh không gian nội thất, tối ưu phản hồi tức thì trên Mobile và xử lý Push Notification (FCM) mượt mà khi hoàn tất.",
+      "card1Title": "Kiến trúc sư trưởng AI",
+      "card1Subtitle": "One Sentence One Home",
+      "card2Title": "La Kinh Bát Trạch 24 Sơn",
+      "card2Subtitle": "Tích hợp GPS & Vệ tinh",
+      "card3Title": "Số hóa CAD 2D Độc quyền",
+      "card3Subtitle": "Kết nối Thước đo Laser BLE",
+      "card4Title": "Phân tích Phong thủy Đa tầng",
+      "card4Subtitle": "Bát Trạch & Huyền Không Phi Tinh"
+    },
+    "p2": {
+      "title": "Thầy AI — Trợ lý Học tập Thông minh Đa Nền tảng",
+      "role": "Mobile & Web Front-end Developer",
+      "desc": "Ứng dụng trợ lý gia sư thông minh trên iOS & Android: Nhận diện đề bài toán/lý qua camera, giải thích từng bước bằng giọng nói AI và hiển thị công thức LaTeX trực quan.",
+      "sol1Title": "Truyền phát Âm thanh (Audio Streaming) Độ trễ thấp",
+      "sol1Desc": "Xử lý luồng âm thanh dạng chunk (TTS streaming) phát ngay khi nhận byte đầu tiên, giảm độ trễ phản hồi từ 4s xuống dưới 800ms.",
+      "sol2Title": "Hiển thị Công thức Toán học LaTeX & Đồ thị Động",
+      "sol2Desc": "Render công thức toán phức tạp và đồ thị hàm số theo thời gian thực trên React Native mà không gây giật khung hình.",
+      "sol3Title": "Quản lý Trạng thái & Lịch sử Hội thoại Cục bộ",
+      "sol3Desc": "Kiến trúc Zustand kết hợp lưu trữ cục bộ SQLite/MMKV giúp truy xuất lịch sử học tập tức thì ngay cả khi mất mạng."
+    },
+    "p3": {
+      "title": "2D Floorplan CAD Editor & 3D Spatial Viewer (Web)",
+      "role": "Frontend & 3D Web Developer",
+      "desc": "Hệ thống dựng và chỉnh sửa mặt bằng kiến trúc trực tiếp trên trình duyệt Web, tự động chuyển đổi từ bản vẽ 2D sang không gian 3D WebGL với độ chính xác theo milimet.",
+      "sol1Title": "Công cụ Dựng hình Vector HTML5 Canvas 2D",
+      "sol1Desc": "Phát triển bộ công cụ vẽ tường, bố trí cửa đi, cửa sổ với thuật toán bắt điểm (snapping) từ tính và tính diện tích hình học đa giác phức tạp.",
+      "sol2Title": "Tạo Mô hình 3D Tự động từ Bản vẽ 2D",
+      "sol2Desc": "Thuật toán Extrude Geometry từ các tọa độ tường 2D sang không gian 3D Three.js, tự động gắn vật liệu PBR và ánh sáng nội thất chân thực."
+    }
+  },
+  "skills": {
+    "badge": "Kỹ năng & Nền tảng Công nghệ",
+    "title": "Năng lực Kỹ thuật Thực chiến",
+    "subtitle": "Tập trung chuyên sâu vào Frontend Mobile & Web, kết hợp hiểu biết nền tảng về Tích hợp API và Quy trình AI hiện đại",
+    "cardMobile": {
+      "title": "Mobile Cross-Platform",
+      "subtitle": "Hiệu năng Native trên iOS & Android",
+      "highlight": "Tối ưu Hermes Engine 60FPS, kiến trúc Offline-First với SQLite/MMKV và cập nhật ứng dụng tức thì qua CodePush."
+    },
+    "cardWeb": {
+      "title": "Web & 3D Spatial",
+      "subtitle": "Nền tảng Web Hiện đại & Không gian 3D",
+      "highlight": "SSR / SSG tối ưu hóa SEO với Next.js 14 và render Three.js WebGL trong Worker ngầm mượt mà."
+    },
+    "cardBackend": {
+      "title": "Backend Integration & APIs",
+      "subtitle": "Tích hợp API & Nền tảng Backend Cơ bản",
+      "highlight": "Nắm vững kiến thức nền tảng Backend, hiểu rõ luồng API, database cơ bản và phối hợp ăn ý với Backend Team để tích hợp mượt mà."
+    },
+    "cardAi": {
+      "title": "AI-Native & Tooling",
+      "subtitle": "Quy trình Kỹ nghệ Tăng tốc bằng AI",
+      "highlight": "Ứng dụng Claude Code & Cursor tăng tốc 2-3x nhưng giữ kỷ luật Type-safety và bảo mật tuyệt đối."
+    },
+    "levels": {
+      "expert": "Chuyên sâu",
+      "proficient": "Thành thạo",
+      "practical": "Thực chiến",
+      "basic": "Nền tảng cơ bản",
+      "integration": "Tích hợp tốt",
+      "daily": "Hằng ngày"
+    }
+  },
+  "aiTerminal": {
+    "badge": "Dành riêng cho Tiêu chí TIZO Việt Nam",
+    "title": "AI-Native Engineering Workflow",
+    "subtitle": "Cách tôi ứng dụng các công cụ AI thế hệ mới (Claude Code, Cursor, Codex) để tăng tốc 2-3x năng suất nhưng luôn giữ vững kỷ luật Type-safety và bảo mật.",
+    "copied": "Đã sao chép",
+    "copyCommand": "Sao chép lệnh",
+    "tabsPrompt": "Tình huống AI thực tế:",
+    "scenarios": [
+      {
+        "id": "perf",
+        "name": "Khắc phục Tràn RAM & Đạt 60FPS",
+        "command": "claude-code analyze --target hc-app/src/screens/view3d --profile memory",
+        "output": [
+          "🔍 [Claude Code] Analyzing Three.js render loop in React Native WebView...",
+          "⚠️  Detected: Textures & Geometries not disposed upon component unmount (OOM risk).",
+          "💡 Solution generated: Web Worker offloading for LIDAR mesh + Auto-disposal hook.",
+          "⚡ Result: Heap allocation reduced by 68%. Frame rate locked at steady 60FPS."
+        ]
+      },
+      {
+        "id": "offline",
+        "name": "Kiến trúc Sync Engine Offline-First",
+        "command": "cursor --generate-sync-engine --db sqlite --conflict updated_at",
+        "output": [
+          "📦 [Cursor AI] Scaffolding Offline-First Local Store (SQLite + MMKV)...",
+          "🔄 Implementing two-way delta synchronization engine with retry backoff...",
+          "🛡️ Edge case resolved: Clock skew conflict handled via vector timestamps.",
+          "✅ Field test passed: 500+ site photos saved offline and synced seamlessly."
+        ]
+      },
+      {
+        "id": "api-contract",
+        "name": "Sinh Type-Safe API Client & Tích hợp",
+        "command": "cursor --generate-api-client --spec swagger.json --output src/services/api",
+        "output": [
+          "🚀 [Cursor AI] Parsing OpenAPI 3.0 specification from Backend team...",
+          "📐 Auto-generating TypeScript interfaces, request validators, and react-query hooks...",
+          "🔒 Strict runtime type validation (Zod) attached to incoming response payloads.",
+          "✨ Result: 100% Type-safe API calls with zero manual boilerplate code."
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "badge": "Sẵn sàng kết nối & Phỏng vấn",
+    "title": "Cùng Xây dựng Sản phẩm Đỉnh cao",
+    "desc": "Tôi luôn cởi mở trao đổi về các cơ hội hợp tác vị trí Middle Mobile & Web Developer, các dự án React Native / Next.js hoặc tích hợp 3D WebGL và AI thế hệ mới.",
+    "phoneLabel": "Điện thoại / Zalo",
+    "emailLabel": "Hòm thư điện tử",
+    "locationLabel": "Khu vực làm việc",
+    "locationValue": "TP. Hồ Chí Minh (Sẵn sàng làm việc tại Cát Lái / TP. Thủ Đức / Trung tâm)",
+    "timeLabel": "Thời gian phản hồi",
+    "timeValue": "Trong vòng 24 giờ • Sẵn sàng phỏng vấn ngay",
+    "formTitle": "Gửi Tin nhắn Trực tiếp",
+    "nameLabel": "Họ và tên",
+    "namePlaceholder": "Ví dụ: Nhà tuyển dụng TIZO",
+    "emailInputLabel": "Địa chỉ Email",
+    "messageLabel": "Nội dung tin nhắn",
+    "messagePlaceholder": "Nhập lời nhắn hoặc đề xuất phỏng vấn...",
+    "sendBtn": "Gửi Tin nhắn",
+    "sentSuccess": "Cảm ơn bạn! Tin nhắn đã được gửi thành công.",
+    "copied": "Đã sao chép"
+  },
+  "footer": {
+    "rights": "Bản quyền thuộc về Lưu Trương Hoàng Phúc. Được xây dựng với React, Three.js & Tailwind CSS.",
+    "available": "Sẵn sàng làm việc Middle Mobile & Web"
+  }
+}
