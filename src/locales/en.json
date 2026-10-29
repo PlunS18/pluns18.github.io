@@ -163,7 +163,7 @@
   "skills": {
     "badge": "Skills & Technology Stack",
     "title": "Production Engineering Matrix",
-    "subtitle": "Deep specialization in Frontend Mobile & Web, backed by solid API integration skills and modern AI workflows",
+    "subtitle": "Deep specialization in Frontend Mobile & Web, solid NestJS architecture & API integration, and modern AI workflows",
     "cardMobile": {
       "title": "Mobile Cross-Platform",
       "subtitle": "iOS & Android Native Performance",
@@ -175,9 +175,9 @@
       "highlight": "SEO-optimized SSR/SSG with Next.js 14 and high-performance Three.js WebGL spatial rendering in Web Workers."
     },
     "cardBackend": {
-      "title": "Backend Integration & APIs",
-      "subtitle": "API Integration & Basic Backend Foundation",
-      "highlight": "Solid backend fundamentals, thorough understanding of API lifecycles, databases, and smooth collaboration with backend engineers."
+      "title": "NestJS & System Integration",
+      "subtitle": "Solid NestJS Architecture & Production API Integration",
+      "highlight": "Solid grasp of NestJS modular architecture (Modules, Controllers, Providers, WsGateway), RESTful/WebSocket APIs, and BullMQ + Redis queues. Ensures seamless full-cycle integration between Mobile/Web and backend systems."
     },
     "cardAi": {
       "title": "AI-Native & Tooling",
@@ -187,6 +187,7 @@
     "levels": {
       "expert": "Deep Expertise",
       "proficient": "Proficient",
+      "solid": "Solid Architecture",
       "practical": "Production Experience",
       "basic": "Working Knowledge",
       "integration": "Good Integration",

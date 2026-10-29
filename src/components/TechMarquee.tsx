@@ -7,12 +7,13 @@ export const TechMarquee: React.FC = () => {
 
   const techItems = [
     { name: 'React Native', note: 'Hermes Engine 60FPS', icon: Smartphone, color: 'text-cyan-400' },
+    { name: 'NestJS', note: language === 'vi' ? 'Nắm vững kiến trúc' : 'Solid Architecture', icon: Cpu, color: 'text-rose-400' },
     { name: 'Three.js', note: '3D WebGL PBR', icon: Layers, color: 'text-indigo-400' },
     { name: 'Next.js 14', note: 'App Router & SSR', icon: Globe, color: 'text-blue-400' },
     { name: 'TypeScript', note: 'Strict Type-Safety', icon: Terminal, color: 'text-sky-400' },
     { name: 'Expo & EAS', note: 'OTA & Native Build', icon: Zap, color: 'text-emerald-400' },
     { name: 'Offline-First', note: 'SQLite & MMKV Sync', icon: Database, color: 'text-amber-400' },
-    { name: language === 'vi' ? 'Tích hợp API' : 'API Integration', note: 'REST, GraphQL & WebSocket', icon: Cpu, color: 'text-purple-400' },
+    { name: language === 'vi' ? 'Tích hợp API & Redis' : 'API & Redis Queue', note: 'REST, WsGateway & BullMQ', icon: Cpu, color: 'text-purple-400' },
     { name: 'Cursor & Claude', note: 'AI-Native Workflow', icon: Shield, color: 'text-pink-400' },
     { name: 'Tailwind CSS', note: 'Modern UI/UX Pro', icon: Layers, color: 'text-teal-400' }
   ];

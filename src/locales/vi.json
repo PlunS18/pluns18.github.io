@@ -163,7 +163,7 @@
   "skills": {
     "badge": "Kỹ năng & Nền tảng Công nghệ",
     "title": "Năng lực Kỹ thuật Thực chiến",
-    "subtitle": "Tập trung chuyên sâu vào Frontend Mobile & Web, kết hợp hiểu biết nền tảng về Tích hợp API và Quy trình AI hiện đại",
+    "subtitle": "Tập trung chuyên sâu vào Frontend Mobile & Web, nắm vững kiến trúc NestJS/API và Quy trình Kỹ nghệ AI",
     "cardMobile": {
       "title": "Mobile Cross-Platform",
       "subtitle": "Hiệu năng Native trên iOS & Android",
@@ -175,9 +175,9 @@
       "highlight": "SSR / SSG tối ưu hóa SEO với Next.js 14 và render Three.js WebGL trong Worker ngầm mượt mà."
     },
     "cardBackend": {
-      "title": "Backend Integration & APIs",
-      "subtitle": "Tích hợp API & Nền tảng Backend Cơ bản",
-      "highlight": "Nắm vững kiến thức nền tảng Backend, hiểu rõ luồng API, database cơ bản và phối hợp ăn ý với Backend Team để tích hợp mượt mà."
+      "title": "NestJS & Tích hợp Hệ thống",
+      "subtitle": "Nắm vững Kiến trúc NestJS & Tích hợp API Thực chiến",
+      "highlight": "Nắm vững kiến trúc mô-đun NestJS (Modules, Controllers, Providers, WsGateway), RESTful/WebSocket APIs và hàng đợi BullMQ + Redis. Hiểu sâu luồng dữ liệu hệ thống, kết nối mượt mà giữa Mobile/Web và Backend."
     },
     "cardAi": {
       "title": "AI-Native & Tooling",
@@ -187,6 +187,7 @@
     "levels": {
       "expert": "Chuyên sâu",
       "proficient": "Thành thạo",
+      "solid": "Nắm vững kiến trúc",
       "practical": "Thực chiến",
       "basic": "Nền tảng cơ bản",
       "integration": "Tích hợp tốt",

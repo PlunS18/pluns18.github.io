@@ -55,26 +55,39 @@ export const ThreeHeroCanvas: React.FC = () => {
   const phoneGroupRef = useRef<THREE.Group | null>(null);
   const screenMeshRef = useRef<THREE.Mesh | null>(null);
   const textureLoaderRef = useRef<THREE.TextureLoader | null>(null);
+  const textureCacheRef = useRef<Map<string, THREE.Texture>>(new Map());
 
-  // Switch screen texture with high-quality filtering
+  // Switch screen texture instantly with zero ghosting and crisp filtering
   const handleSwitchScreen = (screen: ScreenOption) => {
     setActiveScreen(screen.id);
-    if (!screenMeshRef.current || !textureLoaderRef.current) return;
+    if (!screenMeshRef.current) return;
 
-    textureLoaderRef.current.load(
-      screen.url,
-      (texture) => {
-        texture.colorSpace = THREE.SRGBColorSpace;
-        texture.generateMipmaps = true;
-        texture.minFilter = THREE.LinearMipmapLinearFilter;
-        texture.magFilter = THREE.LinearFilter;
-        if (screenMeshRef.current) {
-          const mat = screenMeshRef.current.material as THREE.MeshStandardMaterial;
-          mat.map = texture;
-          mat.needsUpdate = true;
+    const cachedTexture = textureCacheRef.current.get(screen.id);
+    if (cachedTexture) {
+      const mat = screenMeshRef.current.material as THREE.MeshBasicMaterial;
+      mat.map = cachedTexture;
+      mat.needsUpdate = true;
+      return;
+    }
+
+    if (textureLoaderRef.current) {
+      textureLoaderRef.current.load(
+        screen.url,
+        (texture) => {
+          texture.colorSpace = THREE.SRGBColorSpace;
+          texture.generateMipmaps = true;
+          texture.minFilter = THREE.LinearMipmapLinearFilter;
+          texture.magFilter = THREE.LinearFilter;
+          textureCacheRef.current.set(screen.id, texture);
+
+          if (screenMeshRef.current) {
+            const mat = screenMeshRef.current.material as THREE.MeshBasicMaterial;
+            mat.map = texture;
+            mat.needsUpdate = true;
+          }
         }
-      }
-    );
+      );
+    }
   };
 
   useEffect(() => {
@@ -225,26 +238,43 @@ export const ThreeHeroCanvas: React.FC = () => {
     const textureLoader = new THREE.TextureLoader();
     textureLoaderRef.current = textureLoader;
 
+    // OLED black backing plane to eliminate any alpha transparency bleed
+    const backingGeom = new THREE.PlaneGeometry(screenWidth, screenHeight);
+    const backingMat = new THREE.MeshBasicMaterial({ color: 0x020617 });
+    const backingMesh = new THREE.Mesh(backingGeom, backingMat);
+    backingMesh.position.z = phoneThickness / 2 + 0.001;
+    phoneGroup.add(backingMesh);
+
     const initialScreen = SCREEN_OPTIONS[0];
     const screenTexture = textureLoader.load(initialScreen.url, (tex) => {
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.generateMipmaps = true;
       tex.minFilter = THREE.LinearMipmapLinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      textureCacheRef.current.set(initialScreen.id, tex);
     });
 
-    const screenMat = new THREE.MeshStandardMaterial({
+    // Clean OLED material without emissiveMap (eliminates double-exposure ghosting completely)
+    const screenMat = new THREE.MeshBasicMaterial({
       map: screenTexture,
-      roughness: 0.18,
-      metalness: 0.15,
-      emissive: 0xffffff,
-      emissiveMap: screenTexture,
-      emissiveIntensity: 0.22
+      toneMapped: false
     });
 
     const screenMesh = new THREE.Mesh(screenGeom, screenMat);
     screenMesh.position.z = phoneThickness / 2 + 0.002;
     phoneGroup.add(screenMesh);
     screenMeshRef.current = screenMesh;
+
+    // Preload remaining screens into cache in the background for 0ms latency switching
+    SCREEN_OPTIONS.slice(1).forEach((opt) => {
+      textureLoader.load(opt.url, (tex) => {
+        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.generateMipmaps = true;
+        tex.minFilter = THREE.LinearMipmapLinearFilter;
+        tex.magFilter = THREE.LinearFilter;
+        textureCacheRef.current.set(opt.id, tex);
+      });
+    });
 
     // --- E. Dynamic Island Pill Notch on front screen ---
     const islandGeom = new THREE.BoxGeometry(0.58, 0.16, 0.015);
@@ -457,10 +487,15 @@ export const ThreeHeroCanvas: React.FC = () => {
       frameMat.dispose();
       screenGeom.dispose();
       screenMat.dispose();
+      backingGeom.dispose();
+      backingMat.dispose();
       orbitRingGeom.dispose();
       orbitRingMat.dispose();
       starGeom.dispose();
       starMat.dispose();
+
+      textureCacheRef.current.forEach((tex) => tex.dispose());
+      textureCacheRef.current.clear();
 
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);

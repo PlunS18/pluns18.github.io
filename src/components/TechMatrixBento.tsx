@@ -79,13 +79,13 @@ export const TechMatrixBento: React.FC = () => {
       badgeColor: 'border-emerald-500/30 text-emerald-300 bg-emerald-500/10',
       highlightNote: t.skills.cardBackend.highlight,
       skills: [
+        { name: 'NestJS', level: t.skills.levels.solid, isKey: true },
         { name: 'RESTful & GraphQL APIs', level: t.skills.levels.integration, isKey: true },
-        { name: 'Node.js & Express', level: t.skills.levels.basic, isKey: true },
-        { name: 'NestJS', level: t.skills.levels.basic, isKey: false },
-        { name: 'WebSockets (WsClient)', level: t.skills.levels.practical, isKey: true },
-        { name: 'PostgreSQL / SQL', level: t.skills.levels.basic },
-        { name: 'Redis & BullMQ Flow', level: t.skills.levels.basic },
-        { name: 'Postman & Swagger', level: t.skills.levels.practical },
+        { name: 'Node.js & Express', level: t.skills.levels.practical, isKey: true },
+        { name: 'WebSockets (WsGateway / Client)', level: t.skills.levels.practical, isKey: true },
+        { name: 'Redis & BullMQ Queues', level: t.skills.levels.solid, isKey: true },
+        { name: 'PostgreSQL & Prisma / TypeORM', level: t.skills.levels.practical },
+        { name: 'Postman & Swagger API Docs', level: t.skills.levels.practical },
         { name: 'FCM Push Notifications', level: t.skills.levels.practical }
       ]
     },

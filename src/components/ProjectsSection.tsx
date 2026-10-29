@@ -199,8 +199,9 @@ export const ProjectsSection: React.FC = () => {
                     'Three.js WebGL',
                     'HTML5 Canvas 2D',
                     'Zustand',
-                    'RESTful API',
-                    'WebSocket Client',
+                    'NestJS Architecture',
+                    'RESTful API & WsClient',
+                    'BullMQ & Redis Queue',
                     'CodePush (OTA)'
                   ].map((tech) => (
                     <span
