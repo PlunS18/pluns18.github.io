@@ -37,8 +37,8 @@ const SCREEN_OPTIONS: ScreenOption[] = [
     nameVi: 'Bản vẽ CAD 2D/3D',
     nameEn: 'CAD Floorplan 3D',
     url: './assets/hc_web_cad_digitize.webp',
-    tagVi: 'Canvas 2D • BLE',
-    tagEn: 'Canvas 2D • BLE',
+    tagVi: 'Canvas 2D',
+    tagEn: 'Canvas 2D',
     icon: Layers
   },
   {
