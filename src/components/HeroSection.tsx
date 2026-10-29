@@ -34,7 +34,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Main Headline */}
             <div>
-              <h1 className="font-heading font-black text-3xl sm:text-4xl md:text-5xl text-white leading-tight">
+              <h1 className="font-heading font-black text-3xl sm:text-4xl md:text-5xl text-white leading-tight shiny-text">
                 Lưu Trương Hoàng Phúc
               </h1>
               <p className="font-heading font-bold text-lg sm:text-xl md:text-2xl cyber-gradient mt-1">

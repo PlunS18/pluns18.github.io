@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
 import { ThreeRoomViewer } from './ThreeRoomViewer';
-import { ExternalLink, Smartphone, Globe, Cpu, CheckCircle2, Layers, Sparkles, Box, Code2 } from 'lucide-react';
+import { ExternalLink, Smartphone, Globe, Cpu, CheckCircle2, Layers, Sparkles, Box, Code2, ArrowUpRight } from 'lucide-react';
 
 export const ProjectsSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'mobile' | 'web' | '3d'>('all');
+
+  // React Bits 3D Tilt Card Effect Handler
+  const handleTiltMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.008, 1.008, 1.008)`;
+  };
+
+  const handleTiltLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+  };
 
   return (
     <section id="projects" className="py-20 relative">
@@ -13,7 +30,7 @@ export const ProjectsSection: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
             <div className="neon-badge mb-2">
-              <Box className="w-3.5 h-3.5" />
+              <Box className="w-3.5 h-3.5 text-cyan-400" />
               <span>Sản phẩm Thực tế đã Triển khai</span>
             </div>
             <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-white">
@@ -28,7 +45,7 @@ export const ProjectsSection: React.FC = () => {
           <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800 self-start md:self-auto overflow-x-auto">
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'all'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200'
@@ -38,7 +55,7 @@ export const ProjectsSection: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('mobile')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'mobile'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200'
@@ -48,7 +65,7 @@ export const ProjectsSection: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('web')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'web'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200'
@@ -58,7 +75,7 @@ export const ProjectsSection: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('3d')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === '3d'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-slate-400 hover:text-slate-200'
@@ -70,10 +87,14 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            PROJECT 1: FLAGSHIP HOMECHECK ECOSYSTEM
+            PROJECT 1: FLAGSHIP HOMECHECK ECOSYSTEM (HIGH-RES WEB ASSETS)
             ========================================================================= */}
         {(activeTab === 'all' || activeTab === 'mobile' || activeTab === 'web') && (
-          <div className="spotlight-card p-6 md:p-8 mb-10 border-cyan-500/30 bg-slate-900/60 shadow-2xl">
+          <div
+            onMouseMove={handleTiltMove}
+            onMouseLeave={handleTiltLeave}
+            className="spotlight-card p-6 md:p-8 mb-10 border-cyan-500/30 bg-slate-900/60 shadow-2xl transition-transform duration-200 ease-out"
+          >
             {/* Project Header */}
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
               <div className="flex items-center gap-4">
@@ -94,79 +115,79 @@ export const ProjectsSection: React.FC = () => {
                       iOS • Android • Web
                     </span>
                   </div>
-                  <p className="text-xs text-cyan-400 font-semibold">
-                    Core Mobile &amp; Web Developer • Web Media (04/2024 - Hiện tại)
+                  <p className="text-xs text-cyan-400 font-medium">
+                    Core Mobile &amp; Web Developer • Web Media (04/2024 – Hiện tại)
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <a
                   href="https://myhomecheck.ai/"
                   target="_blank"
-                  rel="noreferrer"
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 border border-slate-700 transition-all hover:scale-105"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-xl bg-slate-950/80 hover:bg-cyan-950/50 border border-cyan-500/40 hover:border-cyan-400 text-cyan-300 text-xs font-bold flex items-center gap-2 transition-all shadow-md group"
                 >
                   <span>Truy cập myhomecheck.ai</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
             </div>
 
-            {/* Description & Tech Highlights */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6">
+            {/* Project Description & Architecture Details */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-start">
               
-              {/* Left Column: Technical Achievements */}
-              <div className="lg:col-span-7 flex flex-col gap-4">
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              {/* Left Column: Architectural Bullets */}
+              <div className="lg:col-span-7 space-y-4">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   HomeCheck là giải pháp công nghệ toàn diện cho kỹ sư và chủ nhà nhằm khảo sát, thẩm định hiện trạng công trình, dựng mặt bằng 2D/3D tương tác và ứng dụng Generative AI thiết kế lại không gian sống.
                 </p>
 
-                <div className="space-y-3 mt-1">
-                  <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 flex gap-3">
-                    <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 flex-shrink-0 h-fit">
-                      <Smartphone className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-xs text-white">
-                        Kiến trúc Mobile App Offline-First (React Native, TypeScript)
-                      </h4>
-                      <p className="text-[11px] text-slate-400 mt-1 leading-normal">
-                        Lưu trữ toàn bộ dữ liệu khảo sát và bản vẽ ngay cả khi mất sóng hoàn toàn (SQLite/MMKV). Tự động kích hoạt Sync Engine 2 chiều xử lý conflict thông minh khi có mạng trở lại.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 flex gap-3">
-                    <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 flex-shrink-0 h-fit">
-                      <Cpu className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-xs text-white">
-                        Tối ưu 60FPS &amp; Khắc phục tràn RAM (OOM)
-                      </h4>
-                      <p className="text-[11px] text-slate-400 mt-1 leading-normal">
-                        Xử lý các mô hình LIDAR nặng sang Web Worker luồng nền, thu hồi bộ nhớ (dispose materials) khi chuyển phòng. Sử dụng React Native Reanimated (Worklets) để phản hồi cảm ứng mượt mà.
-                      </p>
+                <div className="space-y-3">
+                  <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-cyan-500/30 transition-all">
+                    <div className="flex items-start gap-2.5">
+                      <div className="p-1 rounded bg-cyan-500/10 text-cyan-400 mt-0.5">
+                        <Smartphone className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-xs text-white">Kiến trúc Mobile App Offline-First (React Native, TypeScript)</div>
+                        <p className="text-xs text-slate-400 mt-1">
+                          Lưu trữ toàn bộ dữ liệu khảo sát và bản vẽ ngay cả khi mất sóng hoàn toàn (SQLite/MMKV). Tự động kích hoạt Sync Engine 2 chiều xử lý conflict thông minh khi có mạng trở lại.
+                        </p>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 flex gap-3">
-                    <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400 flex-shrink-0 h-fit">
-                      <Sparkles className="w-4 h-4" />
+                  <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-cyan-500/30 transition-all">
+                    <div className="flex items-start gap-2.5">
+                      <div className="p-1 rounded bg-cyan-500/10 text-cyan-400 mt-0.5">
+                        <Cpu className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-xs text-white">Tối ưu 60FPS &amp; Khắc phục tràn RAM (OOM)</div>
+                        <p className="text-xs text-slate-400 mt-1">
+                          Xử lý các mô hình LiDAR nặng sang Web Worker luồng nền, thu hồi bộ nhớ (dispose materials) khi chuyển phòng. Sử dụng React Native Reanimated (Worklets) để phản hồi cảm ứng mượt mà.
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-xs text-white">
-                        Hệ thống Bất đồng bộ Generative AI Redesign
-                      </h4>
-                      <p className="text-[11px] text-slate-400 mt-1 leading-normal">
-                        Backend NestJS tích hợp BullMQ + Redis xếp hàng xử lý các tác vụ AI sinh ảnh không gian nội thất, trả phản hồi tức thì cho Mobile và bắn Push Notification (FCM) khi xong.
-                      </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-cyan-500/30 transition-all">
+                    <div className="flex items-start gap-2.5">
+                      <div className="p-1 rounded bg-cyan-500/10 text-cyan-400 mt-0.5">
+                        <Sparkles className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-xs text-white">Hệ thống Bất đồng bộ Generative AI Redesign</div>
+                        <p className="text-xs text-slate-400 mt-1">
+                          Backend NestJS tích hợp BullMQ + Redis xếp hàng xử lý các tác vụ AI sinh ảnh không gian nội thất, trả phản hồi tức thì cho Mobile và bắn Push Notification (FCM) khi xong.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Tech Pills */}
+                {/* Tech Stack Pills */}
                 <div className="flex flex-wrap gap-1.5 pt-2">
                   {[
                     'React Native',
@@ -183,7 +204,7 @@ export const ProjectsSection: React.FC = () => {
                   ].map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-[11px] font-semibold border border-slate-700"
+                      className="px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 text-[11px] font-semibold border border-slate-700/80"
                     >
                       {tech}
                     </span>
@@ -191,41 +212,65 @@ export const ProjectsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right Column: Visual Mockup Showcase */}
-              <div className="lg:col-span-5 flex flex-col gap-4">
+              {/* Right Column: High-Res Official Web Asset Showcase */}
+              <div className="lg:col-span-5 flex flex-col gap-3">
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 p-1 group">
-                    <img
-                      src="./assets/man-trang-chu-app.Br1F0Hab_Z2J0q8.webp"
-                      alt="HomeCheck Mobile UI"
-                      className="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="p-2 text-center text-[10px] font-semibold text-slate-300">
-                      Giao diện Mobile App
+                  <div className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 p-1 group hover:border-cyan-500/50 transition-all shadow-lg">
+                    <div className="h-52 overflow-hidden rounded-xl bg-slate-900 flex items-center justify-center">
+                      <img
+                        src="./assets/hc_web_hero_design.webp"
+                        alt="Kiến trúc sư trưởng Agentic AI"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-2 text-center">
+                      <div className="text-[11px] font-bold text-slate-200">Kiến trúc sư trưởng AI</div>
+                      <div className="text-[10px] text-cyan-400 font-mono">One Sentence One Home</div>
                     </div>
                   </div>
 
-                  <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 p-1 group">
-                    <img
-                      src="./assets/man-do-dac-ve-tinh.B-04KL-2_Z1H4mNW.webp"
-                      alt="Satellite Map"
-                      className="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="p-2 text-center text-[10px] font-semibold text-slate-300">
-                      Đo đạc Vệ tinh Hiện trường
+                  <div className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 p-1 group hover:border-cyan-500/50 transition-all shadow-lg">
+                    <div className="h-52 overflow-hidden rounded-xl bg-slate-900 flex items-center justify-center">
+                      <img
+                        src="./assets/hc_web_satellite_measure.webp"
+                        alt="Đo đạc Vệ tinh Hiện trường"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-2 text-center">
+                      <div className="text-[11px] font-bold text-slate-200">Đo đạc Vệ tinh Hiện trường</div>
+                      <div className="text-[10px] text-cyan-400 font-mono">La Kinh • Sơn Hướng</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 p-1 group">
-                  <img
-                    src="./assets/tk-3d.CYdajQ7S_1GYWpb.webp"
-                    alt="3D Room Viewer"
-                    className="w-full h-32 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="p-2 flex items-center justify-between text-[10px] font-semibold text-slate-300">
-                    <span>Mô hình 3D WebGL</span>
-                    <span className="text-cyan-400 font-mono">Three.js 60FPS</span>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 p-1 group hover:border-cyan-500/50 transition-all shadow-lg">
+                    <div className="h-32 overflow-hidden rounded-xl bg-slate-900 flex items-center justify-center">
+                      <img
+                        src="./assets/hc_web_cad_digitize.webp"
+                        alt="Số hoá bản vẽ & Dựng CAD"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-1.5 text-center">
+                      <div className="text-[10px] font-bold text-slate-200">Số hoá CAD 2D/3D</div>
+                      <div className="text-[9px] text-cyan-400 font-mono">Laser Bluetooth</div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 p-1 group hover:border-cyan-500/50 transition-all shadow-lg">
+                    <div className="h-32 overflow-hidden rounded-xl bg-slate-900 flex items-center justify-center">
+                      <img
+                        src="./assets/hc_web_fengshui_analysis.webp"
+                        alt="Thẩm định Phong thuỷ 24 Sơn Hướng"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-1.5 text-center">
+                      <div className="text-[10px] font-bold text-slate-200">Phong thuỷ 24 Sơn</div>
+                      <div className="text-[9px] text-amber-400 font-mono">Bát Trạch • Phi Tinh</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -235,76 +280,65 @@ export const ProjectsSection: React.FC = () => {
         )}
 
         {/* =========================================================================
-            INTERACTIVE 3D ENGINE SHOWCASE
+            INTERACTIVE 3D ENGINE SHOWCASE (THREE.JS VILLA ARCHITECTURE)
             ========================================================================= */}
         {(activeTab === 'all' || activeTab === '3d') && (
-          <div id="three-engine" className="mb-12">
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <h3 className="font-heading font-extrabold text-xl text-white flex items-center gap-2">
-                  <span>Interactive 3D Architectural Engine (Live Demo)</span>
-                  <span className="neon-badge">Three.js WebGL</span>
-                </h3>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  Thử nghiệm tương tác trực tiếp với bộ render không gian 3D và bản vẽ CAD kiến trúc được tối ưu cho trình duyệt.
-                </p>
-              </div>
-            </div>
+          <div id="three-engine" className="mb-10">
             <ThreeRoomViewer />
           </div>
         )}
 
         {/* =========================================================================
-            PROJECT 2 & 3: GRID
+            PROJECT 2 & 3: THẦY AI & WEB MEDIA STUDIO SAAS
             ========================================================================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          {/* PROJECT 2: THẦY AI */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {(activeTab === 'all' || activeTab === 'mobile') && (
-            <div className="spotlight-card p-6 flex flex-col justify-between border-amber-500/20 bg-slate-900/50">
+            <div
+              onMouseMove={handleTiltMove}
+              onMouseLeave={handleTiltLeave}
+              className="spotlight-card p-6 border-slate-800 bg-slate-900/50 flex flex-col justify-between transition-transform duration-200 ease-out"
+            >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-heading font-black text-white text-base shadow-lg shadow-amber-500/20">
-                      AI
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-bold text-base text-white">
-                        Ứng dụng Giáo dục &amp; Quản trị Gia Phả "Thầy AI"
-                      </h4>
-                      <p className="text-[11px] text-amber-400 font-medium">
-                        Mobile Developer (React Native) • TGMSS (09/2023 - 04/2024)
-                      </p>
-                    </div>
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm border border-amber-500/30">
+                    AI
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
+                      App Store &amp; Google Play
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
+                      React Native • Redux
+                    </span>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="neon-badge live">App Store &amp; Google Play</span>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">
-                    React Native • Redux
-                  </span>
-                </div>
+                <h4 className="font-heading font-black text-lg text-white mb-1">
+                  Ứng dụng Giáo dục &amp; Quản trị Gia Phả "Thầy AI"
+                </h4>
+                <p className="text-xs text-slate-400 mb-4">
+                  Mobile Developer (React Native) • TGMSS (09/2023 – 04/2024)
+                </p>
 
-                <p className="text-slate-300 text-xs leading-relaxed mb-4">
+                <p className="text-xs text-slate-300 leading-relaxed mb-4">
                   Ứng dụng di động cung cấp công cụ tra cứu giáo dục và quản lý phả hệ dòng họ nhiều thế hệ. Đảm nhiệm toàn bộ vòng đời phát triển từ đặc tả yêu cầu, thiết kế kiến trúc đến phát hành lên hai kho ứng dụng.
                 </p>
 
-                <ul className="space-y-2 text-xs text-slate-300 mb-6">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                <div className="space-y-2 text-xs text-slate-300">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
                     <span><strong>Giải thuật Cây Gia Phả đệ quy:</strong> Tự tay thiết kế thuật toán phân nhánh cây nhiều tầng trên infinite canvas, tính toán tọa độ nút và đường nối mượt mà.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                    <span><strong>Xử lý Gesture đa điểm 60FPS:</strong> Tối ưu thao tác Pan, Pinch to Zoom bằng <code>react-native-gesture-handler</code> và <code>reanimated</code> không giật lag.</span>
-                  </li>
-                </ul>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
+                    <span><strong>Xử lý Gesture đa điểm 60FPS:</strong> Tối ưu thao tác Pan, Pinch to Zoom bằng react-native-gesture-handler và reanimated không giật lag.</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800">
+              <div className="flex flex-wrap gap-1.5 pt-4 mt-4 border-t border-slate-800/80">
                 {['React Native', 'TypeScript', 'Gesture Handler', 'Reanimated', 'Redux', 'SDLC'].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">
+                  <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-slate-950 text-slate-400 border border-slate-800 font-mono">
                     {t}
                   </span>
                 ))}
@@ -312,59 +346,59 @@ export const ProjectsSection: React.FC = () => {
             </div>
           )}
 
-          {/* PROJECT 3: WEB MEDIA STUDIO */}
           {(activeTab === 'all' || activeTab === 'web') && (
-            <div className="spotlight-card p-6 flex flex-col justify-between border-blue-500/20 bg-slate-900/50">
+            <div
+              onMouseMove={handleTiltMove}
+              onMouseLeave={handleTiltLeave}
+              className="spotlight-card p-6 border-slate-800 bg-slate-900/50 flex flex-col justify-between transition-transform duration-200 ease-out"
+            >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center font-heading font-black text-white text-base shadow-lg shadow-blue-500/20">
-                      WM
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-bold text-base text-white">
-                        Web Media Studio — Nền tảng Quản trị SaaS
-                      </h4>
-                      <p className="text-[11px] text-blue-400 font-medium">
-                        Frontend / Fullstack Developer • Web Media
-                      </p>
-                    </div>
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm border border-blue-500/30">
+                    WM
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">
+                      SaaS Enterprise
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
+                      Next.js 14 • Tailwind CSS
+                    </span>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="neon-badge">SaaS Enterprise</span>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">
-                    Next.js 14 • Tailwind CSS
-                  </span>
-                </div>
+                <h4 className="font-heading font-black text-lg text-white mb-1">
+                  Web Media Studio — Nền tảng Quản trị SaaS
+                </h4>
+                <p className="text-xs text-slate-400 mb-4">
+                  Frontend / Fullstack Developer • Web Media
+                </p>
 
-                <p className="text-slate-300 text-xs leading-relaxed mb-4">
+                <p className="text-xs text-slate-300 leading-relaxed mb-4">
                   Hệ thống Web App phục vụ quản trị chiến dịch tiếp thị số, tạo video tự động bằng AI và giám sát số liệu SEO thời gian thực với trải nghiệm người dùng cao cấp.
                 </p>
 
-                <ul className="space-y-2 text-xs text-slate-300 mb-6">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                <div className="space-y-2 text-xs text-slate-300">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                     <span><strong>Dynamic Schema-Driven Forms:</strong> Tự động sinh form theo JSON Schema, validate ngữ nghĩa dữ liệu tại Client và Edge.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                     <span><strong>High-Performance UI Dashboard:</strong> Ứng dụng Server Components và caching của Next.js 14 để tối ưu thời gian tải trang dưới 1.2s.</span>
-                  </li>
-                </ul>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800">
+              <div className="flex flex-wrap gap-1.5 pt-4 mt-4 border-t border-slate-800/80">
                 {['Next.js 14', 'React', 'TypeScript', 'Tailwind CSS', 'Dynamic Forms', 'RESTful API'].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">
+                  <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-slate-950 text-slate-400 border border-slate-800 font-mono">
                     {t}
                   </span>
                 ))}
               </div>
             </div>
           )}
-
         </div>
 
       </div>

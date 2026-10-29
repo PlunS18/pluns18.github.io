@@ -1,50 +1,55 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Smartphone, RotateCw, Sparkles, Layers, Eye } from 'lucide-react';
+import { Smartphone, RotateCw, Sparkles, Layers, Eye, Cpu, Compass, ShieldCheck } from 'lucide-react';
 
 interface ScreenOption {
   id: string;
   name: string;
   url: string;
   tag: string;
+  description: string;
 }
 
 const SCREEN_OPTIONS: ScreenOption[] = [
   {
-    id: 'home',
-    name: 'HomeCheck Mobile App',
-    url: './assets/man-trang-chu-app.Br1F0Hab_Z2J0q8.webp',
-    tag: 'App Store & Google Play'
+    id: 'ai-design',
+    name: 'Kiến trúc sư trưởng Agentic AI',
+    url: './assets/hc_web_hero_design.webp',
+    tag: 'One Sentence One Home',
+    description: 'Ra lệnh bằng giọng nói, tự động sinh mặt bằng & phương án 3D theo quy chuẩn xây dựng'
   },
   {
     id: 'satellite',
-    name: 'Đo đạc Vệ tinh & Mặt bằng',
-    url: './assets/man-do-dac-ve-tinh.B-04KL-2_Z1H4mNW.webp',
-    tag: 'Offline-First BLE'
+    name: 'Đo đạc Vệ tinh & Sơn hướng',
+    url: './assets/hc_web_satellite_measure.webp',
+    tag: 'GPS • 24 Sơn Hướng',
+    description: 'Định vị la kinh độ chính xác cao trên không ảnh vệ tinh độ phân giải cao'
   },
   {
-    id: 'view3d',
-    name: 'Interactive 3D Room',
-    url: './assets/tk-3d.CYdajQ7S_1GYWpb.webp',
-    tag: 'Three.js 60FPS'
+    id: 'cad-digitize',
+    name: 'Số hoá & Dựng bản vẽ CAD 2D/3D',
+    url: './assets/hc_web_cad_digitize.webp',
+    tag: 'Canvas 2D • Laser BLE',
+    description: 'Dựng tường, đo đạc kích thước phòng và định vị đồ đạc tự động mượt 60 FPS'
   },
   {
-    id: 'cad',
-    name: 'Bản vẽ CAD 2D Kiến trúc',
-    url: './assets/trace_cropped.png',
-    tag: 'Canvas 2D Engine'
+    id: 'fengshui',
+    name: 'Thẩm định Phong thuỷ Khoa học',
+    url: './assets/hc_web_fengshui_analysis.webp',
+    tag: '9 Chuyên đề Phong thuỷ',
+    description: 'Chấm điểm Bát Trạch, Huyền Không & phát hiện xung sát kiến trúc tự động'
   }
 ];
 
 export const ThreeHeroCanvas: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
-  const [activeScreen, setActiveScreen] = useState<string>('home');
+  const [activeScreen, setActiveScreen] = useState<string>('ai-design');
   const [isInteracting, setIsInteracting] = useState(false);
   const phoneGroupRef = useRef<THREE.Group | null>(null);
   const screenMeshRef = useRef<THREE.Mesh | null>(null);
   const textureLoaderRef = useRef<THREE.TextureLoader | null>(null);
 
-  // Switch screen texture
+  // Switch screen texture with high-quality filtering
   const handleSwitchScreen = (screen: ScreenOption) => {
     setActiveScreen(screen.id);
     if (!screenMeshRef.current || !textureLoaderRef.current) return;
@@ -55,14 +60,13 @@ export const ThreeHeroCanvas: React.FC = () => {
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.generateMipmaps = true;
         texture.minFilter = THREE.LinearMipmapLinearFilter;
+        texture.magFilter = THREE.LinearFilter;
         if (screenMeshRef.current) {
           const mat = screenMeshRef.current.material as THREE.MeshStandardMaterial;
           mat.map = texture;
           mat.needsUpdate = true;
         }
-      },
-      undefined,
-      (err) => console.warn('Texture load error:', err)
+      }
     );
   };
 
@@ -70,218 +74,305 @@ export const ThreeHeroCanvas: React.FC = () => {
     const container = mountRef.current;
     if (!container) return;
 
-    // 1. Scene, Camera, Renderer
+    // 1. Scene & Camera Setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      45,
+      42,
       container.clientWidth / container.clientHeight,
       0.1,
-      100
+      1000
     );
-    camera.position.set(0, 0, 7.2);
+    camera.position.set(0, 0, 7.8);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // 2. High-performance Antialiased WebGL Renderer
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.15;
     container.appendChild(renderer.domElement);
 
-    // 2. Lighting Setup
+    // 3. Cinematic Studio Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0x38bdf8, 3.5);
-    keyLight.position.set(4, 5, 5);
+    const keyLight = new THREE.DirectionalLight(0x38bdf8, 2.5);
+    keyLight.position.set(5, 6, 6);
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0x818cf8, 2.5);
-    fillLight.position.set(-4, -2, 3);
-    scene.add(fillLight);
-
-    const rimLight = new THREE.PointLight(0xc084fc, 4, 10);
-    rimLight.position.set(0, 4, -2);
+    const rimLight = new THREE.DirectionalLight(0x6366f1, 2.8);
+    rimLight.position.set(-6, -4, -4);
     scene.add(rimLight);
 
-    // 3. Create 3D Phone Chassis
+    // Dynamic mouse specular light that follows cursor for realistic titanium glint
+    const mouseLight = new THREE.PointLight(0xffffff, 2.0, 15);
+    mouseLight.position.set(0, 0, 5);
+    scene.add(mouseLight);
+
+    // 4. Main Phone Object Group
     const phoneGroup = new THREE.Group();
     phoneGroupRef.current = phoneGroup;
     scene.add(phoneGroup);
 
-    // Phone Body (Titanium curved frame)
-    const phoneWidth = 2.4;
-    const phoneHeight = 4.9;
-    const phoneDepth = 0.22;
-    const radius = 0.28;
+    // Dimensions for a modern flagship smartphone
+    const phoneWidth = 2.45;
+    const phoneHeight = 5.0;
+    const phoneThickness = 0.22;
+    const cornerRadius = 0.28;
 
-    // Rounded rectangle shape for phone body
-    const shape = new THREE.Shape();
-    const x = -phoneWidth / 2;
-    const y = -phoneHeight / 2;
-    const w = phoneWidth;
-    const h = phoneHeight;
-
-    shape.moveTo(x + radius, y);
-    shape.lineTo(x + w - radius, y);
-    shape.quadraticCurveTo(x + w, y, x + w, y + radius);
-    shape.lineTo(x + w, y + h - radius);
-    shape.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
-    shape.lineTo(x + radius, y + h);
-    shape.quadraticCurveTo(x, y + h, x, y + h - radius);
-    shape.lineTo(x, y + radius);
-    shape.quadraticCurveTo(x, y, x + radius, y);
-
-    const extrudeSettings = {
-      depth: phoneDepth,
-      bevelEnabled: true,
-      bevelSegments: 6,
-      steps: 1,
-      bevelSize: 0.05,
-      bevelThickness: 0.05
-    };
-
-    const phoneGeom = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-    phoneGeom.center();
-
-    const bodyMaterial = new THREE.MeshStandardMaterial({
-      color: 0x0f172a,
-      metalness: 0.9,
-      roughness: 0.2,
+    // --- A. Titanium Outer Frame (Realistic metallic bevel) ---
+    const frameGeom = new THREE.BoxGeometry(phoneWidth, phoneHeight, phoneThickness);
+    const frameMat = new THREE.MeshStandardMaterial({
+      color: 0x1f2937,
+      metalness: 0.95,
+      roughness: 0.22,
       envMapIntensity: 1.5
     });
+    const frameMesh = new THREE.Mesh(frameGeom, frameMat);
+    phoneGroup.add(frameMesh);
 
-    const phoneMesh = new THREE.Mesh(phoneGeom, bodyMaterial);
-    phoneGroup.add(phoneMesh);
-
-    // Outer Titanium Edge Ring
-    const edgeMaterial = new THREE.MeshStandardMaterial({
+    // Titanium Chamfer Edge Accents (Side antenna bands & polished edge)
+    const edgeBevelGeom = new THREE.BoxGeometry(phoneWidth + 0.03, phoneHeight + 0.03, phoneThickness - 0.04);
+    const edgeBevelMat = new THREE.MeshStandardMaterial({
       color: 0x38bdf8,
-      metalness: 0.95,
-      roughness: 0.1,
-      wireframe: false
+      metalness: 0.8,
+      roughness: 0.3,
+      transparent: true,
+      opacity: 0.3
     });
-    const edgeMesh = new THREE.Mesh(phoneGeom, edgeMaterial);
-    edgeMesh.scale.set(1.008, 1.008, 1.008);
-    phoneGroup.add(edgeMesh);
+    const edgeBevelMesh = new THREE.Mesh(edgeBevelGeom, edgeBevelMat);
+    phoneGroup.add(edgeBevelMesh);
 
-    // Screen Geometry & Texture
-    const screenGeom = new THREE.PlaneGeometry(2.32, 4.8);
+    // --- B. Back Matte Glass Plate ---
+    const backGlassGeom = new THREE.PlaneGeometry(phoneWidth - 0.08, phoneHeight - 0.08);
+    const backGlassMat = new THREE.MeshStandardMaterial({
+      color: 0x0f172a,
+      roughness: 0.4,
+      metalness: 0.5
+    });
+    const backGlass = new THREE.Mesh(backGlassGeom, backGlassMat);
+    backGlass.rotation.y = Math.PI;
+    backGlass.position.z = -phoneThickness / 2 - 0.002;
+    phoneGroup.add(backGlass);
+
+    // HomeCheck Logo on back of phone
+    const logoGeom = new THREE.PlaneGeometry(0.5, 0.5);
+    const logoTex = new THREE.TextureLoader().load('./assets/logo-homecheck.png');
+    logoTex.colorSpace = THREE.SRGBColorSpace;
+    const logoMat = new THREE.MeshBasicMaterial({
+      map: logoTex,
+      transparent: true,
+      opacity: 0.6
+    });
+    const backLogo = new THREE.Mesh(logoGeom, logoMat);
+    backLogo.rotation.y = Math.PI;
+    backLogo.position.set(0, 0, -phoneThickness / 2 - 0.005);
+    phoneGroup.add(backLogo);
+
+    // --- C. Camera Module Bump (Triple Lens System on back) ---
+    const bumpGeom = new THREE.BoxGeometry(0.95, 0.95, 0.08);
+    const bumpMat = new THREE.MeshStandardMaterial({
+      color: 0x111827,
+      metalness: 0.9,
+      roughness: 0.2
+    });
+    const cameraBump = new THREE.Mesh(bumpGeom, bumpMat);
+    cameraBump.position.set(-0.55, 1.8, -phoneThickness / 2 - 0.04);
+    phoneGroup.add(cameraBump);
+
+    // 3 Sapphire Camera Lenses with glowing optic rings
+    const lensPositions = [
+      [-0.72, 2.02],
+      [-0.72, 1.58],
+      [-0.38, 1.8]
+    ];
+    lensPositions.forEach(([lx, ly]) => {
+      const ringGeom = new THREE.CylinderGeometry(0.14, 0.14, 0.03, 32);
+      const ringMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.95, roughness: 0.1 });
+      const ring = new THREE.Mesh(ringGeom, ringMat);
+      ring.rotation.x = Math.PI / 2;
+      ring.position.set(lx, ly, -phoneThickness / 2 - 0.085);
+      phoneGroup.add(ring);
+
+      const glassGeom = new THREE.CircleGeometry(0.11, 32);
+      const glassMat = new THREE.MeshStandardMaterial({
+        color: 0x0284c7,
+        roughness: 0.05,
+        metalness: 0.9
+      });
+      const glass = new THREE.Mesh(glassGeom, glassMat);
+      glass.rotation.y = Math.PI;
+      glass.position.set(lx, ly, -phoneThickness / 2 - 0.101);
+      phoneGroup.add(glass);
+    });
+
+    // --- D. Front OLED Screen Display ---
+    const screenWidth = phoneWidth - 0.12;
+    const screenHeight = phoneHeight - 0.14;
+    const screenGeom = new THREE.PlaneGeometry(screenWidth, screenHeight);
+
     const textureLoader = new THREE.TextureLoader();
     textureLoaderRef.current = textureLoader;
 
-    const initialTexture = textureLoader.load(SCREEN_OPTIONS[0].url);
-    initialTexture.colorSpace = THREE.SRGBColorSpace;
-    initialTexture.minFilter = THREE.LinearMipmapLinearFilter;
-
-    const screenMaterial = new THREE.MeshStandardMaterial({
-      map: initialTexture,
-      roughness: 0.15,
-      metalness: 0.05
+    const initialScreen = SCREEN_OPTIONS[0];
+    const screenTexture = textureLoader.load(initialScreen.url, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.generateMipmaps = true;
+      tex.minFilter = THREE.LinearMipmapLinearFilter;
     });
 
-    const screenMesh = new THREE.Mesh(screenGeom, screenMaterial);
-    screenMesh.position.z = phoneDepth / 2 + 0.055;
-    screenMeshRef.current = screenMesh;
+    const screenMat = new THREE.MeshStandardMaterial({
+      map: screenTexture,
+      roughness: 0.18,
+      metalness: 0.15,
+      emissive: 0xffffff,
+      emissiveMap: screenTexture,
+      emissiveIntensity: 0.22
+    });
+
+    const screenMesh = new THREE.Mesh(screenGeom, screenMat);
+    screenMesh.position.z = phoneThickness / 2 + 0.002;
     phoneGroup.add(screenMesh);
+    screenMeshRef.current = screenMesh;
 
-    // Dynamic Island / Camera Notch
-    const notchGeom = new THREE.CapsuleGeometry(0.08, 0.35, 4, 8);
-    notchGeom.rotateZ(Math.PI / 2);
-    const notchMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const notch = new THREE.Mesh(notchGeom, notchMat);
-    notch.position.set(0, 2.15, phoneDepth / 2 + 0.057);
-    phoneGroup.add(notch);
+    // --- E. Dynamic Island Pill Notch on front screen ---
+    const islandGeom = new THREE.BoxGeometry(0.58, 0.16, 0.015);
+    const islandMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const dynamicIsland = new THREE.Mesh(islandGeom, islandMat);
+    dynamicIsland.position.set(0, phoneHeight / 2 - 0.25, phoneThickness / 2 + 0.004);
+    phoneGroup.add(dynamicIsland);
 
-    // 4. Ambient Holographic Rings & Particles
-    const ringGeom = new THREE.TorusGeometry(3.6, 0.015, 16, 100);
-    const ringMat = new THREE.MeshBasicMaterial({
+    // Front sensor lens dot
+    const sensorGeom = new THREE.CircleGeometry(0.035, 16);
+    const sensorMat = new THREE.MeshBasicMaterial({ color: 0x1e3a8a });
+    const sensor = new THREE.Mesh(sensorGeom, sensorMat);
+    sensor.position.set(0.16, phoneHeight / 2 - 0.25, phoneThickness / 2 + 0.013);
+    phoneGroup.add(sensor);
+
+    // --- F. 3D Floating Holographic Badges Orbiting the Device ---
+    const badgesGroup = new THREE.Group();
+    scene.add(badgesGroup);
+
+    // Floating 3D AI Chip marker
+    const chipGeom = new THREE.BoxGeometry(0.42, 0.42, 0.04);
+    const chipMat = new THREE.MeshStandardMaterial({
+      color: 0x0369a1,
+      metalness: 0.9,
+      roughness: 0.2,
+      emissive: 0x38bdf8,
+      emissiveIntensity: 0.35
+    });
+    const chipMesh = new THREE.Mesh(chipGeom, chipMat);
+    chipMesh.position.set(-2.0, 1.8, 0.5);
+    badgesGroup.add(chipMesh);
+
+    // Floating 3D Compass ring
+    const compassRingGeom = new THREE.RingGeometry(0.35, 0.42, 32);
+    const compassRingMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.8
+    });
+    const compassRing = new THREE.Mesh(compassRingGeom, compassRingMat);
+    compassRing.position.set(2.0, -1.2, 0.4);
+    badgesGroup.add(compassRing);
+
+    // Holographic Orbit Ring
+    const orbitRingGeom = new THREE.TorusGeometry(3.6, 0.012, 16, 100);
+    const orbitRingMat = new THREE.MeshBasicMaterial({
       color: 0x38bdf8,
       transparent: true,
       opacity: 0.35
     });
-    const ring = new THREE.Mesh(ringGeom, ringMat);
-    ring.rotation.x = Math.PI / 2.8;
-    scene.add(ring);
+    const orbitRing = new THREE.Mesh(orbitRingGeom, orbitRingMat);
+    orbitRing.rotation.x = Math.PI / 2.3;
+    orbitRing.rotation.y = 0.2;
+    scene.add(orbitRing);
 
-    const ringGeom2 = new THREE.TorusGeometry(4.2, 0.01, 16, 100);
-    const ringMat2 = new THREE.MeshBasicMaterial({
-      color: 0x818cf8,
-      transparent: true,
-      opacity: 0.25
-    });
-    const ring2 = new THREE.Mesh(ringGeom2, ringMat2);
-    ring2.rotation.x = -Math.PI / 3.2;
-    ring2.rotation.y = Math.PI / 6;
-    scene.add(ring2);
-
-    // Particle Cloud
-    const particleCount = 180;
-    const particleGeom = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i += 3) {
-      particlePositions[i] = (Math.random() - 0.5) * 14;
-      particlePositions[i + 1] = (Math.random() - 0.5) * 14;
-      particlePositions[i + 2] = (Math.random() - 0.5) * 8 - 2;
-    }
-
-    particleGeom.setAttribute(
-      'position',
-      new THREE.BufferAttribute(particlePositions, 3)
+    // Second intersecting orbit ring
+    const orbitRing2 = new THREE.Mesh(
+      new THREE.TorusGeometry(3.9, 0.008, 16, 100),
+      new THREE.MeshBasicMaterial({ color: 0x818cf8, transparent: true, opacity: 0.25 })
     );
+    orbitRing2.rotation.x = Math.PI / 1.7;
+    orbitRing2.rotation.z = 0.4;
+    scene.add(orbitRing2);
 
-    const particleMat = new THREE.PointsMaterial({
-      size: 0.045,
-      color: 0x38bdf8,
+    // Background Particle Starfield
+    const starCount = 180;
+    const starGeom = new THREE.BufferGeometry();
+    const starPositions = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i += 3) {
+      starPositions[i] = (Math.random() - 0.5) * 16;
+      starPositions[i + 1] = (Math.random() - 0.5) * 16;
+      starPositions[i + 2] = (Math.random() - 0.5) * 8 - 2;
+    }
+    starGeom.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    const starMat = new THREE.PointsMaterial({
+      color: 0x93c5fd,
+      size: 0.04,
       transparent: true,
-      opacity: 0.6,
-      blending: THREE.AdditiveBlending
+      opacity: 0.6
     });
+    const stars = new THREE.Points(starGeom, starMat);
+    scene.add(stars);
 
-    const particles = new THREE.Points(particleGeom, particleMat);
-    scene.add(particles);
+    // Initial angled display pose
+    phoneGroup.rotation.y = 0.25;
+    phoneGroup.rotation.x = 0.08;
 
-    // Initial Rotation
-    phoneGroup.rotation.y = -0.25;
-    phoneGroup.rotation.x = 0.1;
-
-    // 5. Mouse / Touch Orbit Controls
+    // 5. Interactive Drag & Natural Orbit (FIXED INVERSION BUG)
     let isDragging = false;
-    let prevMouseX = 0;
-    let prevMouseY = 0;
-    let targetRotationY = -0.25;
-    let targetRotationX = 0.1;
+    let prevX = 0;
+    let prevY = 0;
+    let targetRotationY = 0.25;
+    let targetRotationX = 0.08;
+    let currentRotationY = 0.25;
+    let currentRotationX = 0.08;
 
     const onPointerDown = (e: MouseEvent | TouchEvent) => {
       isDragging = true;
       setIsInteracting(true);
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
       const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-      prevMouseX = clientX;
-      prevMouseY = clientY;
+      prevX = clientX;
+      prevY = clientY;
     };
 
     const onPointerMove = (e: MouseEvent | TouchEvent) => {
-      if (!isDragging) return;
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
       const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
 
-      const deltaX = clientX - prevMouseX;
-      const deltaY = clientY - prevMouseY;
+      // Update dynamic mouse specular light position
+      const rect = container.getBoundingClientRect();
+      const normX = ((clientX - rect.left) / rect.width) * 2 - 1;
+      const normY = -((clientY - rect.top) / rect.height) * 2 + 1;
+      mouseLight.position.set(normX * 4, normY * 4, 4);
 
+      if (!isDragging) return;
+
+      const deltaX = clientX - prevX;
+      const deltaY = clientY - prevY;
+
+      // NATURAL TRACKBALL DRAG (Dragging left rotates left, dragging down tilts toward user)
       targetRotationY += deltaX * 0.008;
-      targetRotationX += deltaY * 0.008;
+      targetRotationX += deltaY * 0.006;
 
-      // Clamp X rotation to prevent flipping
-      targetRotationX = Math.max(-0.6, Math.min(0.6, targetRotationX));
+      // Clamp vertical tilt to prevent unnatural flipping
+      targetRotationX = Math.max(-0.65, Math.min(0.65, targetRotationX));
 
-      prevMouseX = clientX;
-      prevMouseY = clientY;
+      prevX = clientX;
+      prevY = clientY;
     };
 
     const onPointerUp = () => {
       isDragging = false;
-      setTimeout(() => setIsInteracting(false), 800);
+      setIsInteracting(false);
     };
 
     container.addEventListener('mousedown', onPointerDown);
@@ -292,108 +383,157 @@ export const ThreeHeroCanvas: React.FC = () => {
     window.addEventListener('touchmove', onPointerMove, { passive: true });
     window.addEventListener('touchend', onPointerUp);
 
-    // 6. Animation Loop
-    let animationFrameId: number;
+    // 6. Smooth Physics Dampening Loop (60 FPS)
+    let animId: number;
     let clock = new THREE.Clock();
 
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
+      animId = requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
 
-      // Idle gentle float when not dragging
+      // Gentle auto-idle floating rotation when user is not dragging
       if (!isDragging) {
-        phoneGroup.position.y = Math.sin(elapsed * 1.5) * 0.08;
-        phoneGroup.rotation.y += (targetRotationY + Math.sin(elapsed * 0.8) * 0.05 - phoneGroup.rotation.y) * 0.06;
-        phoneGroup.rotation.x += (targetRotationX + Math.cos(elapsed * 0.6) * 0.03 - phoneGroup.rotation.x) * 0.06;
-      } else {
-        phoneGroup.rotation.y += (targetRotationY - phoneGroup.rotation.y) * 0.12;
-        phoneGroup.rotation.x += (targetRotationX - phoneGroup.rotation.x) * 0.12;
+        targetRotationY += 0.0018;
       }
 
-      // Rotate ambient rings
-      ring.rotation.z = elapsed * 0.15;
-      ring2.rotation.z = -elapsed * 0.1;
-      particles.rotation.y = elapsed * 0.02;
+      // Smooth spring interpolation (LERP)
+      currentRotationY += (targetRotationY - currentRotationY) * 0.07;
+      currentRotationX += (targetRotationX - currentRotationX) * 0.07;
+
+      phoneGroup.rotation.y = currentRotationY;
+      phoneGroup.rotation.x = currentRotationX;
+
+      // Subtle levitation bobbing
+      phoneGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.08;
+
+      // Orbit holographic accessories
+      orbitRing.rotation.z = elapsedTime * 0.15;
+      orbitRing2.rotation.z = -elapsedTime * 0.12;
+
+      chipMesh.rotation.y = elapsedTime * 0.8;
+      chipMesh.rotation.x = elapsedTime * 0.4;
+      chipMesh.position.y = 1.8 + Math.sin(elapsedTime * 2) * 0.06;
+
+      compassRing.rotation.z = -elapsedTime * 0.6;
+      compassRing.position.y = -1.2 + Math.cos(elapsedTime * 1.8) * 0.06;
 
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // 7. Responsive Resize Handler
-    const handleResize = () => {
+    // 7. Responsive Resizer
+    const onResize = () => {
       if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      renderer.setSize(width, height);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', onResize);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animId);
       container.removeEventListener('mousedown', onPointerDown);
       window.removeEventListener('mousemove', onPointerMove);
       window.removeEventListener('mouseup', onPointerUp);
       container.removeEventListener('touchstart', onPointerDown);
       window.removeEventListener('touchmove', onPointerMove);
       window.removeEventListener('touchend', onPointerUp);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', onResize);
+
+      // Clean disposal
       renderer.dispose();
+      frameGeom.dispose();
+      frameMat.dispose();
+      screenGeom.dispose();
+      screenMat.dispose();
+      orbitRingGeom.dispose();
+      orbitRingMat.dispose();
+      starGeom.dispose();
+      starMat.dispose();
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
     };
   }, []);
 
-  return (
-    <div className="relative w-full h-[460px] md:h-[580px] rounded-2xl overflow-hidden glass-panel border border-cyan-500/20 shadow-2xl flex flex-col justify-between">
-      {/* 3D WebGL Canvas Viewport */}
-      <div
-        ref={mountRef}
-        className="absolute inset-0 cursor-grab active:cursor-grabbing z-0"
-        title="Nhấp &amp; Kéo để xoay thiết bị 3D 360 độ"
-      />
+  const activeOption = SCREEN_OPTIONS.find((s) => s.id === activeScreen) || SCREEN_OPTIONS[0];
 
-      {/* Top Overlay Badge */}
-      <div className="relative z-10 p-4 flex justify-between items-center pointer-events-none">
-        <div className="neon-badge">
-          <Smartphone className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Three.js WebGL Interactive Device</span>
+  return (
+    <div className="relative w-full flex flex-col items-center">
+      {/* 3D WebGL Canvas Card */}
+      <div className="relative w-full h-[460px] sm:h-[500px] lg:h-[540px] rounded-3xl overflow-hidden glass-panel border border-cyan-500/30 shadow-2xl shadow-cyan-950/40">
+        {/* Top Floating Badge */}
+        <div className="absolute top-4 left-4 right-4 z-10 flex justify-between items-center pointer-events-none">
+          <div className="flex items-center gap-2 bg-slate-950/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-cyan-500/30 text-xs font-semibold text-cyan-300 pointer-events-auto shadow-lg">
+            <Smartphone className="w-3.5 h-3.5 text-cyan-400" />
+            <span>THREE.JS WEBGL FLAGSHIP CHASSIS</span>
+          </div>
+
+          <div className="flex items-center gap-2 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 text-[11px] text-slate-300 font-mono pointer-events-auto">
+            <RotateCw className={`w-3.5 h-3.5 text-cyan-400 ${isInteracting ? 'animate-spin' : ''}`} />
+            <span>Kéo chuột xoay 360°</span>
+          </div>
         </div>
-        <div className="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 text-[11px] text-slate-300">
-          <RotateCw className={`w-3 h-3 text-cyan-400 ${isInteracting ? 'animate-spin' : ''}`} />
-          <span>Kéo chuột để xoay 360°</span>
+
+        {/* 3D Three.js Container */}
+        <div
+          ref={mountRef}
+          className="w-full h-full cursor-grab active:cursor-grabbing"
+          title="Kéo &amp; Rê chuột để xoay thiết bị 3D tự nhiên"
+        />
+
+        {/* Floating live indicator at bottom of 3D canvas */}
+        <div className="absolute bottom-4 left-4 right-4 z-10 flex justify-between items-center pointer-events-none">
+          <div className="bg-slate-950/90 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-800 text-[11px] text-slate-300 flex items-center gap-2 pointer-events-auto">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="font-semibold text-white">{activeOption.name}</span>
+            <span className="text-cyan-400 text-[10px] px-1.5 py-0.2 rounded bg-cyan-950/60 border border-cyan-800/60 font-mono">
+              {activeOption.tag}
+            </span>
+          </div>
+          <div className="text-[10px] text-slate-400 font-mono hidden sm:block bg-slate-950/80 px-2.5 py-1 rounded border border-slate-800">
+            PBR Titanium • 60 FPS
+          </div>
         </div>
       </div>
 
-      {/* Bottom Interactive Screen Switcher Bar */}
-      <div className="relative z-10 p-3 md:p-4 bg-slate-950/80 backdrop-blur-xl border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5 text-xs text-slate-300 font-semibold">
-          <Eye className="w-4 h-4 text-cyan-400" />
-          <span>Chọn màn hình demo:</span>
+      {/* Screen Switcher Bar Below 3D Device */}
+      <div className="w-full mt-4 bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-3 shadow-xl">
+        <div className="text-[11px] text-slate-400 font-mono uppercase tracking-wider mb-2.5 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 text-cyan-400">
+            <Eye className="w-3.5 h-3.5" />
+            <span className="font-semibold">Chọn màn hình thực tế từ web myhomecheck.ai:</span>
+          </div>
+          <span className="text-slate-500 hidden sm:inline">Texture 4K WebP • Tự động ánh xạ vào 3D</span>
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto py-1 max-w-full">
-          {SCREEN_OPTIONS.map((opt) => {
-            const isActive = activeScreen === opt.id;
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {SCREEN_OPTIONS.map((screen) => {
+            const isSelected = activeScreen === screen.id;
             return (
               <button
-                key={opt.id}
-                onClick={() => handleSwitchScreen(opt)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
-                  isActive
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 shadow-lg shadow-cyan-500/10'
-                    : 'bg-slate-800/60 text-slate-400 border border-slate-700/50 hover:bg-slate-800 hover:text-slate-200'
+                key={screen.id}
+                onClick={() => handleSwitchScreen(screen)}
+                className={`p-2.5 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
+                  isSelected
+                    ? 'bg-cyan-950/50 border-cyan-400/80 text-white shadow-lg shadow-cyan-500/20 scale-[1.02]'
+                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 text-slate-400 hover:text-slate-200'
                 }`}
               >
-                <Layers className="w-3 h-3" />
-                <span>{opt.name}</span>
-                <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-900/80 text-slate-400 font-mono">
-                  {opt.tag}
-                </span>
+                <div className="flex items-center justify-between mb-1">
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono ${
+                    isSelected ? 'bg-cyan-500/20 text-cyan-300' : 'bg-slate-800 text-slate-400'
+                  }`}>
+                    {screen.tag}
+                  </span>
+                  {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />}
+                </div>
+                <div className="text-xs font-bold truncate text-slate-100">{screen.name}</div>
               </button>
             );
           })}

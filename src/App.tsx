@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { MetricsBar } from './components/MetricsBar';
+import { TechMarquee } from './components/TechMarquee';
 import { ProjectsSection } from './components/ProjectsSection';
 import { TechMatrixBento } from './components/TechMatrixBento';
 import { AiTerminalExperience } from './components/AiTerminalExperience';
@@ -21,6 +22,9 @@ export const App: React.FC = () => {
 
         {/* 4-Card Bento Metrics */}
         <MetricsBar />
+
+        {/* React Bits Infinite Tech Stack Marquee */}
+        <TechMarquee />
 
         {/* Flagship Projects & 3D Interactive Engine */}
         <ProjectsSection />
