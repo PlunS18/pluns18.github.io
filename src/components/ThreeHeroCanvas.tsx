@@ -13,25 +13,25 @@ const SCREEN_OPTIONS: ScreenOption[] = [
   {
     id: 'home',
     name: 'HomeCheck Mobile App',
-    url: '/assets/man-trang-chu-app.Br1F0Hab_Z2J0q8.webp',
+    url: './assets/man-trang-chu-app.Br1F0Hab_Z2J0q8.webp',
     tag: 'App Store & Google Play'
   },
   {
     id: 'satellite',
     name: 'Đo đạc Vệ tinh & Mặt bằng',
-    url: '/assets/man-do-dac-ve-tinh.B-04KL-2_Z1H4mNW.webp',
+    url: './assets/man-do-dac-ve-tinh.B-04KL-2_Z1H4mNW.webp',
     tag: 'Offline-First BLE'
   },
   {
     id: 'view3d',
     name: 'Interactive 3D Room',
-    url: '/assets/tk-3d.CYdajQ7S_1GYWpb.webp',
+    url: './assets/tk-3d.CYdajQ7S_1GYWpb.webp',
     tag: 'Three.js 60FPS'
   },
   {
     id: 'cad',
     name: 'Bản vẽ CAD 2D Kiến trúc',
-    url: '/assets/trace_cropped.png',
+    url: './assets/trace_cropped.png',
     tag: 'Canvas 2D Engine'
   }
 ];

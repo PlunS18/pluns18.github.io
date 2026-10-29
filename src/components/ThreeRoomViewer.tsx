@@ -278,7 +278,7 @@ export const ThreeRoomViewer: React.FC = () => {
       ) : (
         <div className="relative flex-1 w-full bg-slate-950 flex items-center justify-center p-4 overflow-hidden">
           <img
-            src="/assets/trace_cropped.png"
+            src="./assets/trace_cropped.png"
             alt="2D Architectural CAD Floorplan"
             className="max-h-full max-w-full object-contain rounded-lg border border-slate-700/80 shadow-2xl"
           />

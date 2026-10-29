@@ -22,7 +22,7 @@ export const Navbar: React.FC = () => {
             <div className="relative">
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-cyan-400/60 shadow-lg shadow-cyan-500/20">
                 <img
-                  src="/assets/candidate_clean.png"
+                  src="./assets/candidate_clean.png"
                   alt="Lưu Trương Hoàng Phúc"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
@@ -69,7 +69,7 @@ export const Navbar: React.FC = () => {
           {/* CTA Buttons */}
           <div className="hidden sm:flex items-center gap-2.5">
             <a
-              href="/Luu_Truong_Hoang_Phuc_Portfolio.pdf"
+              href="./Luu_Truong_Hoang_Phuc_Portfolio.pdf"
               download="Luu_Truong_Hoang_Phuc_Portfolio.pdf"
               onClick={handleDownloadPortfolio}
               className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
@@ -136,7 +136,7 @@ export const Navbar: React.FC = () => {
             </a>
             <div className="pt-2 border-t border-slate-800 flex flex-col gap-2">
               <a
-                href="/Luu_Truong_Hoang_Phuc_Portfolio.pdf"
+                href="./Luu_Truong_Hoang_Phuc_Portfolio.pdf"
                 download="Luu_Truong_Hoang_Phuc_Portfolio.pdf"
                 onClick={handleDownloadPortfolio}
                 className="w-full py-2.5 rounded-lg bg-blue-600 text-white text-xs font-bold flex items-center justify-center gap-2"

@@ -79,7 +79,7 @@ export const ProjectsSection: React.FC = () => {
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl overflow-hidden border border-cyan-500/40 p-1 bg-slate-950 flex-shrink-0 shadow-lg shadow-cyan-500/20">
                   <img
-                    src="/assets/logo-homecheck.png"
+                    src="./assets/logo-homecheck.png"
                     alt="HomeCheck Logo"
                     className="w-full h-full object-contain rounded-xl"
                   />
@@ -196,7 +196,7 @@ export const ProjectsSection: React.FC = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 p-1 group">
                     <img
-                      src="/assets/man-trang-chu-app.Br1F0Hab_Z2J0q8.webp"
+                      src="./assets/man-trang-chu-app.Br1F0Hab_Z2J0q8.webp"
                       alt="HomeCheck Mobile UI"
                       className="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                     />
@@ -207,7 +207,7 @@ export const ProjectsSection: React.FC = () => {
 
                   <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 p-1 group">
                     <img
-                      src="/assets/man-do-dac-ve-tinh.B-04KL-2_Z1H4mNW.webp"
+                      src="./assets/man-do-dac-ve-tinh.B-04KL-2_Z1H4mNW.webp"
                       alt="Satellite Map"
                       className="w-full h-48 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                     />
@@ -219,7 +219,7 @@ export const ProjectsSection: React.FC = () => {
 
                 <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 p-1 group">
                   <img
-                    src="/assets/tk-3d.CYdajQ7S_1GYWpb.webp"
+                    src="./assets/tk-3d.CYdajQ7S_1GYWpb.webp"
                     alt="3D Room Viewer"
                     className="w-full h-32 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                   />

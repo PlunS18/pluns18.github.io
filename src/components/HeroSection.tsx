@@ -80,7 +80,7 @@ export const HeroSection: React.FC = () => {
               </a>
 
               <a
-                href="/Luu_Truong_Hoang_Phuc_Portfolio.pdf"
+                href="./Luu_Truong_Hoang_Phuc_Portfolio.pdf"
                 download="Luu_Truong_Hoang_Phuc_Portfolio.pdf"
                 onClick={triggerConfetti}
                 className="px-5 py-3 rounded-xl glass-panel border-slate-700/80 hover:border-cyan-400/50 text-slate-200 font-semibold text-sm flex items-center gap-2 transition-all hover:bg-slate-900"

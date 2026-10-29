@@ -151,7 +151,7 @@ export const ContactSection: React.FC = () => {
 
               {/* Button 1: Developer Portfolio PDF */}
               <a
-                href="/Luu_Truong_Hoang_Phuc_Portfolio.pdf"
+                href="./Luu_Truong_Hoang_Phuc_Portfolio.pdf"
                 download="Luu_Truong_Hoang_Phuc_Portfolio.pdf"
                 onClick={handleDownload}
                 className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs flex items-center justify-between shadow-xl shadow-cyan-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
@@ -168,7 +168,7 @@ export const ContactSection: React.FC = () => {
 
               {/* Button 2: FullStack CV */}
               <a
-                href="/Luu_Truong_Hoang_Phuc_FullStack_Engineer.pdf"
+                href="./Luu_Truong_Hoang_Phuc_FullStack_Engineer.pdf"
                 download="Luu_Truong_Hoang_Phuc_FullStack_Engineer.pdf"
                 onClick={handleDownload}
                 className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-850 text-slate-200 border border-slate-700/80 font-semibold text-xs flex items-center justify-between transition-all hover:border-cyan-400/50 hover:scale-[1.02] cursor-pointer"
