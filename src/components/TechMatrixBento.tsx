@@ -22,11 +22,24 @@ export const TechMatrixBento: React.FC = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const { t, language } = useLanguage();
 
-  // React Bits Spotlight Card effect (tracks mouse coords within the card)
+  const rectsRef = useRef<(DOMRect | null)[]>([]);
+
+  // React Bits Spotlight Card effect (cached rect avoids getBoundingClientRect layout reflow on every move)
+  const handleMouseEnter = (idx: number) => {
+    const card = cardsRef.current[idx];
+    if (card) {
+      rectsRef.current[idx] = card.getBoundingClientRect();
+    }
+  };
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
     const card = cardsRef.current[idx];
     if (!card) return;
-    const rect = card.getBoundingClientRect();
+    let rect = rectsRef.current[idx];
+    if (!rect) {
+      rect = card.getBoundingClientRect();
+      rectsRef.current[idx] = rect;
+    }
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     card.style.setProperty('--mouse-x', `${x}px`);
@@ -133,6 +146,7 @@ export const TechMatrixBento: React.FC = () => {
             <div
               key={idx}
               ref={(el) => (cardsRef.current[idx] = el)}
+              onMouseEnter={() => handleMouseEnter(idx)}
               onMouseMove={(e) => handleMouseMove(e, idx)}
               className="spotlight-card p-6 md:p-8 flex flex-col justify-between relative group"
               style={{

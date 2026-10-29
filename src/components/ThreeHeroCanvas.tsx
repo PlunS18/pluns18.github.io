@@ -136,7 +136,7 @@ export const ThreeHeroCanvas: React.FC = () => {
       powerPreference: 'high-performance'
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
     container.appendChild(renderer.domElement);
@@ -397,9 +397,17 @@ export const ThreeHeroCanvas: React.FC = () => {
     let currentRotationY = 0.25;
     let currentRotationX = 0.08;
 
+    // Cache container rect to avoid getBoundingClientRect layout reflow on every mousemove
+    let cachedRect: DOMRect | null = null;
+    const updateCachedRect = () => {
+      if (container) cachedRect = container.getBoundingClientRect();
+    };
+    updateCachedRect();
+
     const onPointerDown = (e: MouseEvent | TouchEvent) => {
       isDragging = true;
       setIsInteracting(true);
+      updateCachedRect();
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
       const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
       prevX = clientX;
@@ -407,25 +415,27 @@ export const ThreeHeroCanvas: React.FC = () => {
     };
 
     const onPointerMove = (e: MouseEvent | TouchEvent) => {
+      // Only process when dragging or directly interacting with container to avoid window-wide drag lag
+      if (!isDragging && e.target !== container) return;
+
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
       const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
 
-      // Update dynamic mouse specular light position
-      const rect = container.getBoundingClientRect();
-      const normX = ((clientX - rect.left) / rect.width) * 2 - 1;
-      const normY = -((clientY - rect.top) / rect.height) * 2 + 1;
-      mouseLight.position.set(normX * 4, normY * 4, 4);
+      if (!cachedRect) updateCachedRect();
+      if (cachedRect && cachedRect.width > 0) {
+        const normX = ((clientX - cachedRect.left) / cachedRect.width) * 2 - 1;
+        const normY = -((clientY - cachedRect.top) / cachedRect.height) * 2 + 1;
+        mouseLight.position.set(normX * 4, normY * 4, 4);
+      }
 
       if (!isDragging) return;
 
       const deltaX = clientX - prevX;
       const deltaY = clientY - prevY;
 
-      // NATURAL TRACKBALL DRAG (Dragging left rotates left, dragging down tilts toward user)
+      // Natural trackball drag
       targetRotationY += deltaX * 0.008;
       targetRotationX += deltaY * 0.006;
-
-      // Clamp vertical tilt to prevent unnatural flipping
       targetRotationX = Math.max(-0.65, Math.min(0.65, targetRotationX));
 
       prevX = clientX;
@@ -438,18 +448,23 @@ export const ThreeHeroCanvas: React.FC = () => {
     };
 
     container.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mousemove', onPointerMove, { passive: true });
     window.addEventListener('mouseup', onPointerUp);
 
     container.addEventListener('touchstart', onPointerDown, { passive: true });
     window.addEventListener('touchmove', onPointerMove, { passive: true });
     window.addEventListener('touchend', onPointerUp);
 
-    // 6. Smooth Physics Dampening Loop (60 FPS)
-    let animId: number;
+    // 6. Smooth Physics Dampening Loop with IntersectionObserver
+    let animId: number = 0;
     let clock = new THREE.Clock();
+    let isVisible = true;
 
     const animate = () => {
+      if (!isVisible) {
+        animId = 0;
+        return;
+      }
       animId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
@@ -482,11 +497,26 @@ export const ThreeHeroCanvas: React.FC = () => {
       renderer.render(scene, camera);
     };
 
+    // IntersectionObserver: Pause 60FPS loop when scrolled out of view to save 50%+ GPU
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !animId) {
+          clock.start();
+          animate();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
+    // Initial trigger
     animate();
 
     // 7. Responsive Resizer
     const onResize = () => {
       if (!container) return;
+      updateCachedRect();
       const width = container.clientWidth;
       const height = container.clientHeight;
       camera.aspect = width / height;
@@ -497,7 +527,8 @@ export const ThreeHeroCanvas: React.FC = () => {
     window.addEventListener('resize', onResize);
 
     return () => {
-      cancelAnimationFrame(animId);
+      observer.disconnect();
+      if (animId) cancelAnimationFrame(animId);
       container.removeEventListener('mousedown', onPointerDown);
       window.removeEventListener('mousemove', onPointerMove);
       window.removeEventListener('mouseup', onPointerUp);

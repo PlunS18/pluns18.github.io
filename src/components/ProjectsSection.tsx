@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ThreeRoomViewer } from './ThreeRoomViewer';
 import { Smartphone, Cpu, CheckCircle2, Sparkles, Box, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
@@ -6,18 +6,35 @@ import { useLanguage } from '../hooks/useLanguage';
 export const ProjectsSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'mobile' | 'web' | '3d'>('all');
   const { t, language } = useLanguage();
+  const rectMap = useRef<WeakMap<HTMLElement, { width: number; height: number; left: number; top: number }>>(new WeakMap());
 
-  // React Bits 3D Tilt Card Effect Handler
-  const handleTiltMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  // React Bits 3D Tilt Card Effect Handler (cached rect avoids getBoundingClientRect layout reflow on every move)
+  const handleTiltEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -4;
-    const rotateY = ((x - centerX) / centerX) * 4;
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.008, 1.008, 1.008)`;
+    rectMap.current.set(card, {
+      width: rect.width,
+      height: rect.height,
+      left: rect.left,
+      top: rect.top
+    });
+  };
+
+  const handleTiltMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    let data = rectMap.current.get(card);
+    if (!data) {
+      const rect = card.getBoundingClientRect();
+      data = { width: rect.width, height: rect.height, left: rect.left, top: rect.top };
+      rectMap.current.set(card, data);
+    }
+    const x = e.clientX - data.left;
+    const y = e.clientY - data.top;
+    const centerX = data.width / 2;
+    const centerY = data.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -3;
+    const rotateY = ((x - centerX) / centerX) * 3;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.006, 1.006, 1.006)`;
   };
 
   const handleTiltLeave = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -93,6 +110,7 @@ export const ProjectsSection: React.FC = () => {
             ========================================================================= */}
         {(activeTab === 'all' || activeTab === 'mobile' || activeTab === 'web') && (
           <div
+            onMouseEnter={handleTiltEnter}
             onMouseMove={handleTiltMove}
             onMouseLeave={handleTiltLeave}
             className="spotlight-card p-6 md:p-8 mb-10 border-cyan-500/30 bg-slate-900/60 shadow-2xl transition-transform duration-200 ease-out"
@@ -296,6 +314,7 @@ export const ProjectsSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {(activeTab === 'all' || activeTab === 'mobile') && (
             <div
+              onMouseEnter={handleTiltEnter}
               onMouseMove={handleTiltMove}
               onMouseLeave={handleTiltLeave}
               className="spotlight-card p-6 border-slate-800 bg-slate-900/50 flex flex-col justify-between transition-transform duration-200 ease-out"
@@ -350,6 +369,7 @@ export const ProjectsSection: React.FC = () => {
 
           {(activeTab === 'all' || activeTab === 'web') && (
             <div
+              onMouseEnter={handleTiltEnter}
               onMouseMove={handleTiltMove}
               onMouseLeave={handleTiltLeave}
               className="spotlight-card p-6 border-slate-800 bg-slate-900/50 flex flex-col justify-between transition-transform duration-200 ease-out"

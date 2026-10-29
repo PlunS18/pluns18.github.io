@@ -30,7 +30,7 @@ export const ThreeRoomViewer: React.FC = () => {
       powerPreference: 'high-performance'
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -357,11 +357,16 @@ export const ThreeRoomViewer: React.FC = () => {
     window.addEventListener('touchmove', onPointerMove, { passive: true });
     window.addEventListener('touchend', onPointerUp);
 
-    // 5. 60 FPS Render Loop
-    let animId: number;
+    // 5. 60 FPS Render Loop with IntersectionObserver
+    let animId: number = 0;
     let clock = new THREE.Clock();
+    let isVisible = false;
 
     const animate = () => {
+      if (!isVisible) {
+        animId = 0;
+        return;
+      }
       animId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
@@ -386,7 +391,18 @@ export const ThreeRoomViewer: React.FC = () => {
       renderer.render(scene, camera);
     };
 
-    animate();
+    // IntersectionObserver: Only render when room viewer is visible in viewport!
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !animId) {
+          clock.start();
+          animate();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     const onResize = () => {
       if (!container) return;
@@ -398,7 +414,8 @@ export const ThreeRoomViewer: React.FC = () => {
     window.addEventListener('resize', onResize);
 
     return () => {
-      cancelAnimationFrame(animId);
+      observer.disconnect();
+      if (animId) cancelAnimationFrame(animId);
       container.removeEventListener('mousedown', onPointerDown);
       window.removeEventListener('mousemove', onPointerMove);
       window.removeEventListener('mouseup', onPointerUp);
