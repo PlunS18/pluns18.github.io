@@ -1,28 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-        heading: ['"Outfit"', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'],
+        hand: ['Pangolin', '"Be Vietnam Pro"', 'cursive'],
       },
       colors: {
-        cyber: {
-          blue: '#2563eb',
-          cyan: '#38bdf8',
-          indigo: '#6366f1',
-          purple: '#8b5cf6',
-          dark: '#070a12',
-          surface: '#0e1424'
-        }
-      }
+        paper: '#f6f7f4',
+        'paper-raised': '#fdfdfb',
+        ink: '#1a2233',
+        'ink-soft': '#4a5468',
+        'ink-faint': '#8a92a3',
+        pen: '#2c56d8',
+        marker: '#f5d35a',
+      },
     },
   },
   plugins: [],
-}
+};

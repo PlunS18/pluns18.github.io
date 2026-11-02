@@ -3,218 +3,287 @@
 @tailwind utilities;
 
 /* =========================================================
-   DESIGN SYSTEM TOKENS & BASE STYLING
-   Inspired by UI/UX Pro Max, Awesome DESIGN.md & React Bits
+   Drafting-sheet design system
+   Graph paper, navy ink, a blueprint pen and a gold
+   highlighter borrowed from the HomeCheck brand.
    ========================================================= */
 
 :root {
-  --bg-primary: #070a12;
-  --bg-surface: #0e1424;
-  --bg-card: rgba(16, 24, 40, 0.7);
-  --bg-glass: rgba(18, 28, 48, 0.45);
-  
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(56, 189, 248, 0.25);
-  --border-glow: rgba(99, 102, 241, 0.35);
+  --paper: #f6f7f4;
+  --paper-raised: #fdfdfb;
+  --grid: rgba(44, 86, 216, 0.07);
+  --ink: #1a2233;
+  --ink-soft: #4a5468;
+  --ink-faint: #8a92a3;
+  --pen: #2c56d8;
+  --marker: #f5d35a;
+  --marker-soft: rgba(245, 211, 90, 0.55);
 
-  --accent-cyan: #38bdf8;
-  --accent-blue: #2563eb;
-  --accent-indigo: #6366f1;
-  --accent-purple: #8b5cf6;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
+  --font-body: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-hand: 'Pangolin', 'Be Vietnam Pro', cursive;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  --gutter: clamp(16px, 4vw, 40px);
+  --max: 1180px;
 }
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  scroll-padding-top: 84px;
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  overflow-x: hidden;
+  font-family: var(--font-body);
+  font-size: 17px;
   line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
   -webkit-font-smoothing: antialiased;
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
-    radial-gradient(ellipse 60% 40% at 90% 40%, rgba(56, 189, 248, 0.08), transparent),
-    radial-gradient(ellipse 50% 50% at 10% 80%, rgba(139, 92, 246, 0.08), transparent);
-  background-repeat: no-repeat;
 }
 
-h1, h2, h3, h4, .font-heading {
-  font-family: 'Outfit', sans-serif;
+::selection {
+  background: var(--marker);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+.wrap {
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.hand {
+  font-family: var(--font-hand);
+  font-weight: 400;
+}
+
+/* ---------- Type scale (1.25 ratio from 17px) ---------- */
+
+.t-display {
+  font-size: clamp(2.3rem, 5.2vw, 3.9rem);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.t-h2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.45rem);
+  line-height: 1.15;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-code, pre, .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+.t-h3 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #090d16;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+.t-lead {
+  font-size: 1.125rem;
+  color: var(--ink-soft);
+  max-width: 34em;
 }
 
-/* Glassmorphism Panels */
-.glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.t-small {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
 }
 
-.glass-panel:hover {
-  border-color: var(--border-accent);
-  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
+/* Highlighter swipe behind a whole line */
+.marker {
+  background-image: linear-gradient(
+    100deg,
+    transparent 0.3em,
+    var(--marker-soft) 0.4em,
+    var(--marker) 50%,
+    var(--marker-soft) calc(100% - 0.4em),
+    transparent calc(100% - 0.3em)
+  );
+  background-size: 100% 0.62em;
+  background-position: 0 78%;
+  background-repeat: no-repeat;
+  padding: 0 0.15em;
+  margin: 0 -0.15em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
-/* Spotlight Card (React Bits style) */
-.spotlight-card {
-  position: relative;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
+/* ---------- Buttons: ink outline with a hard offset shadow ---------- */
 
-.spotlight-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 14px 34px -10px rgba(37, 99, 235, 0.25);
-}
-
-/* Glowing Neon Badges */
-.neon-badge {
+.btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: var(--accent-cyan);
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 46px;
+  padding: 0.6em 1.3em;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--paper-raised);
+  box-shadow: 3px 3px 0 var(--ink);
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  cursor: pointer;
 }
 
-.neon-badge.live {
-  background: rgba(16, 185, 129, 0.12);
-  border-color: rgba(16, 185, 129, 0.35);
-  color: #34d399;
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
 }
 
-.neon-badge.ai {
-  background: rgba(139, 92, 246, 0.12);
-  border-color: rgba(139, 92, 246, 0.35);
-  color: #c084fc;
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
 }
 
-/* Shiny Text Gradient */
-.shiny-text {
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.btn-ink {
+  background: var(--ink);
+  color: var(--paper-raised);
+  box-shadow: 3px 3px 0 var(--pen);
 }
 
-.cyber-gradient {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.btn-ink:hover {
+  box-shadow: 4px 4px 0 var(--pen);
 }
 
-/* Pulse Beacon Effect */
-.pulse-glow {
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+.btn-sm {
+  min-height: 38px;
+  padding: 0.35em 1em;
+  font-size: 0.875rem;
 }
 
-/* Grid Layout Utilities */
-.container-max {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 20px;
+.link-pen {
+  color: var(--pen);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
 }
 
-@media (max-width: 768px) {
-  .container-max {
-    padding: 0 16px;
-  }
+/* ---------- Sections ---------- */
+
+.section {
+  padding-top: clamp(64px, 9vw, 112px);
+  padding-bottom: clamp(64px, 9vw, 112px);
 }
 
-/* React Bits: Infinite Marquee Ticker */
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.rule-top {
+  border-top: 1.5px solid var(--ink);
 }
 
-.marquee-container {
+/* Dimension line: |<———>| used under facts and process steps */
+.dim {
+  position: relative;
+  height: 12px;
+  margin-top: 10px;
+  color: var(--ink-faint);
+}
+
+.dim::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 1px solid currentColor;
+}
+
+.dim::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-left: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+}
+
+/* Phone screenshot frames */
+.phone {
+  border: 1.5px solid var(--ink);
+  border-radius: 26px;
   overflow: hidden;
-  user-select: none;
-  display: flex;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  background: var(--paper-raised);
+  box-shadow: 4px 4px 0 var(--ink);
+  aspect-ratio: 780 / 1696;
 }
 
-.marquee-track {
-  display: flex;
-  flex-shrink: 0;
-  gap: 1.5rem;
-  animation: marquee 35s linear infinite;
+.phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
 }
 
-.marquee-track:hover {
-  animation-play-state: paused;
+/* Graph-paper fill for project covers */
+.sheet {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 16px 16px;
 }
 
-/* React Bits: Shiny Gradient Shimmer */
-@keyframes shiny-text {
-  0%, 100% {
-    background-position: 0% 50%;
+.chip {
+  display: inline-block;
+  padding: 0.15em 0.65em;
+  border: 1px solid var(--ink-faint);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  background: var(--paper-raised);
+}
+
+/* Horizontal screenshot strip that scrolls on narrow screens */
+.strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(150px, 1fr);
+  gap: clamp(14px, 2vw, 24px);
+  overflow-x: auto;
+  padding: 6px 6px 18px 2px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.strip > figure {
+  scroll-snap-align: start;
+}
+
+@media (max-width: 900px) {
+  .strip {
+    grid-auto-columns: 46%;
   }
-  50% {
-    background-position: 100% 50%;
+}
+
+@media (max-width: 520px) {
+  .strip {
+    grid-auto-columns: 62%;
   }
 }
-
-.shiny-text {
-  background: linear-gradient(90deg, #f8fafc 0%, #38bdf8 30%, #818cf8 60%, #f8fafc 100%);
-  background-size: 250% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shiny-text 6s ease-in-out infinite;
-}
-

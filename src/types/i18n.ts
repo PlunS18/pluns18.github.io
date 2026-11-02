@@ -1,7 +1,7 @@
-import vi from '../locales/vi.json';
+import type { Content } from '../content';
 
 export type Language = 'vi' | 'en';
-export type TranslationSchema = typeof vi;
+export type TranslationSchema = Content;
 
 export interface LanguageContextType {
   language: Language;
