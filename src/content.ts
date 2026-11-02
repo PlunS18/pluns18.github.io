@@ -24,7 +24,10 @@ export interface Project {
 
 const APP_STORE = 'https://apps.apple.com/vn/app/home-check/id6698867147';
 const GOOGLE_PLAY = 'https://play.google.com/store/apps/details?id=com.homecheck';
-const WEBSITE = 'https://myhomecheck.ai/';
+const storeLinks = (appStore: string, googlePlay: string) => [
+  { label: appStore, href: APP_STORE },
+  { label: googlePlay, href: GOOGLE_PLAY },
+];
 
 const img = (name: string) => `./assets/${name}`;
 
@@ -70,7 +73,7 @@ const vi = {
   facts: [
     { value: '3+ năm', label: 'làm mobile, web và backend' },
     { value: '2 app', label: 'đang có trên App Store và Google Play' },
-    { value: '7 dự án', label: 'kể cả app, web, 3D và API' },
+    { value: '6 dự án', label: 'kể cả app, web, 3D và API' },
     { value: '3 công ty', label: 'Web Media, TGMSS, BMD Solutions' },
   ],
   projects: {
@@ -103,10 +106,7 @@ const vi = {
       role: 'Core Mobile Developer',
       platforms: 'iOS, Android',
       status: 'Đang chạy production, bản 1.3.6',
-      links: [
-        { label: 'Tải trên App Store', href: APP_STORE },
-        { label: 'Tải trên Google Play', href: GOOGLE_PLAY },
-      ],
+      links: storeLinks('Tải trên App Store', 'Tải trên Google Play'),
       screens: [
         { src: img('man-trang-chu-app.Br1F0Hab_Z2J0q8.webp'), caption: 'Trang chủ' },
         { src: img('man-du-an.eIZB6XZi_Z15LQta.webp'), caption: 'Danh sách dự án nhà' },
@@ -137,7 +137,7 @@ const vi = {
       role: 'Frontend & 3D Developer',
       platforms: 'Web, WebView trong app',
       status: 'Đang chạy production',
-      links: [{ label: 'Mở myhomecheck.ai', href: WEBSITE }],
+      links: storeLinks('Tải trên App Store', 'Tải trên Google Play'),
       screens: [
         { src: img('hc_web_cad_digitize.webp'), caption: 'Vẽ mặt bằng 2D' },
         { src: img('man-sua-giu-bo-cuc.C3h2Egbi_eIyA2.webp'), caption: 'Sửa bố cục cùng trợ lý' },
@@ -193,7 +193,7 @@ const vi = {
       role: 'Frontend Developer',
       platforms: 'Web',
       status: 'Đang chạy production',
-      links: [{ label: 'Mở myhomecheck.ai', href: WEBSITE }],
+      links: storeLinks('Tải trên App Store', 'Tải trên Google Play'),
       screens: [],
       sketch: 'browser',
       context: 'Đội vận hành cần quản lý khách hàng, đơn hàng, gói dịch vụ, thư viện vật liệu và nội thất. Khách hàng mới cần một website tải nhanh và dễ tìm trên Google.',
@@ -204,25 +204,6 @@ const vi = {
         { title: 'Form và lịch', body: 'Form kiểm tra dữ liệu bằng React Hook Form + Zod, lịch hẹn bằng FullCalendar, kéo thả sắp xếp bằng dnd-kit.' },
       ],
       stack: ['Next.js', 'React', 'Vite', 'TypeScript', 'MUI', 'React Hook Form', 'Zod', 'FullCalendar', 'Auth0', 'dnd-kit'],
-    },
-    {
-      slug: 'web-media-studio',
-      name: 'Web Media Studio',
-      tagline: 'Web app quản lý chiến dịch tiếp thị, tạo video tự động và theo dõi dữ liệu SEO.',
-      company: 'Web Media',
-      period: 'Song song HomeCheck',
-      role: 'Frontend / Fullstack Developer',
-      platforms: 'Web',
-      status: 'Nền tảng SaaS',
-      links: [],
-      screens: [],
-      sketch: 'form',
-      context: 'Đội marketing cần một chỗ để tạo chiến dịch, sinh video và xem số liệu SEO, với nhiều loại form thay đổi liên tục theo từng kênh.',
-      work: [
-        { title: 'Form sinh từ cấu hình', body: 'Form được dựng tự động từ JSON Schema, kiểm tra dữ liệu ngay trên trình duyệt. Thêm loại chiến dịch mới chỉ cần thêm cấu hình.' },
-        { title: 'Dashboard tải nhanh', body: 'Server Components và cache của Next.js 16 để rút ngắn thời gian tải, có chế độ sáng và tối.' },
-      ],
-      stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'JSON Schema'],
     },
     {
       slug: 'thay-ai',
@@ -275,7 +256,7 @@ const vi = {
   experience: {
     heading: 'Kinh nghiệm',
     jobs: [
-      { company: 'Web Media', role: 'Full-Stack Developer', period: '04/2024 – nay', summary: 'Lập trình viên chính của hệ sinh thái HomeCheck: thiết kế kiến trúc, làm các module lõi và code review cho team.', projects: ['homecheck-app', 'homecheck-web-3d', 'homecheck-backend', 'homecheck-admin', 'web-media-studio'] },
+      { company: 'Web Media', role: 'Full-Stack Developer', period: '04/2024 – nay', summary: 'Lập trình viên chính của hệ sinh thái HomeCheck: thiết kế kiến trúc, làm các module lõi và code review cho team.', projects: ['homecheck-app', 'homecheck-web-3d', 'homecheck-backend', 'homecheck-admin'] },
       { company: 'TGMSS', role: 'Mobile Developer (React Native)', period: '09/2023 – 04/2024', summary: 'Làm và phát hành app Thầy AI lên App Store và Google Play.', projects: ['thay-ai'] },
       { company: 'BMD Solutions', role: 'Frontend Web Developer', period: '03/2023 – 07/2023', summary: 'Xây portal quản lý khách hàng bằng React.', projects: ['bmd-portal'] },
     ],
@@ -295,7 +276,7 @@ const vi = {
       {
         title: 'Web và 3D',
         tools: 'React, Next.js, Vite, Tailwind, MUI, Ant Design, Three.js, React Three Fiber, Web Worker',
-        usedIn: 'Web mặt bằng, web 3D, MyHomeCheck, trang quản trị, Web Media Studio',
+        usedIn: 'Web mặt bằng, web 3D, MyHomeCheck và trang quản trị',
       },
       {
         title: 'Backend và realtime',
@@ -376,7 +357,7 @@ const en: Content = {
   facts: [
     { value: '3+ years', label: 'across mobile, web and backend' },
     { value: '2 apps', label: 'live on the App Store and Google Play' },
-    { value: '7 projects', label: 'apps, web, 3D and APIs' },
+    { value: '6 projects', label: 'apps, web, 3D and APIs' },
     { value: '3 companies', label: 'Web Media, TGMSS, BMD Solutions' },
   ],
   projects: {
@@ -409,10 +390,7 @@ const en: Content = {
       role: 'Core Mobile Developer',
       platforms: 'iOS, Android',
       status: 'In production, v1.3.6',
-      links: [
-        { label: 'Get it on the App Store', href: APP_STORE },
-        { label: 'Get it on Google Play', href: GOOGLE_PLAY },
-      ],
+      links: storeLinks('Get it on the App Store', 'Get it on Google Play'),
       screens: [
         { src: img('man-trang-chu-app.Br1F0Hab_Z2J0q8.webp'), caption: 'Home' },
         { src: img('man-du-an.eIZB6XZi_Z15LQta.webp'), caption: 'House projects' },
@@ -443,7 +421,7 @@ const en: Content = {
       role: 'Frontend & 3D Developer',
       platforms: 'Web, in-app WebView',
       status: 'In production',
-      links: [{ label: 'Open myhomecheck.ai', href: WEBSITE }],
+      links: storeLinks('Get it on the App Store', 'Get it on Google Play'),
       screens: [
         { src: img('hc_web_cad_digitize.webp'), caption: '2D floor plan' },
         { src: img('man-sua-giu-bo-cuc.C3h2Egbi_eIyA2.webp'), caption: 'Editing layout with the assistant' },
@@ -499,7 +477,7 @@ const en: Content = {
       role: 'Frontend Developer',
       platforms: 'Web',
       status: 'In production',
-      links: [{ label: 'Open myhomecheck.ai', href: WEBSITE }],
+      links: storeLinks('Get it on the App Store', 'Get it on Google Play'),
       screens: [],
       sketch: 'browser',
       context: 'Operations needed to manage customers, orders, plans, and the material and furniture library. New customers needed a fast site that ranks on Google.',
@@ -510,25 +488,6 @@ const en: Content = {
         { title: 'Forms and calendar', body: 'Validated forms with React Hook Form + Zod, scheduling with FullCalendar, drag-and-drop ordering with dnd-kit.' },
       ],
       stack: ['Next.js', 'React', 'Vite', 'TypeScript', 'MUI', 'React Hook Form', 'Zod', 'FullCalendar', 'Auth0', 'dnd-kit'],
-    },
-    {
-      slug: 'web-media-studio',
-      name: 'Web Media Studio',
-      tagline: 'A web app for running marketing campaigns, generating videos and tracking SEO data.',
-      company: 'Web Media',
-      period: 'Alongside HomeCheck',
-      role: 'Frontend / Fullstack Developer',
-      platforms: 'Web',
-      status: 'SaaS platform',
-      links: [],
-      screens: [],
-      sketch: 'form',
-      context: 'The marketing team needed one place to create campaigns, generate videos and read SEO numbers, with forms that change often from channel to channel.',
-      work: [
-        { title: 'Forms from configuration', body: 'Forms are generated from JSON Schema and validated in the browser. A new campaign type only needs new config.' },
-        { title: 'Fast dashboard', body: 'Next.js 16 Server Components and caching to cut load time, with light and dark modes.' },
-      ],
-      stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'JSON Schema'],
     },
     {
       slug: 'thay-ai',
@@ -581,7 +540,7 @@ const en: Content = {
   experience: {
     heading: 'Experience',
     jobs: [
-      { company: 'Web Media', role: 'Full-Stack Developer', period: '04/2024 – now', summary: 'Lead developer on the HomeCheck system: architecture, core modules and team code review.', projects: ['homecheck-app', 'homecheck-web-3d', 'homecheck-backend', 'homecheck-admin', 'web-media-studio'] },
+      { company: 'Web Media', role: 'Full-Stack Developer', period: '04/2024 – now', summary: 'Lead developer on the HomeCheck system: architecture, core modules and team code review.', projects: ['homecheck-app', 'homecheck-web-3d', 'homecheck-backend', 'homecheck-admin'] },
       { company: 'TGMSS', role: 'Mobile Developer (React Native)', period: '09/2023 – 04/2024', summary: 'Built and released the Thầy AI app on the App Store and Google Play.', projects: ['thay-ai'] },
       { company: 'BMD Solutions', role: 'Frontend Web Developer', period: '03/2023 – 07/2023', summary: 'Built a customer management portal in React.', projects: ['bmd-portal'] },
     ],
@@ -601,7 +560,7 @@ const en: Content = {
       {
         title: 'Web and 3D',
         tools: 'React, Next.js, Vite, Tailwind, MUI, Ant Design, Three.js, React Three Fiber, Web Worker',
-        usedIn: 'Plan editor, 3D viewer, MyHomeCheck, admin dashboard, Web Media Studio',
+        usedIn: 'Plan editor, 3D viewer, MyHomeCheck and admin dashboard',
       },
       {
         title: 'Backend and real-time',
