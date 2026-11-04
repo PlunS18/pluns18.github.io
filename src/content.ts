@@ -47,7 +47,7 @@ const vi = {
     role: 'Mobile & Web Developer',
     headline: 'Tôi xây app đo nhà, vẽ mặt bằng và dựng 3D cho HomeCheck.',
     lead: 'Hơn 3 năm làm React Native, React và NestJS ở ba công ty. Hai app đang có trên App Store và Google Play. Tôi thích những bài toán chạm vào phần cứng và đồ họa: quét phòng bằng LiDAR, thước laser Bluetooth, cảm biến la bàn, bản vẽ 2D thành mô hình 3D.',
-    available: 'Đang tìm vị trí Middle Mobile / Web tại TP.HCM',
+    available: 'Đang tìm vị trí Middle Mobile / Web tại TP.HCM hoặc remote',
     ctaWork: 'Xem các dự án',
     ctaCv: 'Tải CV (PDF)',
     model: {
@@ -198,12 +198,12 @@ const vi = {
       sketch: 'browser',
       context: 'Đội vận hành cần quản lý khách hàng, đơn hàng, gói dịch vụ, thư viện vật liệu và nội thất. Khách hàng mới cần một website tải nhanh và dễ tìm trên Google.',
       work: [
-        { title: 'Website MyHomeCheck', body: 'Next.js render phía server để Google index tốt và trang đầu tải nhanh.' },
-        { title: 'Trang quản trị', body: 'Hơn 30 màn hình: khách hàng, đơn hàng, gói nâng cấp, khuyến mãi, token, thư viện vật liệu và đối tượng mặt bằng, người dùng đang online.' },
+        { title: 'Website MyHomeCheck', body: 'Next.js render phía server để Google index tốt và trang đầu tải nhanh. Landing, bảng giá và cổng khách hàng responsive trên điện thoại và máy tính bằng Tailwind.' },
+        { title: 'Trang quản trị', body: 'Hơn 30 màn hình: khách hàng, đơn hàng, gói nâng cấp, khuyến mãi, token, thư viện vật liệu và đối tượng mặt bằng, người dùng đang online. Dữ liệu lấy từ RESTful API qua Axios.' },
         { title: 'Phân quyền nhân viên', body: 'Quyền theo module, có nhật ký sử dụng quyền. Đăng nhập qua Auth0.' },
         { title: 'Form và lịch', body: 'Form kiểm tra dữ liệu bằng React Hook Form + Zod, lịch hẹn bằng FullCalendar, kéo thả sắp xếp bằng dnd-kit.' },
       ],
-      stack: ['Next.js', 'React', 'Vite', 'TypeScript', 'MUI', 'React Hook Form', 'Zod', 'FullCalendar', 'Auth0', 'dnd-kit'],
+      stack: ['Next.js', 'React', 'Vite', 'TypeScript', 'Tailwind', 'MUI', 'Axios', 'React Hook Form', 'Zod', 'FullCalendar', 'Auth0', 'dnd-kit'],
     },
     {
       slug: 'thay-ai',
@@ -228,7 +228,7 @@ const vi = {
     {
       slug: 'bmd-portal',
       name: 'Portal quản lý khách hàng',
-      tagline: 'Trang quản lý khách hàng cho doanh nghiệp, xây bằng React, Vite và Ant Design.',
+      tagline: 'Dự án outsource: trang quản lý khách hàng cho doanh nghiệp, xây bằng React, Vite và Ant Design.',
       company: 'BMD Solutions',
       period: '03/2023 – 07/2023',
       role: 'Frontend Web Developer',
@@ -237,7 +237,7 @@ const vi = {
       links: [],
       screens: [],
       sketch: 'browser',
-      context: 'Dự án đầu tiên của tôi sau khi học Kỹ thuật phần mềm: một portal để doanh nghiệp quản lý thông tin khách hàng.',
+      context: 'Dự án đầu tiên của tôi sau khi học Kỹ thuật phần mềm, làm tại công ty outsource BMD Solutions: một portal để doanh nghiệp khách hàng quản lý thông tin khách hàng của họ.',
       work: [
         { title: 'Dựng frontend', body: 'Xây portal bằng React và Vite, giao diện bảng biểu và form bằng Ant Design.' },
       ],
@@ -275,7 +275,7 @@ const vi = {
       },
       {
         title: 'Web và 3D',
-        tools: 'React, Next.js, Vite, Tailwind, MUI, Ant Design, Three.js, React Three Fiber, Web Worker',
+        tools: 'HTML5, CSS3, React (Hooks, Context API), Next.js, Vite, Tailwind, MUI, Ant Design, responsive, REST API (Axios), Three.js, React Three Fiber, Web Worker',
         usedIn: 'Web mặt bằng, web 3D, MyHomeCheck và trang quản trị',
       },
       {
@@ -299,14 +299,14 @@ const vi = {
   },
   contact: {
     heading: 'Cần người làm app hoặc web 3D?',
-    body: 'Tôi đang tìm vị trí Middle Mobile / Web Developer tại TP.HCM. Nhắn Zalo hoặc gửi email, tôi trả lời trong ngày.',
+    body: 'Tôi đang tìm vị trí Middle Mobile / Web Developer tại TP.HCM hoặc làm remote. Nhắn Zalo hoặc gửi email, tôi trả lời trong ngày.',
     zalo: 'Nhắn Zalo',
     email: 'Gửi email',
     cv: 'Tải CV (PDF)',
     phoneLabel: 'Điện thoại / Zalo',
     emailLabel: 'Email',
     locationLabel: 'Khu vực',
-    location: 'TP. Hồ Chí Minh',
+    location: 'TP. Hồ Chí Minh · Sẵn sàng remote',
   },
   footer: {
     line: 'Lưu Trương Hoàng Phúc. Trang này viết bằng React và Three.js.',
@@ -331,7 +331,7 @@ const en: Content = {
     role: 'Mobile & Web Developer',
     headline: 'I build the apps that measure, draw and render homes at HomeCheck.',
     lead: '3+ years of React Native, React and NestJS across three companies. Two apps live on the App Store and Google Play. I like problems that touch hardware and graphics: LiDAR room scans, Bluetooth laser meters, compass sensors, and 2D floor plans that turn into 3D models.',
-    available: 'Open to Middle Mobile / Web roles in Ho Chi Minh City',
+    available: 'Open to Middle Mobile / Web roles in Ho Chi Minh City or remote',
     ctaWork: 'See my projects',
     ctaCv: 'Download CV (PDF)',
     model: {
@@ -482,12 +482,12 @@ const en: Content = {
       sketch: 'browser',
       context: 'Operations needed to manage customers, orders, plans, and the material and furniture library. New customers needed a fast site that ranks on Google.',
       work: [
-        { title: 'MyHomeCheck website', body: 'Server-rendered Next.js so pages index well and the first load is fast.' },
-        { title: 'Admin dashboard', body: '30+ screens: customers, orders, upgrade plans, promotions, tokens, the material and plan object library, and online users.' },
+        { title: 'MyHomeCheck website', body: 'Server-rendered Next.js so pages index well and the first load is fast. Landing, pricing and customer portal are responsive on phone and desktop with Tailwind.' },
+        { title: 'Admin dashboard', body: '30+ screens: customers, orders, upgrade plans, promotions, tokens, the material and plan object library, and online users. Data comes from the RESTful API through Axios.' },
         { title: 'Staff permissions', body: 'Per-module permissions with a usage log. Sign-in through Auth0.' },
         { title: 'Forms and calendar', body: 'Validated forms with React Hook Form + Zod, scheduling with FullCalendar, drag-and-drop ordering with dnd-kit.' },
       ],
-      stack: ['Next.js', 'React', 'Vite', 'TypeScript', 'MUI', 'React Hook Form', 'Zod', 'FullCalendar', 'Auth0', 'dnd-kit'],
+      stack: ['Next.js', 'React', 'Vite', 'TypeScript', 'Tailwind', 'MUI', 'Axios', 'React Hook Form', 'Zod', 'FullCalendar', 'Auth0', 'dnd-kit'],
     },
     {
       slug: 'thay-ai',
@@ -512,7 +512,7 @@ const en: Content = {
     {
       slug: 'bmd-portal',
       name: 'Customer management portal',
-      tagline: 'A customer management portal for a business, built with React, Vite and Ant Design.',
+      tagline: 'Outsourcing project: a customer management portal for a business, built with React, Vite and Ant Design.',
       company: 'BMD Solutions',
       period: '03/2023 – 07/2023',
       role: 'Frontend Web Developer',
@@ -521,7 +521,7 @@ const en: Content = {
       links: [],
       screens: [],
       sketch: 'browser',
-      context: 'My first project after studying software engineering: a portal for a business to manage customer information.',
+      context: 'My first project after studying software engineering, at the outsourcing company BMD Solutions: a portal for a client business to manage its customer information.',
       work: [
         { title: 'Building the frontend', body: 'Built the portal with React and Vite, with tables and forms from Ant Design.' },
       ],
@@ -559,7 +559,7 @@ const en: Content = {
       },
       {
         title: 'Web and 3D',
-        tools: 'React, Next.js, Vite, Tailwind, MUI, Ant Design, Three.js, React Three Fiber, Web Worker',
+        tools: 'HTML5, CSS3, React (Hooks, Context API), Next.js, Vite, Tailwind, MUI, Ant Design, responsive, REST API (Axios), Three.js, React Three Fiber, Web Worker',
         usedIn: 'Plan editor, 3D viewer, MyHomeCheck and admin dashboard',
       },
       {
@@ -583,14 +583,14 @@ const en: Content = {
   },
   contact: {
     heading: 'Need someone for an app or 3D web project?',
-    body: "I'm looking for a Middle Mobile / Web Developer role in Ho Chi Minh City. Message me on Zalo or email; I reply the same day.",
+    body: "I'm looking for a Middle Mobile / Web Developer role in Ho Chi Minh City or remote. Message me on Zalo or email; I reply the same day.",
     zalo: 'Message on Zalo',
     email: 'Send an email',
     cv: 'Download CV (PDF)',
     phoneLabel: 'Phone / Zalo',
     emailLabel: 'Email',
     locationLabel: 'Location',
-    location: 'Ho Chi Minh City',
+    location: 'Ho Chi Minh City · Open to remote',
   },
   footer: {
     line: 'Luu Truong Hoang Phuc. Built with React and Three.js.',
