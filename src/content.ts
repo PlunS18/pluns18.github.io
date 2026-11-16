@@ -13,8 +13,10 @@ export interface Project {
   platforms: string;
   status: string;
   links: { label: string; href: string }[];
-  // Phone screenshots when we have them, otherwise a drawn sketch for the cover
+  // Screenshots when we have them, otherwise a drawn sketch for the cover
   screens: { src: string; caption: string }[];
+  // How the screenshots are framed: phone (default) or a desktop browser window
+  device?: 'phone' | 'desktop';
   sketch?: Sketch;
   context: string;
   work: { title: string; body: string }[];
@@ -30,6 +32,8 @@ const storeLinks = (appStore: string, googlePlay: string) => [
 ];
 
 const img = (name: string) => `./assets/${name}`;
+const PLANORA = 'https://planora-self-five.vercel.app';
+const PLANORA_STACK = ['Next.js 16', 'React 19', 'TypeScript', 'Three.js', 'React Three Fiber', 'Zustand', 'Tailwind CSS 4', 'NestJS', 'Drizzle ORM', 'PostgreSQL', 'Redis', 'BullMQ', 'Cloudflare R2', 'WebCrypto', 'Docker', 'Vercel', 'Railway', 'Vitest'];
 
 const vi = {
   meta: {
@@ -127,6 +131,35 @@ const vi = {
         { title: 'Phát hành và cập nhật nóng', body: 'Đưa app lên App Store và Google Play, sửa lỗi nhỏ qua CodePush (RevoPush) mà không cần chờ duyệt lại.' },
       ],
       stack: ['React Native', 'TypeScript', 'Redux Toolkit', 'TanStack Query', 'Reanimated', 'Skia', 'Vision Camera', 'RoomPlan (Swift)', 'BLE', 'Mapbox', 'Firebase', 'react-native-iap', 'CodePush'],
+    },
+    {
+      slug: 'planora',
+      name: 'Planora',
+      tagline: 'Web vẽ nhà 2D/3D ngay trên trình duyệt: vẽ tường tự thành phòng, kéo nội thất thật vào, xem 3D và dạo nhà, chia sẻ cho người khác cùng xem hoặc sửa.',
+      company: 'Dự án cá nhân',
+      period: '2026',
+      role: 'Tự làm toàn bộ (full-stack)',
+      platforms: 'Web, API',
+      status: 'Đang chạy bản demo',
+      links: [{ label: 'Mở bản demo', href: PLANORA }],
+      device: 'desktop',
+      screens: [
+        { src: img('planora-2d.webp'), caption: 'Mặt bằng 2D: nội thất là model thật nhìn từ trên xuống' },
+        { src: img('planora-3d.webp'), caption: '3D mặt cắt, dựng từ cùng dữ liệu với 2D' },
+        { src: img('planora-walk.webp'), caption: 'Dạo nhà góc nhìn người thứ nhất' },
+      ],
+      context: 'Tôi tự làm Planora từ con số không tới khi chạy thật trên mạng, để áp dụng theo cách của riêng mình những gì học được ở HomeCheck: một trình vẽ nhà người không chuyên cũng dùng được, có thư viện nội thất do cửa hàng đăng lên, và model 3D không thể bị tải trộm.',
+      work: [
+        { title: 'Tường tự thành phòng', body: 'Làm phẳng đồ thị tường (gộp điểm gần nhau, tách chỗ giao chữ T và X), duyệt mặt bằng half-edge để tìm các vùng kín, diện tích theo công thức Shoelace. Góc tường dày được vát (mitre) để không hở.' },
+        { title: '2D và 3D chung một dữ liệu', body: 'React Three Fiber dựng tường, cửa, sàn, mái từ mặt bằng. Ở 2D, nội thất hiện bằng chính model 3D nhìn từ trên xuống và xoay được tự do.' },
+        { title: 'Hoàn tác và lưu an toàn', body: 'Mọi thay đổi là một lệnh thuần nên có undo/redo, kéo thả nhiều bước chỉ thành một bước hoàn tác. Lưu lên server kèm số phiên bản để hai tab không ghi đè lên nhau.' },
+        { title: 'Dạo nhà', body: 'Góc nhìn người thứ nhất bằng Pointer Lock, đi bằng WASD, va chạm với tường. Nhắm cửa bằng tâm màn hình rồi bấm F để mở.' },
+        { title: 'Kho model không bị tải trộm', body: '684 model nén bằng glTF-Transform rồi mã hoá AES-256-GCM. Trình duyệt chỉ nhận vé ký HMAC sống 60 giây và giải mã trong bộ nhớ bằng WebCrypto.' },
+        { title: 'Chia sẻ có phân quyền', body: 'Chủ, người chỉnh sửa, người xem; mời qua email hoặc gửi link. Quyền kiểm tra ở server cho từng request, người không có quyền chỉ thấy 404.' },
+        { title: 'Backend NestJS', body: 'Drizzle ORM trên PostgreSQL, Redis cho cache, hàng đợi BullMQ và giới hạn tần suất dùng chung. Khoá advisory của Postgres chống race condition. Đăng nhập không mật khẩu bằng mã gửi qua email.' },
+        { title: 'Chạy thật', body: 'Web Next.js trên Vercel, API đóng Docker chạy trên Railway, file trên Cloudflare R2, mail qua Brevo. Gần 290 test Vitest cho thuật toán và API.' },
+      ],
+      stack: PLANORA_STACK,
     },
     {
       slug: 'homecheck-web-3d',
@@ -259,6 +292,7 @@ const vi = {
       { company: 'Web Media', role: 'Full-Stack Developer', period: '04/2024 – nay', summary: 'Lập trình viên chính của hệ sinh thái HomeCheck: thiết kế kiến trúc, làm các module lõi và code review cho team.', projects: ['homecheck-app', 'homecheck-web-3d', 'homecheck-backend', 'homecheck-admin'] },
       { company: 'TGMSS', role: 'Mobile Developer (React Native)', period: '09/2023 – 04/2024', summary: 'Làm và phát hành app Thầy AI lên App Store và Google Play.', projects: ['thay-ai'] },
       { company: 'BMD Solutions', role: 'Frontend Web Developer', period: '03/2023 – 07/2023', summary: 'Xây portal quản lý khách hàng bằng React.', projects: ['bmd-portal'] },
+      { company: 'Dự án cá nhân', role: 'Full-Stack Developer', period: '2026', summary: 'Tự làm và deploy Planora, web vẽ nhà 2D/3D có backend NestJS, kho model mã hoá và chia sẻ theo quyền.', projects: ['planora'] },
     ],
     education: { school: 'ĐH Công nghiệp TP.HCM (IUH)', degree: 'Kỹ sư Kỹ thuật phần mềm', period: '2019 – 2023' },
     educationLabel: 'Học vấn',
@@ -413,6 +447,35 @@ const en: Content = {
       stack: ['React Native', 'TypeScript', 'Redux Toolkit', 'TanStack Query', 'Reanimated', 'Skia', 'Vision Camera', 'RoomPlan (Swift)', 'BLE', 'Mapbox', 'Firebase', 'react-native-iap', 'CodePush'],
     },
     {
+      slug: 'planora',
+      name: 'Planora',
+      tagline: 'A 2D/3D home planner in the browser: walls become rooms on their own, real furniture models drop in, view it in 3D or walk through it, and share it to view or edit together.',
+      company: 'Personal project',
+      period: '2026',
+      role: 'Sole developer (full-stack)',
+      platforms: 'Web, API',
+      status: 'Live demo',
+      links: [{ label: 'Open the demo', href: PLANORA }],
+      device: 'desktop',
+      screens: [
+        { src: img('planora-2d.webp'), caption: '2D plan: furniture is the real model seen from above' },
+        { src: img('planora-3d.webp'), caption: '3D cutaway built from the same data as 2D' },
+        { src: img('planora-walk.webp'), caption: 'First-person walk-through' },
+      ],
+      context: 'I built Planora on my own, from nothing to a live deployment, to apply what I learned on HomeCheck my own way: a home planner anyone can use, a furniture library that stores publish to, and 3D models that cannot simply be downloaded.',
+      work: [
+        { title: 'Walls become rooms', body: 'Planarize the wall graph (merge near points, split T and X joints), walk half-edge faces to find closed areas, area by the Shoelace formula. Thick wall corners are mitred so they never gap.' },
+        { title: 'One model for 2D and 3D', body: 'React Three Fiber builds walls, openings, floors and roofs from the plan. In 2D, furniture is drawn with the real 3D model seen from above and rotates freely.' },
+        { title: 'Undo and safe saving', body: 'Every edit is a pure command, so undo/redo is exact and a drag counts as one step. Saves carry a version number so two tabs never overwrite each other.' },
+        { title: 'Walk-through', body: 'First-person view with Pointer Lock, WASD movement and wall collision. Aim at a door with the screen centre and press F to open it.' },
+        { title: 'Models that cannot be scraped', body: '684 models compressed with glTF-Transform and encrypted with AES-256-GCM. The browser gets a 60-second HMAC-signed ticket and decrypts in memory with WebCrypto.' },
+        { title: 'Sharing with roles', body: 'Owner, editor, viewer; invite by email or by link. Access is checked on the server for every request, and outsiders only ever see 404.' },
+        { title: 'NestJS backend', body: 'Drizzle ORM on PostgreSQL, Redis for caching, BullMQ queues and shared rate limits. Postgres advisory locks prevent race conditions. Passwordless sign-in with emailed codes.' },
+        { title: 'Running for real', body: 'Next.js on Vercel, the API as a Docker image on Railway, files on Cloudflare R2, mail through Brevo. Close to 290 Vitest tests for the algorithms and the API.' },
+      ],
+      stack: PLANORA_STACK,
+    },
+    {
       slug: 'homecheck-web-3d',
       name: 'HomeCheck 2D plans and 3D house',
       tagline: 'A browser floor plan editor and 3D house viewer that run on the web and inside the app through a WebView.',
@@ -543,6 +606,7 @@ const en: Content = {
       { company: 'Web Media', role: 'Full-Stack Developer', period: '04/2024 – now', summary: 'Lead developer on the HomeCheck system: architecture, core modules and team code review.', projects: ['homecheck-app', 'homecheck-web-3d', 'homecheck-backend', 'homecheck-admin'] },
       { company: 'TGMSS', role: 'Mobile Developer (React Native)', period: '09/2023 – 04/2024', summary: 'Built and released the Thầy AI app on the App Store and Google Play.', projects: ['thay-ai'] },
       { company: 'BMD Solutions', role: 'Frontend Web Developer', period: '03/2023 – 07/2023', summary: 'Built a customer management portal in React.', projects: ['bmd-portal'] },
+      { company: 'Personal project', role: 'Full-Stack Developer', period: '2026', summary: 'Built and deployed Planora, a 2D/3D home planner with a NestJS backend, an encrypted model library and role-based sharing.', projects: ['planora'] },
     ],
     education: { school: 'Industrial University of HCMC (IUH)', degree: 'B.S. in Software Engineering', period: '2019 – 2023' },
     educationLabel: 'Education',

@@ -63,7 +63,18 @@ export const ProjectDetail: React.FC<{ slug: string }> = ({ slug }) => {
         )}
       </header>
 
-      {project.screens.length > 0 ? (
+      {project.screens.length > 0 && project.device === 'desktop' ? (
+        <section className="wrap mt-14 grid gap-8 md:grid-cols-2" aria-label={L.screens}>
+          {project.screens.map((s, i) => (
+            <figure key={s.src} className={`m-0 ${i === 0 ? 'md:col-span-2' : ''}`}>
+              <div className="desktop">
+                <img src={s.src} alt={s.caption} loading="lazy" width={1440} height={900} />
+              </div>
+              <figcaption className="hand mt-3 text-center text-[1.05rem] leading-snug text-ink-soft">{s.caption}</figcaption>
+            </figure>
+          ))}
+        </section>
+      ) : project.screens.length > 0 ? (
         <section className="wrap mt-14" aria-label={L.screens}>
           <div className="strip">
             {project.screens.map((s) => (

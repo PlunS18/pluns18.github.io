@@ -59,10 +59,24 @@ const SKETCHES: Record<Sketch, React.ReactNode> = {
 
 export const ProjectCover: React.FC<{ project: Project; className?: string }> = ({ project, className = '' }) => {
   const phones = project.screens.slice(0, 3);
+  const desktop = project.device === 'desktop';
 
   return (
     <div className={`sheet relative overflow-hidden ${className}`} aria-hidden>
-      {phones.length > 0 ? (
+      {desktop && phones.length > 0 ? (
+        // Two browser windows, the second one offset behind the first
+        <div className="absolute inset-0 flex items-center justify-center">
+          {phones.slice(0, 2).reverse().map((s, i) => (
+            <div
+              key={s.src}
+              className="desktop absolute w-[72%] max-w-[420px]"
+              style={{ transform: i === 0 ? 'translate(9%, -9%) rotate(3deg)' : 'translate(-7%, 7%) rotate(-2deg)', zIndex: i + 1 }}
+            >
+              <img src={s.src} alt="" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      ) : phones.length > 0 ? (
         <div className="absolute inset-x-0 top-6 flex justify-center">
           {phones.map((s, i) => (
             <div

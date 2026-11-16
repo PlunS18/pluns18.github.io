@@ -233,6 +233,23 @@ body {
   aspect-ratio: 780 / 1696;
 }
 
+.desktop {
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--paper-raised);
+  box-shadow: 4px 4px 0 var(--ink);
+  aspect-ratio: 1440 / 900;
+}
+
+.desktop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
+
 .phone img {
   width: 100%;
   height: 100%;
