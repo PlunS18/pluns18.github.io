@@ -1,7 +1,7 @@
 import React from 'react';
 import { Download, Mail, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
-import { CV_URL } from './Hero';
+import { CV_URL, MOBILE_CV_URL, PORTFOLIO_PDF_URL } from './Hero';
 
 const PHONE = '0888 244 212';
 const ZALO = 'https://zalo.me/0888244212';
@@ -32,6 +32,12 @@ export const Contact: React.FC = () => {
               {c.cv}
             </a>
           </div>
+          <p className="t-small mt-4">
+            {c.moreDocs}{' '}
+            <a href={MOBILE_CV_URL} download className="font-semibold underline">{c.cvMobile}</a>
+            {' · '}
+            <a href={PORTFOLIO_PDF_URL} download className="font-semibold underline">{c.portfolioPdf}</a>
+          </p>
           <dl className="mx-auto mt-10 grid max-w-[44em] gap-4 text-[0.95rem] sm:grid-cols-3">
             <div>
               <dt className="t-small">{c.phoneLabel}</dt>

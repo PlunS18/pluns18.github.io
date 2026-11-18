@@ -1,5 +1,5 @@
 // All page copy lives here. `en` is typed against `vi` so both languages stay in sync.
-// Project facts come from the two CV PDFs in /public and the HomeCheck monorepo.
+// Project facts come from the CV PDFs in /public, the HomeCheck monorepo and the Planora repo.
 
 export type Sketch = 'tree' | 'queue' | 'browser' | 'form';
 
@@ -337,6 +337,9 @@ const vi = {
     zalo: 'Nhắn Zalo',
     email: 'Gửi email',
     cv: 'Tải CV (PDF)',
+    moreDocs: 'Thêm:',
+    cvMobile: 'CV Mobile (React Native)',
+    portfolioPdf: 'Portfolio chi tiết (PDF)',
     phoneLabel: 'Điện thoại / Zalo',
     emailLabel: 'Email',
     locationLabel: 'Khu vực',
@@ -651,6 +654,9 @@ const en: Content = {
     zalo: 'Message on Zalo',
     email: 'Send an email',
     cv: 'Download CV (PDF)',
+    moreDocs: 'Also:',
+    cvMobile: 'Mobile CV (React Native)',
+    portfolioPdf: 'Detailed portfolio (PDF)',
     phoneLabel: 'Phone / Zalo',
     emailLabel: 'Email',
     locationLabel: 'Location',

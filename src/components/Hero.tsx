@@ -3,7 +3,10 @@ import { Download } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { PlanModel } from './PlanModel';
 
-export const CV_URL = './Luu_Truong_Hoang_Phuc_Portfolio.pdf';
+// The main CV; a Mobile-only variant and the longer portfolio PDF are offered in Contact
+export const CV_URL = './Luu_Truong_Hoang_Phuc_FullStack_Engineer.pdf';
+export const MOBILE_CV_URL = './Luu_Truong_Hoang_Phuc_Mobile_Developer.pdf';
+export const PORTFOLIO_PDF_URL = './Luu_Truong_Hoang_Phuc_Portfolio.pdf';
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
